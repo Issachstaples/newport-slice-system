@@ -1,0 +1,195 @@
+Newport / HelixFlow Slice Library Pattern (v1)
+1. Naming & Structure (non-negotiable)
+
+This keeps Prismic, dev, and design aligned.
+
+Folder structure
+src/
+└─ slices/
+   ├─ HeroSystem/
+   │  ├─ index.tsx
+   │  ├─ model.json
+   │  ├─ mocks.json
+   │  └─ screenshot.png (later)
+   ├─ FeatureGrid/
+   ├─ CTASection/
+   └─ index.ts
+Naming rules
+Thing	Rule	Example
+Slice name	PascalCase	HeroSystem
+Slice ID	snake_case	hero_system
+Field IDs	snake_case	primary_cta_label
+Variants	kebab or snake	centered, compact
+
+Never break this. Ever.
+
+2. Field Design Rules (this prevents chaos)
+Text field rules
+Use case	Field type
+Eyebrow	Text
+Headline	Text
+Short labels	Text
+Paragraph copy	Rich Text (limited)
+
+🚫 Never use Rich Text for headlines in system slices.
+
+Rich Text constraints (important)
+
+For subheadline / body copy:
+
+Allowed blocks: Paragraph, Bold, Link
+
+No headings
+
+No lists
+
+No embeds
+
+This keeps layout predictable.
+
+3. Control Fields (what makes slices powerful)
+
+Every system slice should have:
+
+at least 1 Boolean
+
+at least 1 Select
+
+Example (HeroSystem)
+badge_enabled   → Boolean
+visual_mode     → Select
+
+These are your design toggles, not content.
+
+4. Visual Mode Pattern (reusable everywhere)
+Standard select values
+
+Always use these names:
+
+none
+gradient_orb
+helix_3d
+
+Why?
+
+lets you branch visuals cleanly
+
+future-proofs WebGL / Spline / Three.js
+
+no refactor later
+
+Rendering rule
+if (visualMode === "gradient_orb") { /* render */ }
+
+Never mix visuals directly into layout logic.
+
+5. Component Rules (this is key)
+Every slice component must:
+
+accept slice only
+
+never fetch data
+
+never know about pages
+
+never hardcode copy (except safe fallbacks)
+
+✅ Good:
+
+slice.primary.headline
+
+🚫 Bad:
+
+"Build once. Operate everything."
+6. Mock Content Rule (huge time saver)
+
+Always immediately edit mocks.json
+Never design against lorem (clay, flight, etc.)
+
+Mock checklist
+
+Real headline
+
+Real subheadline
+
+Real CTAs
+
+Correct visual_mode
+
+This makes design decisions obvious.
+
+7. Styling Rules (Liquid Glass System)
+Global utilities only
+
+Anything reused goes in:
+
+globals.css
+
+Examples:
+
+.glass-frost
+
+.glass-rim
+
+.pulse-dot
+
+🚫 Never inline complex glass CSS inside components.
+
+8. Alignment Rule (default)
+
+This is now your library default:
+
+Container: centered
+
+Text: left-aligned
+
+No text-center unless variant demands it
+
+If a client wants centered hero → that’s a variant, not a new slice.
+
+9. Variants (how you scale cleanly)
+
+You do not duplicate slices for layout changes.
+
+You add variants:
+
+default
+
+centered
+
+compact
+
+And branch minimally:
+
+slice.variation === "centered"
+10. The “Factory” Rule (the payoff)
+
+If a slice violates any of these:
+
+❌ unclear field purpose
+
+❌ layout depends on copy hacks
+
+❌ hardcoded styling logic
+
+It does not belong in the library.
+
+Your slice library is a manufacturing line, not a design playground.
+
+What you’ve unlocked
+
+With this pattern:
+
+You can build a full site in ~30 minutes
+
+Swap content safely in Prismic
+
+Reuse slices across:
+
+Newport Ecom
+
+HelixFlow
+
+client projects
+
+Layer in AI later (auto-assembling pages from slices)

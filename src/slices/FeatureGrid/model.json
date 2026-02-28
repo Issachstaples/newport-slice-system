@@ -1,0 +1,134 @@
+{
+  "id": "eyebrow",
+  "type": "SharedSlice",
+  "name": "FeatureGrid",
+  "description": "Eyebrow",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "eyebrow": {
+          "type": "Text",
+          "config": {
+            "label": "Eyebrow",
+            "placeholder": "none"
+          }
+        },
+        "headline": {
+          "type": "Text",
+          "config": {
+            "label": "Headline",
+            "placeholder": "none"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "none",
+            "allowTargetBlank": true,
+            "single": "paragraph,strong,hyperlink"
+          }
+        },
+        "columns": {
+          "type": "Select",
+          "config": {
+            "label": "Columns",
+            "placeholder": "none",
+            "options": [
+              "2",
+              "3",
+              "4"
+            ],
+            "default_value": "2"
+          }
+        },
+        "icon_style": {
+          "type": "Select",
+          "config": {
+            "label": "Icon Style",
+            "placeholder": "none",
+            "options": [
+              "chip",
+              "none"
+            ]
+          }
+        },
+        "highlight_enabled": {
+          "type": "Boolean",
+          "config": {
+            "label": "Highlight Enabled",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": true
+          }
+        },
+        "visual_mode": {
+          "type": "Select",
+          "config": {
+            "label": "Visual Mode",
+            "placeholder": "none",
+            "options": [
+              "glass",
+              "gradient_orb",
+              "helix_3d"
+            ],
+            "default_value": "glass"
+          }
+        },
+        "feature_cards": {
+          "type": "Group",
+          "config": {
+            "label": "Feature Cards",
+            "repeat": true,
+            "fields": {
+              "icons": {
+                "type": "Select",
+                "config": {
+                  "label": "Icons",
+                  "placeholder": "none",
+                  "options": [
+                    "star",
+                    "spark",
+                    "shield",
+                    "wand"
+                  ],
+                  "default_value": "star"
+                }
+              },
+              "title": {
+                "type": "Text",
+                "config": {
+                  "label": "Title",
+                  "placeholder": "none"
+                }
+              },
+              "description": {
+                "type": "Text",
+                "config": {
+                  "label": "Description",
+                  "placeholder": "none"
+                }
+              },
+              "highlight": {
+                "type": "Boolean",
+                "config": {
+                  "label": "Highlight",
+                  "placeholder_false": "false",
+                  "placeholder_true": "true",
+                  "default_value": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

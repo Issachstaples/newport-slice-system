@@ -1,0 +1,104 @@
+{
+  "id": "hero_system",
+  "type": "SharedSlice",
+  "name": "HeroSystem",
+  "description": "HeroSystem",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "eyebrow": {
+          "type": "Text",
+          "config": {
+            "label": "Eyebrow",
+            "placeholder": "FROM WEBSITE TO OPERATING SYSTEM"
+          }
+        },
+        "headline": {
+          "type": "Text",
+          "config": {
+            "label": "HEADLINE",
+            "placeholder": "Build Once. Operate Everything."
+          }
+        },
+        "subheadline": {
+          "type": "Text",
+          "config": {
+            "label": "Subheadline",
+            "placeholder": "High-performance websites seamlessly connected to your daily workflow — powered by HelixFlow."
+          }
+        },
+        "primary_cta_label": {
+          "type": "Text",
+          "config": {
+            "label": "Primary CTA Label",
+            "placeholder": "Start a Project"
+          }
+        },
+        "primary_cta_link": {
+          "type": "Link",
+          "config": {
+            "label": "Primary CTA Link",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": false
+          }
+        },
+        "secondary_cta_label": {
+          "type": "Text",
+          "config": {
+            "label": "Secondary CTA Label",
+            "placeholder": "See the System"
+          }
+        },
+        "secondary_cta_link": {
+          "type": "Link",
+          "config": {
+            "label": "Secondary CTA Link",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": false
+          }
+        },
+        "badge_enabled": {
+          "type": "Boolean",
+          "config": {
+            "label": "Badge Enabled",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": true
+          }
+        },
+        "badge_text": {
+          "type": "Text",
+          "config": {
+            "label": "Badge Text",
+            "placeholder": "Digital Operations, built in."
+          }
+        },
+        "visual_mode": {
+          "type": "Select",
+          "config": {
+            "label": "Visual Mode",
+            "placeholder": "none",
+            "options": [
+              "helix_3d",
+              "gradient_orb"
+            ],
+            "default_value": "helix_3d"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

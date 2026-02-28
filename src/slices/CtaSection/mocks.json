@@ -1,0 +1,68 @@
+[
+	{
+  "__TYPE__": "SharedSliceContent",
+  "variation": "default",
+  "primary": {
+    "eyebrow": {
+      "__TYPE__": "FieldContent",
+      "value": "READY TO MOVE FASTER",
+      "type": "Text"
+    },
+    "headline": {
+      "__TYPE__": "FieldContent",
+      "value": "Turn your website into a system.",
+      "type": "Text"
+    },
+    "body": {
+      "__TYPE__": "StructuredTextContent",
+      "value": [
+        {
+          "type": "paragraph",
+          "content": {
+            "text": "We build high-performance pages connected to your daily workflow — powered by HelixFlow."
+          }
+        }
+      ]
+    },
+    "primary_cta_label": {
+      "__TYPE__": "FieldContent",
+      "value": "Start a Project",
+      "type": "Text"
+    },
+    "primary_cta_link": {
+      "key": "70ed8b4e-c84f-478a-a1de-4bf952517bcb",
+      "__TYPE__": "LinkContent",
+      "value": {
+        "__TYPE__": "ExternalLink",
+        "url": "https://newportecom.com/contact",
+        "text": "Start a Project"
+      }
+    },
+    "secondary_cta_label": {
+      "__TYPE__": "FieldContent",
+      "value": "See the System",
+      "type": "Text"
+    },
+    "secondary_cta_link": {
+      "key": "0c224fbc-978d-427b-b899-9c1bf52a39f6",
+      "__TYPE__": "LinkContent",
+      "value": {
+        "__TYPE__": "ExternalLink",
+        "url": "https://newportecom.com",
+        "text": "See the System"
+      }
+    },
+    "visual_mode": {
+      "__TYPE__": "FieldContent",
+      "value": "glass",
+      "type": "Select"
+    },
+    "emphasis": {
+      "__TYPE__": "FieldContent",
+      "value": "strong",
+      "type": "Select"
+    }
+  },
+  "items": []
+}
+]

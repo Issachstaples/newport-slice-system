@@ -1,0 +1,121 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"eyebrow": {
+				"__TYPE__": "FieldContent",
+				"value": "solid",
+				"type": "Text"
+			},
+			"headline": {
+				"__TYPE__": "FieldContent",
+				"value": "needs",
+				"type": "Text"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Exercitation pariatur id duis elit ad labore laborum officia fugiat culpa amet. Ex mollit sunt excepteur voluptate labore anim pariatur eu aliqua."
+						}
+					}
+				]
+			},
+			"columns": {
+				"__TYPE__": "FieldContent",
+				"value": "1",
+				"type": "Select"
+			},
+			"visual_mode": {
+				"__TYPE__": "FieldContent",
+				"value": "gradient_orb",
+				"type": "Select"
+			},
+			"cards": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"title",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "captured",
+									"type": "Text"
+								}
+							],
+							[
+								"body",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Dolore pariatur ut ipsum voluptate laborum excepteur proident nostrud eu irure mollit incididunt consequat non. Magna ipsum do ad."
+											}
+										}
+									]
+								}
+							],
+							[
+								"icon",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "bolt",
+									"type": "Select"
+								}
+							],
+							[
+								"size",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "md",
+									"type": "Select"
+								}
+							],
+							[
+								"emphasis",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "highlight",
+									"type": "Select"
+								}
+							],
+							[
+								"link",
+								{
+									"key": "5738e773-ec6b-42e3-91d7-5cd26f506bed",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "https://prismic.io",
+										"text": "cotton"
+									}
+								}
+							],
+							[
+								"link_label",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "scared",
+									"type": "Text"
+								}
+							]
+						]
+					}
+				]
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	}
+]

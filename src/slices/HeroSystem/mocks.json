@@ -1,0 +1,66 @@
+[
+	{
+  "__TYPE__": "SharedSliceContent",
+  "variation": "default",
+  "primary": {
+    "eyebrow": {
+      "__TYPE__": "FieldContent",
+      "value": "FROM WEBSITE TO OPERATING SYSTEM",
+      "type": "Text"
+    },
+    "headline": {
+      "__TYPE__": "FieldContent",
+      "value": "Build once. Operate everything.",
+      "type": "Text"
+    },
+    "subheadline": {
+      "__TYPE__": "FieldContent",
+      "value": "High-performance websites connected to your daily workflow — powered by HelixFlow.",
+      "type": "Text"
+    },
+    "primary_cta_label": {
+      "__TYPE__": "FieldContent",
+      "value": "Start a Project",
+      "type": "Text"
+    },
+    "primary_cta_link": {
+      "key": "a4773eb3-0f68-4f58-b935-a9ec93efa725",
+      "__TYPE__": "LinkContent",
+      "value": {
+        "__TYPE__": "ExternalLink",
+        "url": "https://newportecom.com/contact",
+        "text": "Start a Project"
+      }
+    },
+    "secondary_cta_link": {
+      "key": "bbe17f50-dd4e-4a92-84f3-ccc322b49c8d",
+      "__TYPE__": "LinkContent",
+      "value": {
+        "__TYPE__": "ExternalLink",
+        "url": "https://newportecom.com",
+        "text": "See the System"
+      }
+    },
+    "secondary_cta_label": {
+      "__TYPE__": "FieldContent",
+      "value": "See the System",
+      "type": "Text"
+    },
+    "badge_enabled": {
+      "__TYPE__": "BooleanContent",
+      "value": true
+    },
+    "badge_text": {
+      "__TYPE__": "FieldContent",
+      "value": "Digital operations, built in",
+      "type": "Text"
+    },
+    "visual_mode": {
+      "__TYPE__": "FieldContent",
+      "value": "gradient_orb",
+      "type": "Select"
+    }
+  },
+  "items": []
+}
+]
