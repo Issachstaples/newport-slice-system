@@ -1,0 +1,136 @@
+{
+  "id": "feature_grid_v2",
+  "type": "SharedSlice",
+  "name": "FeatureGridV2",
+  "description": "FeatureGridV2",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "headline": {
+          "type": "Text",
+          "config": {
+            "label": "Headline",
+            "placeholder": "We build your business an Operating System."
+          }
+        },
+        "eyebrow": {
+          "type": "Text",
+          "config": {
+            "label": "Eyebrow",
+            "placeholder": "Features: Online"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "High-performance websites seamlessly connected to your daily workflow — powered by HelixFlow.",
+            "allowTargetBlank": true,
+            "single": "paragraph,hyperlink"
+          }
+        },
+        "columns": {
+          "type": "Select",
+          "config": {
+            "label": "columns",
+            "placeholder": "",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "default_value": "1"
+          }
+        },
+        "icon_style": {
+          "type": "Select",
+          "config": {
+            "label": "Icon Style",
+            "placeholder": "",
+            "options": [
+              "chip",
+              "none"
+            ],
+            "default_value": "chip"
+          }
+        },
+        "highlight_enabled": {
+          "type": "Boolean",
+          "config": {
+            "label": "Highlight Enabled",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": true
+          }
+        },
+        "visual_mode": {
+          "type": "Select",
+          "config": {
+            "label": "Visual Mode",
+            "placeholder": "",
+            "options": [
+              "glass",
+              "gradient_orb",
+              "3d_helix"
+            ]
+          }
+        },
+        "cards": {
+          "type": "Group",
+          "config": {
+            "label": "Cards",
+            "repeat": true,
+            "fields": {
+              "icons": {
+                "type": "Select",
+                "config": {
+                  "label": "Icons",
+                  "placeholder": "",
+                  "options": [
+                    "star",
+                    "spark",
+                    "shield",
+                    "wand"
+                  ]
+                }
+              },
+              "title": {
+                "type": "Text",
+                "config": {
+                  "label": "Title",
+                  "placeholder": ""
+                }
+              },
+              "description": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Description",
+                  "placeholder": "body",
+                  "allowTargetBlank": true,
+                  "single": "paragraph,strong,em,hyperlink,image,list-item,o-list-item"
+                }
+              },
+              "highlight": {
+                "type": "Boolean",
+                "config": {
+                  "label": "Highlight",
+                  "placeholder_false": "false",
+                  "placeholder_true": "true",
+                  "default_value": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

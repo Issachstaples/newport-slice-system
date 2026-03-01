@@ -26,8 +26,8 @@ export function asEnumValue(
   let value: unknown = field;
 
   // Unwrap Slice Machine mock shape
-  if (typeof value === "object" && value !== null) {
-    const maybeValue = (value as any).value;
+  if (typeof value === "object" && value !== null && "value" in value) {
+    const maybeValue = (value as { value?: unknown }).value;
     if (typeof maybeValue === "string") value = maybeValue;
   }
 

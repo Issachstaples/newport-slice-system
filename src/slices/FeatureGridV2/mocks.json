@@ -1,0 +1,96 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"eyebrow": {
+				"__TYPE__": "FieldContent",
+				"value": "yellow",
+				"type": "Text"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Aliquip cillum voluptate ad fugiat veniam non mollit commodo aliquip aliqua officia consectetur ex magna excepteur. Aliquip irure et ad officia adipisicing nisi tempor eu amet pariatur sint et amet qui duis. Commodo Lorem est amet anim ut nulla sint quis reprehenderit consectetur voluptate."
+						}
+					}
+				]
+			},
+			"columns": {
+				"__TYPE__": "FieldContent",
+				"value": "4",
+				"type": "Select"
+			},
+			"icon_style": {
+				"__TYPE__": "FieldContent",
+				"value": "none",
+				"type": "Select"
+			},
+			"highlight_enabled": {
+				"__TYPE__": "BooleanContent",
+				"value": true
+			},
+			"visual_mode": {
+				"__TYPE__": "FieldContent",
+				"value": "gradient_orb",
+				"type": "Select"
+			},
+			"cards": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"icons",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "spark",
+									"type": "Select"
+								}
+							],
+							[
+								"title",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "shadow",
+									"type": "Text"
+								}
+							],
+							[
+								"description",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Amet Lorem minim do dolore dolor culpa occaecat reprehenderit irure. Mollit mollit non et non. Sint consectetur elit minim dolor aute Lorem quis qui irure deserunt aliqua."
+											}
+										}
+									]
+								}
+							],
+							[
+								"highlight",
+								{
+									"__TYPE__": "BooleanContent",
+									"value": false
+								}
+							]
+						]
+					}
+				]
+			},
+			"headline": {
+				"__TYPE__": "FieldContent",
+				"value": "hundred",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
+]

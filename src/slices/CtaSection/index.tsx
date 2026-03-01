@@ -9,7 +9,7 @@ function asTextValue(field: unknown, fallback = ""): string {
   if (typeof field === "string") return field;
   if (typeof field === "number") return String(field);
   if (typeof field === "object") {
-    const maybeValue = (field as any).value;
+    const maybeValue = (field as { value?: unknown }).value;
     if (typeof maybeValue === "string") return maybeValue;
     if (typeof maybeValue === "number") return String(maybeValue);
   }

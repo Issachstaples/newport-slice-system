@@ -1,41 +1,44 @@
 // src/slices/HeroSystem/index.tsx
 import { PrismicNextLink } from "@prismicio/next";
-import type { Content } from "@prismicio/client";
-import { SafeRichText } from "@/components/prismic/SafeRichText";
-import type { ReactNode } from "react";
+import { asText, type Content, type RichTextField } from "@prismicio/client";
 
 type Props = {
   slice: Content.HeroSystemSlice;
 };
 
 /**
- * Slice Machine v2 mocks sometimes wrap Text / Select fields like:
- * { __TYPE__: "Text", value: "...", type: "Text" }
- *
- * This helper is ONLY for:
- * - Key Text
- * - Select / enum-like config values
- * - UI labels
- *
- * DO NOT use this for content-bearing fields.
+ * Safe text extraction for:
+ * - Key Text (string)
+ * - Rich Text (array)
+ * - Slice Machine wrappers: { __TYPE__, value, type }
  */
 function asTextValue(field: unknown, fallback = ""): string {
   if (field == null) return fallback;
+
   if (typeof field === "string") return field;
   if (typeof field === "number") return String(field);
 
+  if (Array.isArray(field)) {
+    const text = asText(field as RichTextField);
+    return text || fallback;
+  }
+
   if (typeof field === "object") {
-    const maybeValue = (field as any).value;
+    const maybeValue = (field as { value?: unknown }).value;
+
     if (typeof maybeValue === "string") return maybeValue;
     if (typeof maybeValue === "number") return String(maybeValue);
+
+    if (Array.isArray(maybeValue)) {
+      const text = asText(maybeValue as RichTextField);
+      return text || fallback;
+    }
   }
 
   return fallback;
 }
 
-type AsEnumValueOptions = {
-  normalize?: boolean;
-};
+type AsEnumValueOptions = { normalize?: boolean };
 
 function asEnumValue(
   field: unknown,
@@ -48,13 +51,9 @@ function asEnumValue(
     value = (value as { value?: unknown }).value;
   }
 
-  if (typeof value === "number") {
-    value = String(value);
-  }
+  if (typeof value === "number") value = String(value);
 
-  if (typeof value !== "string" || value.length === 0) {
-    return fallback;
-  }
+  if (typeof value !== "string" || value.length === 0) return fallback;
 
   const normalized = options.normalize
     ? value.trim().toLowerCase().replace(/\s+/g, "_")
@@ -62,37 +61,24 @@ function asEnumValue(
 
   return normalized || fallback;
 }
+
 export default function HeroSystem({ slice }: Props) {
   const primary = slice.primary;
 
-  // ─────────────────────────────────────────────
-  // UI / CONFIG (Key Text, Selects, Toggles)
-  // ─────────────────────────────────────────────
+  // Toggles / labels
   const showBadge = !!primary.badge_enabled;
 
-  const badgeText = asTextValue(
-    primary.badge_text,
-    "Digital operations, built in"
-  );
+  const badgeText = asTextValue(primary.badge_text, "Digital operations, built in");
+  const primaryLabel = asTextValue(primary.primary_cta_label, "Start a Project");
+  const secondaryLabel = asTextValue(primary.secondary_cta_label, "See the System");
 
-  const primaryLabel = asTextValue(
-    primary.primary_cta_label,
-    "Start a Project"
-  );
+  // Content (Key Text in your Prismic UI)
+  const eyebrow = asTextValue(primary.eyebrow);
+  const headline = asTextValue(primary.headline);
+  const subheadline = asTextValue(primary.subheadline);
 
-  const secondaryLabel = asTextValue(
-    primary.secondary_cta_label,
-    "See the System"
-  );
+  const visualMode = asEnumValue(primary.visual_mode, "helix_3d", { normalize: true });
 
-  const visualMode = asEnumValue(
-    primary.visual_mode,
-    "helix_3d",
-    { normalize: true }
-  );
-  // ─────────────────────────────────────────────
-  // RENDER
-  // ─────────────────────────────────────────────
   return (
     <section className="relative min-h-[80vh] overflow-hidden bg-[#070B14] text-white">
       {/* Grid */}
@@ -100,11 +86,13 @@ export default function HeroSystem({ slice }: Props) {
         <div className="h-full w-full bg-[linear-gradient(to_right,rgba(148,163,184,0.10)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.10)_1px,transparent_1px)] bg-[size:40px_40px]" />
       </div>
 
-      {/* Vignette */}
+      {/* Visual mode */}
       {visualMode === "gradient_orb" && (
         <div className="pointer-events-none absolute inset-0">
-          <div className="absolute left-1/2 top-24 h-[520px] w-[520px] -translate-x-1/2 rounded-full blur-3xl opacity-30
-            bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.55),rgba(56,189,248,0.22),rgba(99,102,241,0.12),transparent_70%)]" />
+          <div
+            className="absolute left-1/2 top-24 h-[520px] w-[520px] -translate-x-1/2 rounded-full blur-3xl opacity-30
+            bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.55),rgba(56,189,248,0.22),rgba(99,102,241,0.12),transparent_70%)]"
+          />
         </div>
       )}
 
@@ -120,46 +108,22 @@ export default function HeroSystem({ slice }: Props) {
             </div>
           )}
 
-          {/* Eyebrow (CONTENT) */}
-          <SafeRichText
-            field={primary.eyebrow}
-            components={{
-              paragraph: ({ children }: { children: ReactNode }) => (
-  <div className="text-xs tracking-[0.22em] text-white/60">
-    {children}
-  </div>
-),
-            }}
-          />
+          {/* Eyebrow */}
+          {eyebrow ? (
+            <div className="text-xs tracking-[0.22em] text-white/60">{eyebrow}</div>
+          ) : null}
 
-          {/* Headline (CONTENT) */}
-          <SafeRichText
-            field={primary.headline}
-            components={{
-             heading1: ({ children }: { children: ReactNode }) => (
-  <h1 className="mt-4 text-5xl font-semibold tracking-tight leading-[1.02] md:text-6xl">
-    {children}
-  </h1>
-),
-heading2: ({ children }: { children: ReactNode }) => (
-  <h1 className="mt-4 text-5xl font-semibold tracking-tight leading-[1.02] md:text-6xl">
-    {children}
-  </h1>
-),
-            }}
-          />
+          {/* Headline */}
+          {headline ? (
+            <h1 className="mt-4 text-5xl font-semibold tracking-tight leading-[1.02] md:text-6xl">
+              {headline}
+            </h1>
+          ) : null}
 
-          {/* Subheadline (CONTENT) */}
-          <SafeRichText
-            field={primary.subheadline}
-            components={{
-              paragraph: ({ children }: { children: ReactNode }) => (
-  <div className="text-xs tracking-[0.22em] text-white/60">
-    {children}
-  </div>
-),
-            }}
-          />
+          {/* Subheadline */}
+          {subheadline ? (
+            <p className="mt-5 max-w-2xl text-base text-white/70">{subheadline}</p>
+          ) : null}
 
           {/* CTAs */}
           <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -178,7 +142,7 @@ heading2: ({ children }: { children: ReactNode }) => (
             </PrismicNextLink>
           </div>
 
-          {/* Optional debug (safe) */}
+          {/* Optional debug */}
           <div className="mt-8 text-xs text-white/50">
             Visual mode: <span className="text-white/70">{visualMode}</span>
           </div>

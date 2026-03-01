@@ -1,6 +1,7 @@
 // src/slices/FeatureGrid/index.tsx
 import * as React from "react";
 import { PrismicRichText } from "@prismicio/react";
+import type { RichTextField } from "@prismicio/client";
 import type { SliceComponentProps } from "@prismicio/react";
 
 import {
@@ -18,7 +19,31 @@ import {
   Wand2,
 } from "lucide-react";
 
-type FeatureGridProps = SliceComponentProps<any>;
+type FeatureGridItem = {
+  icons?: string;
+  highlight?: boolean;
+  title?: unknown;
+  description?: unknown;
+};
+
+type FeatureGridSlice = {
+  id: string;
+  slice_type: string;
+  primary?: {
+    eyebrow?: unknown;
+    headline?: unknown;
+    body?: unknown;
+    cards?: FeatureGridItem[];
+    columns?: string | number;
+    icon_style?: string;
+    highlight_enabled?: boolean;
+    visual_mode?: string;
+  };
+  items?: FeatureGridItem[];
+  variation?: string;
+};
+
+type FeatureGridProps = SliceComponentProps<FeatureGridSlice>;
 
 const ICONS = {
   Sparkles,
@@ -45,14 +70,27 @@ function cx(...classes: Array<string | false | null | undefined>) {
  * - Slice Machine mocks ({ __TYPE__, value })
  * - Real Prismic API responses ([...])
  */
-function normalizeRichText(field: any) {
-  if (Array.isArray(field)) return field;
-  if (field?.value && Array.isArray(field.value)) return field.value;
+function normalizeRichText(field: unknown): RichTextField | null {
+  if (Array.isArray(field)) return field as RichTextField;
+  if (
+    typeof field === "object" &&
+    field !== null &&
+    "value" in field &&
+    Array.isArray((field as { value?: unknown }).value)
+  ) {
+    return (field as { value: RichTextField }).value;
+  }
   return null;
 }
 
 export default function FeatureGrid({ slice }: FeatureGridProps) {
   const primary = slice?.primary ?? {};
+  const cards: FeatureGridItem[] =
+    Array.isArray(primary?.cards)
+      ? primary.cards
+      : Array.isArray(slice.items)
+        ? slice.items
+        : [];
 
   const eyebrowField = normalizeRichText(primary.eyebrow);
   const headlineField = normalizeRichText(primary.headline);
@@ -70,12 +108,8 @@ export default function FeatureGrid({ slice }: FeatureGridProps) {
     columns === 2
       ? "md:grid-cols-2"
       : columns === 4
-      ? "md:grid-cols-2 lg:grid-cols-4"
-      : "md:grid-cols-2 lg:grid-cols-3";
-
-  const cards: any[] = Array.isArray(primary.feature_cards)
-    ? primary.feature_cards
-    : [];
+        ? "md:grid-cols-2 lg:grid-cols-4"
+        : "md:grid-cols-2 lg:grid-cols-3";
 
   return (
     <section
@@ -174,7 +208,10 @@ export default function FeatureGrid({ slice }: FeatureGridProps) {
           {cards.map((item, index) => {
             const iconKey =
               typeof item?.icons === "string" ? item.icons : "Sparkles";
-            const Icon = (ICONS as any)[iconKey] ?? Sparkles;
+            const Icon =
+              iconKey in ICONS
+                ? ICONS[iconKey as keyof typeof ICONS]
+                : Sparkles;
 
             const isHighlighted = Boolean(
               highlightEnabled && item?.highlight

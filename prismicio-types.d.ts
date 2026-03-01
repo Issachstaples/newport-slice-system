@@ -69,6 +69,42 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
+type PageDocumentDataSlicesSlice =
+  | EyebrowSlice
+  | BentoGridSlice
+  | CtaSectionSlice
+  | HeroSystemSlice;
+
+/**
+ * Content for Page documents
+ */
+interface PageDocumentData {
+  /**
+   * Slice Zone field in *Page*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: page.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<PageDocumentDataSlicesSlice>;
+}
+
+/**
+ * Page document from Prismic
+ *
+ * - **API ID**: `page`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type PageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
+
+export type AllDocumentTypes = PageDocument;
+
 /**
  * Item in *BentoGrid → Default → Primary → cards*
  */
@@ -555,6 +591,172 @@ export type EyebrowSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *FeatureGridV2 → Default → Primary → Cards*
+ */
+export interface FeatureGridV2SliceDefaultPrimaryCardsItem {
+  /**
+   * Icons field in *FeatureGridV2 → Default → Primary → Cards*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feature_grid_v2.default.primary.cards[].icons
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  icons: prismic.SelectField<"star" | "spark" | "shield" | "wand">;
+
+  /**
+   * Title field in *FeatureGridV2 → Default → Primary → Cards*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feature_grid_v2.default.primary.cards[].title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *FeatureGridV2 → Default → Primary → Cards*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: body
+   * - **API ID Path**: feature_grid_v2.default.primary.cards[].description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Highlight field in *FeatureGridV2 → Default → Primary → Cards*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: feature_grid_v2.default.primary.cards[].highlight
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  highlight: prismic.BooleanField;
+}
+
+/**
+ * Primary content in *FeatureGridV2 → Default → Primary*
+ */
+export interface FeatureGridV2SliceDefaultPrimary {
+  /**
+   * Headline field in *FeatureGridV2 → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: We build your business an Operating System.
+   * - **API ID Path**: feature_grid_v2.default.primary.headline
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  headline: prismic.KeyTextField;
+
+  /**
+   * Eyebrow field in *FeatureGridV2 → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Features: Online
+   * - **API ID Path**: feature_grid_v2.default.primary.eyebrow
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  eyebrow: prismic.KeyTextField;
+
+  /**
+   * Body field in *FeatureGridV2 → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: High-performance websites seamlessly connected to your daily workflow — powered by HelixFlow.
+   * - **API ID Path**: feature_grid_v2.default.primary.body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * columns field in *FeatureGridV2 → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: 1
+   * - **API ID Path**: feature_grid_v2.default.primary.columns
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  columns: prismic.SelectField<"1" | "2" | "3" | "4", "filled">;
+
+  /**
+   * Icon Style field in *FeatureGridV2 → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: chip
+   * - **API ID Path**: feature_grid_v2.default.primary.icon_style
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  icon_style: prismic.SelectField<"chip" | "none", "filled">;
+
+  /**
+   * Highlight Enabled field in *FeatureGridV2 → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: feature_grid_v2.default.primary.highlight_enabled
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  highlight_enabled: prismic.BooleanField;
+
+  /**
+   * Visual Mode field in *FeatureGridV2 → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feature_grid_v2.default.primary.visual_mode
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  visual_mode: prismic.SelectField<"glass" | "gradient_orb" | "3d_helix">;
+
+  /**
+   * Cards field in *FeatureGridV2 → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feature_grid_v2.default.primary.cards[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  cards: prismic.GroupField<
+    Simplify<FeatureGridV2SliceDefaultPrimaryCardsItem>
+  >;
+}
+
+/**
+ * Default variation for FeatureGridV2 Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type FeatureGridV2SliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<FeatureGridV2SliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *FeatureGridV2*
+ */
+type FeatureGridV2SliceVariation = FeatureGridV2SliceDefault;
+
+/**
+ * FeatureGridV2 Shared Slice
+ *
+ * - **API ID**: `feature_grid_v2`
+ * - **Description**: FeatureGridV2
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type FeatureGridV2Slice = prismic.SharedSlice<
+  "feature_grid_v2",
+  FeatureGridV2SliceVariation
+>;
+
+/**
  * Primary content in *HeroSystem → Default → Primary*
  */
 export interface HeroSystemSliceDefaultPrimary {
@@ -708,22 +910,26 @@ declare module "@prismicio/client" {
     (
       repositoryNameOrEndpoint: string,
       options?: prismic.ClientConfig,
-    ): prismic.Client;
+    ): prismic.Client<AllDocumentTypes>;
   }
 
   interface CreateWriteClient {
     (
       repositoryNameOrEndpoint: string,
-      options?: prismic.WriteClientConfig,
-    ): prismic.WriteClient;
+      options: prismic.WriteClientConfig,
+    ): prismic.WriteClient<AllDocumentTypes>;
   }
 
   interface CreateMigration {
-    (): prismic.Migration;
+    (): prismic.Migration<AllDocumentTypes>;
   }
 
   namespace Content {
     export type {
+      PageDocument,
+      PageDocumentData,
+      PageDocumentDataSlicesSlice,
+      AllDocumentTypes,
       BentoGridSlice,
       BentoGridSliceDefaultPrimaryCardsItem,
       BentoGridSliceDefaultPrimary,
@@ -738,6 +944,11 @@ declare module "@prismicio/client" {
       EyebrowSliceDefaultPrimary,
       EyebrowSliceVariation,
       EyebrowSliceDefault,
+      FeatureGridV2Slice,
+      FeatureGridV2SliceDefaultPrimaryCardsItem,
+      FeatureGridV2SliceDefaultPrimary,
+      FeatureGridV2SliceVariation,
+      FeatureGridV2SliceDefault,
       HeroSystemSlice,
       HeroSystemSliceDefaultPrimary,
       HeroSystemSliceVariation,

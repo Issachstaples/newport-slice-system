@@ -1,27 +1,27 @@
-import HeroSystem from "@/slices/HeroSystem";
-import heroMocks from "@/slices/HeroSystem/mocks.json";
+// src/app/page.tsx
+import { SliceZone } from "@prismicio/react";
+import dynamic from "next/dynamic";
+import { notFound } from "next/navigation";
 
-import BentoGrid from "@/slices/BentoGrid";
-import bentoMocks from "@/slices/BentoGrid/mocks.json";
+import { createClient } from "@/prismicio";
+import { components } from "@/slices";
 
-import CtaSection from "@/slices/CtaSection";
-import ctaMocks from "@/slices/CtaSection/mocks.json";
 
-import FeatureGrid from "@/slices/FeatureGrid";
-import featureGridMocks from "@/slices/FeatureGrid/mocks.json";
+export default async function Page() {
+  const client = createClient();
+  const localComponents = {
+    ...components,
+    eyebrow: dynamic(() => import("@/slices/FeatureGrid")),
+    feature_grid: dynamic(() => import("@/slices/FeatureGrid")),
+  };
 
-export default function Page() {
-  const heroSlice = (heroMocks as any)[0];
-  const bentoSlice = (bentoMocks as any)[0];
-  const featureGridSlice = (featureGridMocks as any)[0];
-  const ctaSlice = (ctaMocks as any)[0];
+  // Fetch the published Page document by UID: "home"
+  const page = await client
+    .getByUID("page", "home")
+    .catch(() => null);
 
-  const slices = [heroSlice, bentoSlice, featureGridSlice, ctaSlice];
+  if (!page) notFound();
 
-  const context = {};
-  const bentoIndex = 1;
-  const featureGridIndex = 2;
-  const ctaIndex = 3;
 
   return (
     <main className="relative min-h-dvh overflow-hidden">
@@ -41,28 +41,7 @@ export default function Page() {
 
       {/* Content */}
       <div className="relative">
-        <HeroSystem slice={heroSlice} />
-
-        <BentoGrid
-          slice={bentoSlice}
-          index={bentoIndex}
-          slices={slices}
-          context={context}
-        />
-
-        <FeatureGrid
-          slice={featureGridSlice}
-          index={featureGridIndex}
-          slices={slices}
-          context={context}
-        />
-
-        <CtaSection
-          slice={ctaSlice}
-          index={ctaIndex}
-          slices={slices}
-          context={context}
-        />
+        <SliceZone slices={page.data.slices} components={localComponents} />
       </div>
     </main>
   );

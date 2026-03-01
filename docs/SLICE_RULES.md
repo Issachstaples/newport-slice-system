@@ -1,3 +1,124 @@
+Operating Principle Going Forward
+
+Document the rule once, automate it forever.
+
+This system favors:
+
+explicit helpers
+
+defensive rendering
+
+documented constraints
+
+AI-assisted enforcement
+
+
+---
+
+## 📄 `SLICE_RULES.md` (Updated)
+
+```md
+# SLICE_RULES.md — Newport Slice System
+
+This file defines **non-negotiable rules** for all Prismic slices in this repository.
+
+Violating these rules will cause runtime bugs.
+
+---
+
+## 1) Repeatable Fields Rule (CRITICAL)
+
+Prismic repeatables can live in two valid places depending on the slice model:
+
+### A) Slice repeatable zone
+✅ `slice.items`
+
+### B) Group field inside primary (common for "cards")
+✅ `slice.primary.cards` (or another group field)
+
+🚫 Never assume repeatables exist or are arrays.
+Always guard with `Array.isArray(...)`.
+
+**Factory standard for system slices:** if the model includes a `cards` group field, treat
+`slice.primary.cards` as canonical.
+
+2) Field Type Rules
+Key Text
+
+Render as strings
+
+Use asTextValue(field, fallback)
+
+Rich Text
+
+Render ONLY with SafeRichText
+
+Never pass raw wrapper objects
+
+Never assume array shape
+
+Select / Enum
+
+Normalize via asEnumValue
+
+Never trust casing or separators
+
+3) Slice Machine Wrapper Rule
+
+Slice Machine v2 may wrap fields as:
+
+{ "__TYPE__": "...", "value": ... }
+
+All rendering logic must:
+
+detect wrapper objects
+
+extract .value
+
+support both mock + API shapes
+
+4) Banned Patterns
+
+🚫 Direct PrismicRichText usage inside slices
+🚫 any used to bypass shape uncertainty
+🚫 Reading repeatables from primary
+🚫 Assuming mocks == API data
+
+5) Required Helpers
+
+Slices SHOULD use:
+
+asTextValue
+
+asEnumValue
+
+SafeRichText
+
+Helpers SHOULD live under:
+
+src/lib/prismic/
+6) Before You Ship a Slice
+
+Checklist:
+
+ No any
+
+ Repeatables read from slice.items
+
+ Rich Text unwrapped safely
+
+ Key Text rendered as strings
+
+ Enums normalized
+
+ Works with mocks AND real Prismic data
+
+Guiding Principle
+
+If it worked in mocks but broke in prod, the rule was missing.
+
+Add the rule. Then automate it.
+
 SLICE_RULES.md — Newport Slice System Authoring Rules
 
 Last updated: 2026-02-28

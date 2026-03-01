@@ -1,6 +1,6 @@
 import { PrismicRichText, type SliceComponentProps } from "@prismicio/react";
 import { PrismicNextLink } from "@prismicio/next";
-import type { Content } from "@prismicio/client";
+import type { Content, LinkField, RichTextField } from "@prismicio/client";
 import {
   Sparkles,
   Zap,
@@ -8,11 +8,23 @@ import {
   LayoutGrid,
   MessageSquare,
   Wand2,
+  type LucideIcon,
 } from "lucide-react";
 
 export type BentoGridProps = SliceComponentProps<Content.BentoGridSlice>;
 
-const ICONS: Record<string, any> = {
+type BentoGridItem = {
+  title?: unknown;
+  body?: unknown;
+  icon?: unknown;
+  size?: unknown;
+  emphasis?: unknown;
+  link_label?: unknown;
+  link?: unknown;
+  key?: string | number;
+};
+
+const ICONS: Record<string, LucideIcon> = {
   spark: Sparkles,
   bolt: Zap,
   shield: ShieldCheck,
@@ -26,7 +38,7 @@ function asTextValue(field: unknown, fallback = ""): string {
   if (typeof field === "string") return field;
   if (typeof field === "number") return String(field);
   if (typeof field === "object") {
-    const v = (field as any).value;
+    const v = (field as { value?: unknown }).value;
     if (typeof v === "string") return v;
     if (typeof v === "number") return String(v);
   }
@@ -60,10 +72,17 @@ function spanClass(size: string) {
 }
 
 export default function BentoGrid({ slice }: BentoGridProps) {
-  const eyebrow = asTextValue(slice.primary.eyebrow);
-  const headline = asTextValue(slice.primary.headline);
-  const columns = asTextValue(slice.primary.columns, "3");
-  const visualMode = asTextValue(slice.primary.visual_mode, "glass");
+  const primary = slice.primary;
+  const cards: BentoGridItem[] =
+    Array.isArray(primary?.cards)
+      ? primary.cards
+      : Array.isArray(slice.items)
+        ? slice.items
+        : [];
+  const eyebrow = asTextValue(primary.eyebrow);
+  const headline = asTextValue(primary.headline);
+  const columns = asTextValue(primary.columns, "3");
+  const visualMode = asTextValue(primary.visual_mode, "glass");
 
   return (
     <section className="relative overflow-hidden bg-[#070B14] text-white">
@@ -87,18 +106,20 @@ export default function BentoGrid({ slice }: BentoGridProps) {
             {headline}
           </h2>
           <div className="mt-4 max-w-2xl text-base text-white/70">
-            <PrismicRichText field={slice.primary.body} />
+            <PrismicRichText field={primary.body} />
           </div>
         </header>
 
         <div className={`mt-8 grid grid-cols-1 gap-3 ${colClass(columns)}`}>
-          {(Array.isArray(slice.items) ? slice.items : []).map((item: any, idx: number) => {
+          {cards.map((item, idx) => {
             const title = asTextValue(item.title);
             const body = asTextValue(item.body); // if you kept card_body, change to item.card_body here
             const icon = asTextValue(item.icon, "spark");
             const size = asTextValue(item.size, "md");
             const emphasis = asTextValue(item.emphasis, "normal");
             const linkLabel = asTextValue(item.link_label, "Learn more");
+            const bodyField = item.body as RichTextField | null | undefined;
+            const linkField = item.link as LinkField | null | undefined;
 
             const highlight = emphasis === "highlight";
 
@@ -117,23 +138,23 @@ export default function BentoGrid({ slice }: BentoGridProps) {
                   {(() => {
                     const Icon = ICONS[icon] ?? Sparkles;
                     return (
-                    <div className="relative rounded-xl border border-white/10 bg-white/[0.06] p-2 text-white/75 backdrop-blur-xl">
-  <Icon size={18} />{highlight && (
-  <span className="pulse-dot absolute -right-1 -top-1 h-2 w-2 rounded-full bg-white/90" />
-)}
-</div>
-                 );
-                })()}
+                      <div className="relative rounded-xl border border-white/10 bg-white/[0.06] p-2 text-white/75 backdrop-blur-xl">
+                        <Icon size={18} />{highlight && (
+                          <span className="pulse-dot absolute -right-1 -top-1 h-2 w-2 rounded-full bg-white/90" />
+                        )}
+                      </div>
+                    );
+                  })()}
                 </div>
 
                 <div className="mt-3 text-sm text-white/70">
-                  {body ? body : <PrismicRichText field={item.body} />}
+                  {body ? body : <PrismicRichText field={bodyField} />}
                 </div>
 
-                {item.link && (
+                {linkField && (
                   <div className="mt-5">
                     <PrismicNextLink
-                      field={item.link}
+                      field={linkField}
                       className="inline-flex items-center gap-2 text-sm font-medium text-white/85 hover:text-white"
                     >
                       {linkLabel}
