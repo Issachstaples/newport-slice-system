@@ -33,6 +33,7 @@ type FeatureGridSlice = {
     eyebrow?: unknown;
     headline?: unknown;
     body?: unknown;
+    feature_cards?: FeatureGridItem[];
     cards?: FeatureGridItem[];
     columns?: string | number;
     icon_style?: string;
@@ -86,11 +87,13 @@ function normalizeRichText(field: unknown): RichTextField | null {
 export default function FeatureGrid({ slice }: FeatureGridProps) {
   const primary = slice?.primary ?? {};
   const cards: FeatureGridItem[] =
-    Array.isArray(primary?.cards)
-      ? primary.cards
-      : Array.isArray(slice.items)
-        ? slice.items
-        : [];
+    Array.isArray(primary?.feature_cards)
+      ? primary.feature_cards
+      : Array.isArray(primary?.cards)
+        ? primary.cards
+        : Array.isArray(slice.items)
+          ? slice.items
+          : [];
 
   const eyebrowField = normalizeRichText(primary.eyebrow);
   const headlineField = normalizeRichText(primary.headline);
