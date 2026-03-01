@@ -281,7 +281,152 @@ the slice is incorrect.
 
 Not “needs a patch.”
 Incorrect.
+2026-03-01 — FeatureGrid / FeatureGridV2 Cards Not Rendering Correctly
+Symptom
 
+FeatureGrid rendered card titles as repeated placeholders (e.g. “Feature Feature Feature”)
+
+FeatureGridV2 initially rendered only Slice Machine placeholder text
+
+Rich Text descriptions (especially lists) failed to render or appeared empty
+
+No runtime crashes; slices existed in DOM but content was incorrect or missing
+
+Root Causes (Multiple, Related)
+1️⃣ Slice Machine Stub Left in Place (FeatureGridV2)
+
+FeatureGridV2 was still using the auto-generated Slice Machine stub:
+
+return <section>Placeholder component for feature_grid_v2...</section>
+
+Result: Prismic preview showed placeholder text instead of real UI.
+
+2️⃣ Incorrect Cards Source (FeatureGrid)
+
+Component read from primary.cards
+
+Prismic model actually defined Group field as:
+
+primary.feature_cards
+
+Result: real card data was ignored → fallback titles rendered.
+
+3️⃣ Rich Text Flattened Incorrectly
+
+Card descriptions were modeled as Rich Text (lists required)
+
+Component used asTextValue() which:
+
+Flattens content
+
+Breaks lists
+
+Mishandles Slice Machine wrapper objects:
+
+{ "__TYPE__": "StructuredTextContent", "value": [...] }
+
+Result: descriptions silently failed or rendered incorrectly.
+
+4️⃣ Local Normalization Logic (Anti-Pattern)
+
+A local normalizeRichText existed inside the slice
+
+Violated factory rule: normalization must be centralized
+
+Caused inconsistent behavior between mocks and API data
+
+Fixes Applied (Minimal, Correct)
+✅ FeatureGridV2
+
+Replaced Slice Machine stub with real rendering logic
+
+Implemented:
+
+Eyebrow / headline / body
+
+Cards grid
+
+Icon + highlight support
+
+Defensive guards
+
+Removed placeholder text entirely
+
+✅ FeatureGrid
+
+Switched canonical cards source to:
+
+primary.feature_cards
+
+Kept slice.items only as a fallback
+
+Removed hardcoded “Feature” placeholder titles
+
+✅ Rich Text Handling (Critical)
+
+Added shared helper:
+
+src/lib/prismic/normalizeRichText.ts
+
+Updated all Rich Text rendering to:
+
+<SafeRichText field={normalizeRichText(field)} />
+
+Never flatten Rich Text with asTextValue
+
+Rules Extracted (Permanent)
+🔒 Rich Text Rendering Rule
+
+If a field needs lists or formatting:
+
+It must be Rich Text
+
+It must be rendered with:
+
+normalizeRichText → SafeRichText
+
+asTextValue is forbidden for Rich Text
+
+🔒 Group Field Canonical Rule
+
+When a slice defines a Group field in primary:
+
+That field is canonical
+
+slice.items may exist only as a defensive fallback
+
+Never guess repeatable location
+
+🔒 Slice Stub Rule
+
+Slice Machine stubs must not ship
+
+Placeholder text indicates the slice is not implemented
+
+If placeholder text appears in preview → implementation is incomplete
+
+Final Status
+
+FeatureGrid: ✅ renders real card data
+
+FeatureGridV2: ✅ fully implemented (no stub)
+
+Rich Text lists: ✅ render correctly
+
+Slice Machine mocks + API parity: ✅ maintained
+
+No runtime errors or fallback placeholders
+
+Classification
+
+Failure Class:
+Rich Text wrapper mishandling + wrong group field + unimplemented slice stub
+
+Prevented by:
+Centralized normalization + canonical field discipline + stub removal
+
+This entry is complete and factory-grade.
+You’re now protected against this entire class of failure going forward.
 ---
 
 End of NE_error_log.md

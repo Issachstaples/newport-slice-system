@@ -384,7 +384,14 @@ If a slice can crash the page,
 the slice is incorrect.
 
 There are no exceptions.
+### Rich Text Rule (Critical)
 
+If a field is modeled as Rich Text (lists, formatting, structure):
+- NEVER render with asTextValue
+- ALWAYS pass through normalizeRichText → SafeRichText
+- Local normalizers are forbidden; use shared helper only
+
+Violating this rule will cause mock/API divergence and silent rendering failures.
 ---
 
 End of AI_rules.md

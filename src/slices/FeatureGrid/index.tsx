@@ -1,8 +1,10 @@
 // src/slices/FeatureGrid/index.tsx
 import * as React from "react";
 import { PrismicRichText } from "@prismicio/react";
-import type { RichTextField } from "@prismicio/client";
+import { asText, type RichTextField } from "@prismicio/client";
 import type { SliceComponentProps } from "@prismicio/react";
+import { SafeRichText } from "@/components/prismic/SafeRichText";
+import { normalizeRichText } from "@/lib/prismic/normalizeRichText";
 
 import {
   Sparkles,
@@ -65,35 +67,30 @@ function cx(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
 }
 
-/**
- * Normalize Prismic Rich Text fields so they are ALWAYS arrays.
- * Supports:
- * - Slice Machine mocks ({ __TYPE__, value })
- * - Real Prismic API responses ([...])
- */
-function normalizeRichText(field: unknown): RichTextField | null {
-  if (Array.isArray(field)) return field as RichTextField;
-  if (
-    typeof field === "object" &&
-    field !== null &&
-    "value" in field &&
-    Array.isArray((field as { value?: unknown }).value)
-  ) {
-    return (field as { value: RichTextField }).value;
+function asTextValue(field: unknown, fallback = ""): string {
+  if (field == null) return fallback;
+  if (typeof field === "string") return field;
+  if (typeof field === "number") return String(field);
+  if (Array.isArray(field)) return asText(field as RichTextField) || fallback;
+  if (typeof field === "object" && "value" in field) {
+    const v = (field as { value?: unknown }).value;
+    if (typeof v === "string") return v;
+    if (typeof v === "number") return String(v);
+    if (Array.isArray(v)) return asText(v as RichTextField) || fallback;
   }
-  return null;
+  return fallback;
 }
 
 export default function FeatureGrid({ slice }: FeatureGridProps) {
   const primary = slice?.primary ?? {};
-  const cards: FeatureGridItem[] =
-    Array.isArray(primary?.feature_cards)
-      ? primary.feature_cards
-      : Array.isArray(primary?.cards)
-        ? primary.cards
-        : Array.isArray(slice.items)
-          ? slice.items
-          : [];
+  const featureCards = Array.isArray(primary?.feature_cards)
+    ? primary.feature_cards
+    : [];
+  const cards: FeatureGridItem[] = featureCards.length
+    ? featureCards
+    : Array.isArray(slice.items)
+      ? slice.items
+      : [];
 
   const eyebrowField = normalizeRichText(primary.eyebrow);
   const headlineField = normalizeRichText(primary.headline);
@@ -220,7 +217,7 @@ export default function FeatureGrid({ slice }: FeatureGridProps) {
               highlightEnabled && item?.highlight
             );
 
-            const titleField = normalizeRichText(item?.title);
+            const titleText = asTextValue(item?.title);
             const descriptionField = normalizeRichText(item?.description);
 
             return (
@@ -245,31 +242,20 @@ export default function FeatureGrid({ slice }: FeatureGridProps) {
 
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
-                      {titleField ? (
-                        <PrismicRichText
-                          field={titleField}
-                          components={{
-                            paragraph: ({ children }) => (
-                              <h3 className="text-sm font-semibold leading-snug">
-                                {children}
-                              </h3>
-                            ),
-                          }}
-                        />
-                      ) : (
+                      {titleText ? (
                         <h3 className="text-sm font-semibold leading-snug">
-                          Feature
+                          {titleText}
                         </h3>
-                      )}
+                      ) : null}
 
                       {isHighlighted && (
                         <span className="pulse-dot" aria-hidden />
                       )}
                     </div>
 
-                    {descriptionField && (
-                      <PrismicRichText
-                        field={descriptionField}
+                    {descriptionField ? (
+                      <SafeRichText
+                        field={item?.description}
                         components={{
                           paragraph: ({ children }) => (
                             <p className="mt-1 text-sm leading-relaxed opacity-85">
@@ -278,7 +264,7 @@ export default function FeatureGrid({ slice }: FeatureGridProps) {
                           ),
                         }}
                       />
-                    )}
+                    ) : null}
                   </div>
                 </div>
 
