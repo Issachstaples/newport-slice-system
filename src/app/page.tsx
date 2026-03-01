@@ -27,7 +27,7 @@ export default async function Page() {
   }
 
   return (
-    <main className="relative min-h-dvh overflow-hidden">
+    <main className="relative min-h-dvh">
       {/* Premium liquid backdrop */}
       <div aria-hidden className="absolute inset-0 app-backdrop" />
       <div aria-hidden className="absolute inset-0 app-grid pointer-events-none" />
