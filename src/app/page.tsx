@@ -1,6 +1,5 @@
 // src/app/page.tsx
 import { SliceZone } from "@prismicio/react";
-import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 
 import { createClient } from "@/prismicio";
@@ -9,12 +8,6 @@ import { components } from "@/slices";
 
 export default async function Page() {
   const client = createClient();
-  const localComponents = {
-    ...components,
-    eyebrow: dynamic(() => import("@/slices/FeatureGrid")),
-    feature_grid: dynamic(() => import("@/slices/FeatureGrid")),
-    feature_grid_v2: dynamic(() => import("@/slices/FeatureGridV2")),
-  };
 
   // Fetch the published Page document by UID: "home"
   const page = await client
@@ -23,6 +16,15 @@ export default async function Page() {
 
   if (!page) notFound();
 
+  if (process.env.NODE_ENV === "development") {
+    console.log(
+      "[page] slices:",
+      page.data.slices.map((s) => ({
+        slice_type: s.slice_type,
+        variation: s.variation,
+      }))
+    );
+  }
 
   return (
     <main className="relative min-h-dvh overflow-hidden">
@@ -42,7 +44,7 @@ export default async function Page() {
 
       {/* Content */}
       <div className="relative">
-        <SliceZone slices={page.data.slices} components={localComponents} />
+        <SliceZone slices={page.data.slices} components={components} />
       </div>
     </main>
   );
