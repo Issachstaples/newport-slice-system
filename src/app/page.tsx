@@ -13,6 +13,7 @@ export default async function Page() {
     ...components,
     eyebrow: dynamic(() => import("@/slices/FeatureGrid")),
     feature_grid: dynamic(() => import("@/slices/FeatureGrid")),
+    feature_grid_v2: dynamic(() => import("@/slices/FeatureGridV2")),
   };
 
   // Fetch the published Page document by UID: "home"

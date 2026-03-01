@@ -17,6 +17,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "feature_grid_v2": {
+              "type": "SharedSlice"
+            },
             "eyebrow": {
               "type": "SharedSlice"
             },

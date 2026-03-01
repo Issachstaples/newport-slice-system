@@ -8,4 +8,5 @@ export const components = {
   eyebrow: dynamic(() => import("./FeatureGrid")),
   feature_grid_v2: dynamic(() => import("./FeatureGridV2")),
   hero_system: dynamic(() => import("./HeroSystem")),
+  
 };

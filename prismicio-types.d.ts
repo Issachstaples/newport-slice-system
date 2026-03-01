@@ -70,6 +70,7 @@ type ContentRelationshipFieldWithData<
 }[Exclude<TCustomType[number], string>["id"]];
 
 type PageDocumentDataSlicesSlice =
+  | FeatureGridV2Slice
   | EyebrowSlice
   | BentoGridSlice
   | CtaSectionSlice
