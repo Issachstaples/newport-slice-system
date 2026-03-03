@@ -1,311 +1,82 @@
-1️⃣ Core Layout Slices (Foundation Tier)
+# Slice Library Index
 
-These are structural primitives — used on almost every site.
+Newport Slice System — Canonical Slice Inventory
+Last Updated: 2026-03-02
 
-1. HeroSystem
+All slices are layout-only, lint-clean, and compliant with `UNIVERSAL_SLICE_CONTROL_SCHEMA.md`.
 
-Flagship above-the-fold system hero
-Variants:
+Status key: ✅ Implemented | 🔲 Planned
 
-default
+---
 
-split
+## 1️⃣ Structural / Foundation Slices
 
-centered
+Core primitives present on nearly every deployment.
 
-dashboard
+| # | Slice | Status | Description |
+|---|-------|--------|-------------|
+| 1 | **HeroSystem** | ✅ | Above-the-fold hero with visual modes, badge, dual CTA, and split/centered/dashboard variations. |
+| 2 | **SectionIntro** | ✅ | Headline + Rich Text section framing with universal layout controls. |
+| 3 | **BentoGrid** | ✅ | Asymmetric feature grid with configurable card count, icons, and highlight support. |
 
-product
+---
 
-Controls:
+## 2️⃣ Content / Feature Slices
 
-visual_mode (none | gradient_orb | helix_3d)
+Reusable mid-page modules for communicating value and features.
 
-badge_enabled
+| # | Slice | Status | Description |
+|---|-------|--------|-------------|
+| 4 | **FeatureGrid** | ✅ | Icon + title + description card grid; reads from `primary.feature_cards` Group field. |
+| 5 | **FeatureGridV2** | ✅ | Enhanced feature card grid with icon mapping, highlight support, and visual mode decorators. |
+| 6 | **IconList** | ✅ | Vertically stacked icon rows with title, badge, Rich Text description, and per-row highlight. |
+| 7 | **StepsTimeline** | ✅ | Numbered or icon-driven step sequence with vertical/horizontal layout, connector modes, and animation. |
 
-primary_cta
+---
 
-secondary_cta
+## 3️⃣ Conversion Slices
 
-Purpose:
-High-conversion entry module.
+High-intent modules optimised for lead capture, demo booking, and checkout.
 
-2. SectionIntro ✅
+| # | Slice | Status | Description |
+|---|-------|--------|-------------|
+| 8 | **CtaSection** | ✅ | Conversion block with centered/split/inline/minimal variations and dual CTA support. |
 
-Headline + Rich Text section framing with universal layout controls.
-Used before major content blocks.
+---
 
-3. CtaSection
+## 4️⃣ Interactive Slices
 
-Conversion block
-Variants:
+Client-rendered slices requiring `"use client"` and local state.
 
-centered
+| # | Slice | Status | Description |
+|---|-------|--------|-------------|
+| 9 | **TabsSection** | ✅ | Tab switcher with pills/underline/cards styles, panel/grid content modes, and per-tab Rich Text bodies. |
 
-split
+---
 
-inline
+## 5️⃣ Planned Slices (Roadmap)
 
-minimal
+| # | Slice | Status | Description |
+|---|-------|--------|-------------|
+| 10 | **PricingTable** | 🔲 | Tier comparison grid with recommended plan highlight and monthly/annual toggle. |
+| 11 | **TestimonialsCarousel** | 🔲 | Quote + avatar + company cards with optional auto-rotate. |
+| 12 | **LogoCloud** | 🔲 | Client logo grid with grayscale, glass-card, and marquee variants. |
+| 13 | **StatsStrip** | 🔲 | Metric counters in static or animated mode. |
+| 14 | **ProductShowcase** | 🔲 | Large image + feature bullets with CTA cluster and optional price display. |
+| 15 | **ComparisonTable** | 🔲 | Feature comparison matrix with category toggle for competitive positioning. |
+| 16 | **BlogFeedGrid** | 🔲 | Page-level data fed card grid for blog/content archive pages. |
+| 17 | **Divider / SpacerSlice** | 🔲 | Controlled whitespace slice for layout composability. |
 
-Use cases:
+---
 
-Lead capture
+## Architectural Notes
 
-Demo booking
+- All implemented slices include the **required control block** (`is_enabled`, `visual_mode`, `section_padding`, `container_width`) per `UNIVERSAL_SLICE_CONTROL_SCHEMA.md`.
+- **TabsSection** uses Rich Text blocks rendered as a CSS grid (`content_style: grid`) rather than nested Group fields, due to Slice Machine v2 not supporting nested groups.
+- All Group fields are canonical in `primary` (not in `items`), per factory standard.
+- `items: {}` is left empty at the variation root for all slices.
+- All slices are lint-clean at time of implementation (ESLint exit 0).
 
-Checkout upsell
+---
 
-4. Divider / SpacerSlice
-
-Controlled whitespace slice
-Important for layout composability.
-
-2️⃣ Content Slices (Meat & Potatoes)
-
-These are reusable mid-page modules.
-
-5. FeatureGrid (Classic)
-
-Icon + title + description grid
-Variants:
-
-2-column
-
-3-column
-
-dense SaaS
-
-bordered
-
-Use case:
-Service explanation
-Value props
-Feature comparison
-
-6. IconList
-
-Vertical or horizontal list
-Optional checkmarks or custom icons
-Optional highlighted row
-
-Use case:
-Pricing breakdown
-Process explanation
-Deliverables list
-
-7. BlurbGrid
-
-Image + headline + short paragraph
-Flexible column count.
-
-Use case:
-Team highlights
-Mini case studies
-Use-case breakdown
-
-8. StepsTimeline
-
-Numbered steps with optional connectors
-Variants:
-
-vertical
-
-horizontal
-
-minimal
-
-timeline
-
-Use case:
-Onboarding flow
-How it works
-Assembly process
-
-9. TabsSection
-
-Dynamic tab switcher
-Controlled via repeatable tab groups
-
-Use case:
-Service breakdown
-Product specs
-Industry-specific views
-
-This becomes powerful for HelixFlow vertical templates.
-
-3️⃣ Product-Focused Slices
-
-For ecommerce or SaaS product pages.
-
-10. ProductShowcase
-
-Large image + feature bullets
-CTA cluster
-Optional price display
-
-11. ProductCarousel
-
-Scrollable product cards
-Must be defensive & lazy-safe
-
-Use case:
-Shop pages
-Related products
-Case studies
-
-12. PricingTable
-
-Tier comparison grid
-Highlight recommended plan
-Toggle monthly/annual
-
-High revenue impact slice.
-
-13. ComparisonTable
-
-Feature comparison matrix
-Toggle between categories
-
-Competitive positioning slice.
-
-4️⃣ Trust & Authority Slices
-
-These increase conversions.
-
-14. TestimonialsCarousel
-
-Quote + avatar + company
-Optional rating stars
-Auto-rotate optional
-
-15. LogoCloud
-
-Client logos grid
-Variants:
-
-grayscale
-
-glass-card
-
-marquee scroll
-
-16. CaseStudyHighlight
-
-Image + summary + results stats
-CTA to full study
-
-17. StatsStrip
-
-Metric counters
-Variants:
-
-static
-
-animated
-
-5️⃣ Blog & Content Engine Slices
-
-Important for marketing scaling.
-
-18. BlogFeedGrid
-
-Pulls posts (page-level fetch allowed, not inside slice)
-Displays cards only.
-
-19. BlogCarousel
-
-Horizontal scroll version.
-
-20. ArticleBody
-
-Structured long-form slice
-Used for blog page type.
-
-21. AuthorBox
-
-Avatar + bio + social links.
-
-6️⃣ Dashboard / SaaS Slices (HelixFlow Future)
-
-These blur marketing and app UI.
-
-22. ModuleTogglePanel
-
-Enable/disable feature modules
-Future admin tool
-
-23. CRMWidget
-
-Compact lead list display
-
-24. RevenueSnapshot
-
-Stat overview card
-
-25. ActivityFeed
-
-Recent events list
-
-🧠 Important Architectural Decision
-
-You are NOT building pages.
-
-You are building:
-
-Modular UI packages that can assemble into infinite layouts.
-
-Each slice must:
-
-Accept only slice
-
-Be layout-only
-
-Have at least 1 Boolean control
-
-Have at least 1 Select control
-
-Be visually premium
-
-Work in multiple industries
-
-No niche design hacks.
-No one-off branding baked in.
-
-🎯 Slice Build Priority Recommendation (Smart Order)
-
-Do not build randomly.
-
-Build in this order:
-
-SectionIntro
-
-IconList
-
-StepsTimeline
-
-PricingTable
-
-TestimonialsCarousel
-
-TabsSection
-
-ProductShowcase
-
-StatsStrip
-
-ComparisonTable
-
-This gives you:
-
-Service websites
-
-SaaS websites
-
-Ecommerce landing pages
-
-Agency templates
-
-Vertical SaaS layouts
-
-From one library.
+*This file is the authoritative slice inventory. Update it whenever a slice is implemented, deprecated, or structurally changed.*

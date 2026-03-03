@@ -426,6 +426,43 @@ Apply minimal-diff philosophy when editing existing files.
 If output conflicts with any governing document, the governing document wins.
 
 Failure to follow this rule invalidates the response.
+
+---
+
+# 21. Documentation Maintenance Rule
+
+When a slice is implemented, the following documentation files must be updated in the same session:
+
+1. `public/docs/slice_library_index.md` — add/update the slice entry with ✅ status and one-line description.
+2. `public/docs/context_anchor.md` — append a bullet under the appropriate section noting the slice is implemented and lint-verified.
+
+Failure to update documentation when shipping a slice is a protocol violation. Documentation is part of the slice, not an afterthought.
+
+---
+
+# 22. UNIVERSAL_SLICE_CONTROL_SCHEMA Cross-Check Rule
+
+Before generating, modifying, or reviewing any slice model or component, AI must cross-check `UNIVERSAL_SLICE_CONTROL_SCHEMA.md` to verify:
+
+- The required control block (`is_enabled`, `visual_mode`, `section_padding`, `container_width`) is present at the top of `primary`.
+- No enum values are introduced that are not defined in the schema.
+- Optional controls (`background_tone`, `animation_mode`, `density_mode`, `align_mode`) use only their defined enum values when included.
+
+If the proposed change conflicts with the schema, the schema wins. The change must not proceed without an explicit architectural decision.
+
+---
+
+# 23. No Nested Groups Rule
+
+Slice Machine v2 does not support Group fields nested inside other Group fields.
+
+AI must never:
+- Generate a model with a Group field inside another Group field.
+- Suggest nested groups as a solution to grid-like content requirements.
+
+The canonical alternative for grid-like content within tabs or cards is Rich Text blocks rendered into a CSS grid using Tailwind's `[&>*]` selector utilities. This pattern is established in `TabsSection` and is the system-wide standard.
+
 ---
 
 End of AI_rules.md
+

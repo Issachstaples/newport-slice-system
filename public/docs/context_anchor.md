@@ -354,3 +354,22 @@ This is the HelixFlow Operating System.
 ## Slice Library Updates
 
 - **SectionIntro** implemented (`src/slices/SectionIntro/index.tsx`) — replaces Slice Machine stub; full universal control block (`is_enabled`, `visual_mode`, `section_padding`, `container_width`, `align_mode`), `SafeRichText` + `normalizeRichText` for body, `asTextValue` for eyebrow/headline, lint verified (exit 0), two mocks added (gradient_orb/left and helix_3d/center), `slice_library_index.md` updated. *(2026-03-02)*
+
+---
+
+## Slice Library Milestone — 2026-03-02
+
+The following slices were implemented, lint-verified (ESLint exit 0), and pushed to `main` in this session:
+
+- **IconList** (`src/slices/IconList/index.tsx`) — vertically stacked icon rows; reads from `primary.items` Group; supports `item_icon` (Select → lucide map), `item_title`, `item_description` (Rich Text), `item_badge`, `item_is_highlighted`; full `density_mode` control.
+- **StepsTimeline** (`src/slices/StepsTimeline/index.tsx`) — numbered or icon-driven step sequence; reads from `primary.steps` Group; supports `layout_mode` (vertical/horizontal), `connector_mode` (line/dots/none), `number_style` (numeric/icon), `animation_mode` (none/fade_in/slide_up/stagger with per-step inline delay).
+- **TabsSection** (`src/slices/TabsSection/index.tsx`) — interactive tab switcher (`"use client"`); reads from `primary.tabs` Group; supports `tabs_style` (pills/underline/cards), `content_style` (panel/grid), `show_icons`, `allow_wrap`, `default_tab_index` (clamped); ARIA-compliant tab/tabpanel roles.
+
+**Architectural note:** TabsSection uses Rich Text blocks rendered into a CSS `[&>*]` grid (`content_style: grid`) rather than nested Group fields. Slice Machine v2 does not support nested Groups. This is the canonical pattern for grid-like content within tab panels.
+
+**Documentation updated this session:**
+- `public/docs/slice_library_index.md` — fully rewritten as canonical table-format inventory (9 implemented, 8 planned)
+- `docs/SLICE_IMPLEMENTATION_STANDARDS.md` — created; formalises required control block order, hard rules, defensive rendering standards
+- `docs/SLICE_FACTORY_WORKFLOW.md` — created; defines 10-step build process, QA checklist, JSON validation steps, commit message conventions
+- `docs/AI_rules.md` — updated with doc maintenance rule, cross-check rule, and no-nested-groups rule
+
