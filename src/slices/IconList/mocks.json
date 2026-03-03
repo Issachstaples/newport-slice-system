@@ -1,0 +1,114 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"is_enabled": {
+				"__TYPE__": "BooleanContent",
+				"value": true
+			},
+			"visual_mode": {
+				"__TYPE__": "FieldContent",
+				"value": "none",
+				"type": "Select"
+			},
+			"section_padding": {
+				"__TYPE__": "FieldContent",
+				"value": "md",
+				"type": "Select"
+			},
+			"container_width": {
+				"__TYPE__": "FieldContent",
+				"value": "full",
+				"type": "Select"
+			},
+			"align_mode": {
+				"__TYPE__": "FieldContent",
+				"value": "left",
+				"type": "Select"
+			},
+			"density_mode": {
+				"__TYPE__": "FieldContent",
+				"value": "relaxed",
+				"type": "Select"
+			},
+			"eyebrow": {
+				"__TYPE__": "FieldContent",
+				"value": "establish",
+				"type": "Text"
+			},
+			"headline": {
+				"__TYPE__": "FieldContent",
+				"value": "truth",
+				"type": "Text"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Sit eiusmod et non est dolor. Aute aute id laboris nisi reprehenderit minim pariatur occaecat. Consectetur esse eiusmod nostrud laboris ipsum nostrud eiusmod sunt qui et deserunt adipisicing sunt cupidatat adipisicing."
+						}
+					}
+				]
+			},
+			"items": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"item_icon",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "star",
+									"type": "Select"
+								}
+							],
+							[
+								"item_title",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "neighbor",
+									"type": "Text"
+								}
+							],
+							[
+								"item_description",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Elit Lorem laboris magna adipisicing occaecat quis nulla."
+											}
+										}
+									]
+								}
+							],
+							[
+								"item_is_highlighted",
+								{
+									"__TYPE__": "BooleanContent",
+									"value": false
+								}
+							],
+							[
+								"item_badge",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "floating",
+									"type": "Text"
+								}
+							]
+						]
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]

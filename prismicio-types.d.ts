@@ -907,6 +907,205 @@ export type HeroSystemSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *IconList → Default → Primary → Items*
+ */
+export interface IconListSliceDefaultPrimaryItemsItem {
+  /**
+   * Item Icon field in *IconList → Default → Primary → Items*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: check
+   * - **API ID Path**: icon_list.default.primary.items[].item_icon
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  item_icon: prismic.SelectField<
+    "check" | "sparkles" | "bolt" | "shield" | "star" | "info" | "warning",
+    "filled"
+  >;
+
+  /**
+   * Item Title field in *IconList → Default → Primary → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: none
+   * - **API ID Path**: icon_list.default.primary.items[].item_title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  item_title: prismic.KeyTextField;
+
+  /**
+   * Item Description field in *IconList → Default → Primary → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: none
+   * - **API ID Path**: icon_list.default.primary.items[].item_description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  item_description: prismic.RichTextField;
+
+  /**
+   * Item Is Highlighted field in *IconList → Default → Primary → Items*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: icon_list.default.primary.items[].item_is_highlighted
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  item_is_highlighted: prismic.BooleanField;
+
+  /**
+   * Item Badge field in *IconList → Default → Primary → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: none
+   * - **API ID Path**: icon_list.default.primary.items[].item_badge
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  item_badge: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *IconList → Default → Primary*
+ */
+export interface IconListSliceDefaultPrimary {
+  /**
+   * Is Enabled field in *IconList → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: icon_list.default.primary.is_enabled
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  is_enabled: prismic.BooleanField;
+
+  /**
+   * Visual Mode field in *IconList → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **API ID Path**: icon_list.default.primary.visual_mode
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  visual_mode: prismic.SelectField<"none" | "gradient_orb" | "helix_3d">;
+
+  /**
+   * Section Padding field in *IconList → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: md
+   * - **API ID Path**: icon_list.default.primary.section_padding
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  section_padding: prismic.SelectField<"md" | "sm" | "lg" | "none", "filled">;
+
+  /**
+   * Container Width field in *IconList → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **API ID Path**: icon_list.default.primary.container_width
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  container_width: prismic.SelectField<"standard" | "wide" | "full">;
+
+  /**
+   * Align Mode field in *IconList → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: left
+   * - **API ID Path**: icon_list.default.primary.align_mode
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  align_mode: prismic.SelectField<"left" | "center", "filled">;
+
+  /**
+   * Density Mode field in *IconList → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: relaxed
+   * - **API ID Path**: icon_list.default.primary.density_mode
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  density_mode: prismic.SelectField<"relaxed" | "compact", "filled">;
+
+  /**
+   * Eyebrow field in *IconList → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: none
+   * - **API ID Path**: icon_list.default.primary.eyebrow
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  eyebrow: prismic.KeyTextField;
+
+  /**
+   * Headline field in *IconList → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Headline
+   * - **API ID Path**: icon_list.default.primary.headline
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  headline: prismic.KeyTextField;
+
+  /**
+   * Body field in *IconList → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Body
+   * - **API ID Path**: icon_list.default.primary.body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Items field in *IconList → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: icon_list.default.primary.items[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  items: prismic.GroupField<Simplify<IconListSliceDefaultPrimaryItemsItem>>;
+}
+
+/**
+ * Default variation for IconList Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type IconListSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<IconListSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *IconList*
+ */
+type IconListSliceVariation = IconListSliceDefault;
+
+/**
+ * IconList Shared Slice
+ *
+ * - **API ID**: `icon_list`
+ * - **Description**: IconList
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type IconListSlice = prismic.SharedSlice<
+  "icon_list",
+  IconListSliceVariation
+>;
+
+/**
  * Primary content in *SectionIntro → Default → Primary*
  */
 export interface SectionIntroSliceDefaultPrimary {
@@ -1076,6 +1275,11 @@ declare module "@prismicio/client" {
       HeroSystemSliceDefaultPrimary,
       HeroSystemSliceVariation,
       HeroSystemSliceDefault,
+      IconListSlice,
+      IconListSliceDefaultPrimaryItemsItem,
+      IconListSliceDefaultPrimary,
+      IconListSliceVariation,
+      IconListSliceDefault,
       SectionIntroSlice,
       SectionIntroSliceDefaultPrimary,
       SectionIntroSliceVariation,
