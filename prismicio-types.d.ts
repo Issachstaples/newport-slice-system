@@ -1480,6 +1480,267 @@ export type StepsTimelineSlice = prismic.SharedSlice<
   StepsTimelineSliceVariation
 >;
 
+/**
+ * Item in *TabsSection → Default → Primary → Tabs*
+ */
+export interface TabsSectionSliceDefaultPrimaryTabsItem {
+  /**
+   * Tab Label field in *TabsSection → Default → Primary → Tabs*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Label
+   * - **API ID Path**: tabs_section.default.primary.tabs[].tab_label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  tab_label: prismic.KeyTextField;
+
+  /**
+   * Tab Icon field in *TabsSection → Default → Primary → Tabs*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: check
+   * - **API ID Path**: tabs_section.default.primary.tabs[].tab_icon
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  tab_icon: prismic.SelectField<
+    "check" | "sparkles" | "bolt" | "shield" | "star" | "info" | "warning",
+    "filled"
+  >;
+
+  /**
+   * Tab Badge field in *TabsSection → Default → Primary → Tabs*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Badge
+   * - **API ID Path**: tabs_section.default.primary.tabs[].tab_badge
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  tab_badge: prismic.KeyTextField;
+
+  /**
+   * Tab Body field in *TabsSection → Default → Primary → Tabs*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Body
+   * - **API ID Path**: tabs_section.default.primary.tabs[].tab_body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  tab_body: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *TabsSection → Default → Primary*
+ */
+export interface TabsSectionSliceDefaultPrimary {
+  /**
+   * Is Enabled field in *TabsSection → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: tabs_section.default.primary.is_enabled
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  is_enabled: prismic.BooleanField;
+
+  /**
+   * Visual Mode field in *TabsSection → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: none
+   * - **API ID Path**: tabs_section.default.primary.visual_mode
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  visual_mode: prismic.SelectField<
+    "none" | "gradient_orb" | "3d_helix",
+    "filled"
+  >;
+
+  /**
+   * Section Padding field in *TabsSection → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: md
+   * - **API ID Path**: tabs_section.default.primary.section_padding
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  section_padding: prismic.SelectField<"md" | "sm" | "lg" | "none", "filled">;
+
+  /**
+   * Container Width field in *TabsSection → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: standard
+   * - **API ID Path**: tabs_section.default.primary.container_width
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  container_width: prismic.SelectField<"standard" | "wide" | "full", "filled">;
+
+  /**
+   * Align Mode field in *TabsSection → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: left
+   * - **API ID Path**: tabs_section.default.primary.align_mode
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  align_mode: prismic.SelectField<"left" | "center", "filled">;
+
+  /**
+   * Density Mode field in *TabsSection → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: relaxed
+   * - **API ID Path**: tabs_section.default.primary.density_mode
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  density_mode: prismic.SelectField<"relaxed" | "compact", "filled">;
+
+  /**
+   * Animation Mode field in *TabsSection → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: none
+   * - **API ID Path**: tabs_section.default.primary.animation_mode
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  animation_mode: prismic.SelectField<
+    "none" | "slide_up" | "stagger" | "fade_in",
+    "filled"
+  >;
+
+  /**
+   * Tabs Style field in *TabsSection → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: pills
+   * - **API ID Path**: tabs_section.default.primary.tabs_style
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  tabs_style: prismic.SelectField<"pills" | "underline" | "cards", "filled">;
+
+  /**
+   * Content Style field in *TabsSection → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: panel
+   * - **API ID Path**: tabs_section.default.primary.content_style
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  content_style: prismic.SelectField<"panel" | "grid", "filled">;
+
+  /**
+   * Default Tab Index field in *TabsSection → Default → Primary*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: 0
+   * - **API ID Path**: tabs_section.default.primary.default_tab_index
+   * - **Documentation**: https://prismic.io/docs/fields/number
+   */
+  default_tab_index: prismic.NumberField;
+
+  /**
+   * Show Icons field in *TabsSection → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: tabs_section.default.primary.show_icons
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  show_icons: prismic.BooleanField;
+
+  /**
+   * Allow Wrap field in *TabsSection → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: tabs_section.default.primary.allow_wrap
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  allow_wrap: prismic.BooleanField;
+
+  /**
+   * Eyebrow field in *TabsSection → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: none
+   * - **API ID Path**: tabs_section.default.primary.eyebrow
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  eyebrow: prismic.KeyTextField;
+
+  /**
+   * Headline field in *TabsSection → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Headline
+   * - **API ID Path**: tabs_section.default.primary.headline
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  headline: prismic.KeyTextField;
+
+  /**
+   * Body field in *TabsSection → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Body
+   * - **API ID Path**: tabs_section.default.primary.body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Tabs field in *TabsSection → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tabs_section.default.primary.tabs[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  tabs: prismic.GroupField<Simplify<TabsSectionSliceDefaultPrimaryTabsItem>>;
+}
+
+/**
+ * Default variation for TabsSection Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type TabsSectionSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TabsSectionSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *TabsSection*
+ */
+type TabsSectionSliceVariation = TabsSectionSliceDefault;
+
+/**
+ * TabsSection Shared Slice
+ *
+ * - **API ID**: `tabs_section`
+ * - **Description**: TabsSection
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type TabsSectionSlice = prismic.SharedSlice<
+  "tabs_section",
+  TabsSectionSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -1542,6 +1803,11 @@ declare module "@prismicio/client" {
       StepsTimelineSliceDefaultPrimary,
       StepsTimelineSliceVariation,
       StepsTimelineSliceDefault,
+      TabsSectionSlice,
+      TabsSectionSliceDefaultPrimaryTabsItem,
+      TabsSectionSliceDefaultPrimary,
+      TabsSectionSliceVariation,
+      TabsSectionSliceDefault,
     };
   }
 }

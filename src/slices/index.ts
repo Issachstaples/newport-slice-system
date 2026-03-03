@@ -11,4 +11,5 @@ export const components = {
   icon_list: dynamic(() => import("./IconList")),
   section_intro: dynamic(() => import("./SectionIntro")),
   steps_timeline: dynamic(() => import("./StepsTimeline")),
+  tabs_section: dynamic(() => import("./TabsSection")),
 };

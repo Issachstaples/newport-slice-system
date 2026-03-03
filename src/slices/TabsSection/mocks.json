@@ -12,6 +12,11 @@
 				"value": "none",
 				"type": "Select"
 			},
+			"section_padding": {
+				"__TYPE__": "FieldContent",
+				"value": "lg",
+				"type": "Select"
+			},
 			"container_width": {
 				"__TYPE__": "FieldContent",
 				"value": "standard",
@@ -19,7 +24,7 @@
 			},
 			"align_mode": {
 				"__TYPE__": "FieldContent",
-				"value": "center",
+				"value": "left",
 				"type": "Select"
 			},
 			"density_mode": {
@@ -29,32 +34,40 @@
 			},
 			"animation_mode": {
 				"__TYPE__": "FieldContent",
-				"value": "slide_up",
-				"type": "Select"
-			},
-			"layout_mode": {
-				"__TYPE__": "FieldContent",
-				"value": "horizontal",
-				"type": "Select"
-			},
-			"connector_mode": {
-				"__TYPE__": "FieldContent",
 				"value": "none",
 				"type": "Select"
 			},
-			"number_style": {
+			"tabs_style": {
 				"__TYPE__": "FieldContent",
-				"value": "numeric",
+				"value": "underline",
 				"type": "Select"
+			},
+			"content_style": {
+				"__TYPE__": "FieldContent",
+				"value": "panel",
+				"type": "Select"
+			},
+			"default_tab_index": {
+				"__TYPE__": "FieldContent",
+				"value": "44",
+				"type": "Number"
+			},
+			"show_icons": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			},
+			"allow_wrap": {
+				"__TYPE__": "BooleanContent",
+				"value": true
 			},
 			"eyebrow": {
 				"__TYPE__": "FieldContent",
-				"value": "meant",
+				"value": "shoe",
 				"type": "Text"
 			},
 			"headline": {
 				"__TYPE__": "FieldContent",
-				"value": "only",
+				"value": "lunch",
 				"type": "Text"
 			},
 			"body": {
@@ -63,70 +76,58 @@
 					{
 						"type": "paragraph",
 						"content": {
-							"text": "Labore est fugiat esse nisi aliquip non commodo aute id in."
+							"text": "Anim excepteur consectetur nostrud incididunt culpa excepteur sit laborum. Officia minim fugiat ad sint mollit quis in."
 						}
 					}
 				]
 			},
-			"steps": {
+			"tabs": {
 				"__TYPE__": "GroupContentType",
 				"value": [
 					{
 						"__TYPE__": "GroupItemContent",
 						"value": [
 							[
-								"step_title",
+								"tab_label",
 								{
 									"__TYPE__": "FieldContent",
-									"value": "supply",
+									"value": "average",
 									"type": "Text"
 								}
 							],
 							[
-								"step_body",
+								"tab_icon",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "check",
+									"type": "Select"
+								}
+							],
+							[
+								"tab_badge",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "greater",
+									"type": "Text"
+								}
+							],
+							[
+								"tab_body",
 								{
 									"__TYPE__": "StructuredTextContent",
 									"value": [
 										{
 											"type": "paragraph",
 											"content": {
-												"text": "Elit eu consectetur quis Lorem eu eiusmod ullamco sit cillum. Lorem ad enim ex amet. Veniam minim reprehenderit id Lorem elit pariatur commodo pariatur ullamco in incididunt Lorem consequat."
+												"text": "Id fugiat cupidatat eiusmod duis occaecat tempor non cillum pariatur labore veniam."
 											}
 										}
 									]
-								}
-							],
-							[
-								"step_icon",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "warning",
-									"type": "Select"
-								}
-							],
-							[
-								"step_is_highlighted",
-								{
-									"__TYPE__": "BooleanContent",
-									"value": true
-								}
-							],
-							[
-								"step_badge",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "help",
-									"type": "Text"
 								}
 							]
 						]
 					}
 				]
-			},
-			"section_padding": {
-				"__TYPE__": "FieldContent",
-				"value": "sm",
-				"type": "Select"
 			}
 		},
 		"items": []
