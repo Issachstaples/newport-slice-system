@@ -1,0 +1,161 @@
+{
+    "id": "slice_name",
+    "type": "SharedSlice",
+    "name": "SliceName",
+    "description": "Universal canonical slice template for the Newport Slice System.",
+    "variations": [
+        {
+            "id": "default",
+            "name": "Default",
+            "docURL": "...",
+            "version": "initial",
+            "description": "Default variation.",
+            "imageUrl": "",
+            "primary": {
+                "is_enabled": {
+                    "type": "Boolean",
+                    "config": {
+                        "label": "Is Enabled",
+                        "placeholder_false": "false",
+                        "placeholder_true": "true",
+                        "default_value": true
+                    }
+                },
+                "visual_mode": {
+                    "type": "Select",
+                    "config": {
+                        "label": "Visual Mode",
+                        "placeholder": "",
+                        "options": [
+                            "none",
+                            "gradient_orb",
+                            "helix_3d"
+                        ],
+                        "default_value": "none"
+                    }
+                },
+                "section_padding": {
+                    "type": "Select",
+                    "config": {
+                        "label": "Section Padding",
+                        "placeholder": "",
+                        "options": [
+                            "none",
+                            "sm",
+                            "md",
+                            "lg"
+                        ],
+                        "default_value": "md"
+                    }
+                },
+                "container_width": {
+                    "type": "Select",
+                    "config": {
+                        "label": "Container Width",
+                        "placeholder": "",
+                        "options": [
+                            "standard",
+                            "wide",
+                            "full"
+                        ],
+                        "default_value": "standard"
+                    }
+                },
+                "eyebrow": {
+                    "type": "Text",
+                    "config": {
+                        "label": "Eyebrow",
+                        "placeholder": ""
+                    }
+                },
+                "headline": {
+                    "type": "Text",
+                    "config": {
+                        "label": "Headline",
+                        "placeholder": ""
+                    }
+                },
+                "body": {
+                    "type": "StructuredText",
+                    "config": {
+                        "label": "Body",
+                        "placeholder": "",
+                        "allowTargetBlank": true,
+                        "single": "paragraph,strong,em,hyperlink,list-item,o-list-item"
+                    }
+                },
+                "cta_label": {
+                    "type": "Text",
+                    "config": {
+                        "label": "CTA Label",
+                        "placeholder": ""
+                    }
+                },
+                "cta_link": {
+                    "type": "Link",
+                    "config": {
+                        "label": "CTA Link",
+                        "allowTargetBlank": true
+                    }
+                },
+                "items": {
+                    "type": "Group",
+                    "config": {
+                        "label": "Items",
+                        "repeat": true,
+                        "fields": {
+                            "item_title": {
+                                "type": "Text",
+                                "config": {
+                                    "label": "Item Title",
+                                    "placeholder": ""
+                                }
+                            },
+                            "item_body": {
+                                "type": "StructuredText",
+                                "config": {
+                                    "label": "Item Body",
+                                    "placeholder": "",
+                                    "allowTargetBlank": true,
+                                    "single": "paragraph,strong,em,hyperlink,list-item,o-list-item"
+                                }
+                            },
+                            "item_icon": {
+                                "type": "Select",
+                                "config": {
+                                    "label": "Item Icon",
+                                    "placeholder": "",
+                                    "options": [
+                                        "none",
+                                        "star",
+                                        "spark",
+                                        "shield",
+                                        "wand"
+                                    ],
+                                    "default_value": "none"
+                                }
+                            },
+                            "item_is_highlighted": {
+                                "type": "Boolean",
+                                "config": {
+                                    "label": "Item Is Highlighted",
+                                    "placeholder_false": "false",
+                                    "placeholder_true": "true",
+                                    "default_value": false
+                                }
+                            },
+                            "item_link": {
+                                "type": "Link",
+                                "config": {
+                                    "label": "Item Link",
+                                    "allowTargetBlank": true
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "items": {}
+        }
+    ]
+}

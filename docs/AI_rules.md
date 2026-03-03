@@ -392,6 +392,40 @@ If a field is modeled as Rich Text (lists, formatting, structure):
 - Local normalizers are forbidden; use shared helper only
 
 Violating this rule will cause mock/API divergence and silent rendering failures.
+
+20. Constitutional Awareness Rule (AI Prompt Requirement)
+
+When generating, modifying, or debugging any slice, model, or architectural file, AI must assume the following documents are authoritative:
+
+PROJECT_IDENTITY.md
+
+context_anchor.md
+
+UNIVERSAL_SLICE_CONTROL_SCHEMA.md
+
+SLICE_LIBRARY_INDEX.md
+
+NE_error_log.md
+
+AI must:
+
+Respect required slice controls.
+
+Preserve snake_case naming.
+
+Never introduce new enums without explicit approval.
+
+Never violate the multi-tenant architecture.
+
+Never bypass defensive rendering requirements.
+
+Never restructure architectural files unless explicitly instructed.
+
+Apply minimal-diff philosophy when editing existing files.
+
+If output conflicts with any governing document, the governing document wins.
+
+Failure to follow this rule invalidates the response.
 ---
 
 End of AI_rules.md
