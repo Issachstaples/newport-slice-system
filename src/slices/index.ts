@@ -10,4 +10,5 @@ export const components = {
   hero_system: dynamic(() => import("./HeroSystem")),
   icon_list: dynamic(() => import("./IconList")),
   section_intro: dynamic(() => import("./SectionIntro")),
+  steps_timeline: dynamic(() => import("./StepsTimeline")),
 };

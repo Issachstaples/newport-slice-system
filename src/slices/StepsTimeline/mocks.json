@@ -1,0 +1,134 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"is_enabled": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			},
+			"visual_mode": {
+				"__TYPE__": "FieldContent",
+				"value": "none",
+				"type": "Select"
+			},
+			"container_width": {
+				"__TYPE__": "FieldContent",
+				"value": "standard",
+				"type": "Select"
+			},
+			"align_mode": {
+				"__TYPE__": "FieldContent",
+				"value": "center",
+				"type": "Select"
+			},
+			"density_mode": {
+				"__TYPE__": "FieldContent",
+				"value": "relaxed",
+				"type": "Select"
+			},
+			"animation_mode": {
+				"__TYPE__": "FieldContent",
+				"value": "slide_up",
+				"type": "Select"
+			},
+			"layout_mode": {
+				"__TYPE__": "FieldContent",
+				"value": "horizontal",
+				"type": "Select"
+			},
+			"connector_mode": {
+				"__TYPE__": "FieldContent",
+				"value": "none",
+				"type": "Select"
+			},
+			"number_style": {
+				"__TYPE__": "FieldContent",
+				"value": "numeric",
+				"type": "Select"
+			},
+			"eyebrow": {
+				"__TYPE__": "FieldContent",
+				"value": "meant",
+				"type": "Text"
+			},
+			"headline": {
+				"__TYPE__": "FieldContent",
+				"value": "only",
+				"type": "Text"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Labore est fugiat esse nisi aliquip non commodo aute id in."
+						}
+					}
+				]
+			},
+			"steps": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"step_title",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "supply",
+									"type": "Text"
+								}
+							],
+							[
+								"step_body",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Elit eu consectetur quis Lorem eu eiusmod ullamco sit cillum. Lorem ad enim ex amet. Veniam minim reprehenderit id Lorem elit pariatur commodo pariatur ullamco in incididunt Lorem consequat."
+											}
+										}
+									]
+								}
+							],
+							[
+								"step_icon",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "warning",
+									"type": "Select"
+								}
+							],
+							[
+								"step_is_highlighted",
+								{
+									"__TYPE__": "BooleanContent",
+									"value": true
+								}
+							],
+							[
+								"step_badge",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "help",
+									"type": "Text"
+								}
+							]
+						]
+					}
+				]
+			},
+			"section_padding": {
+				"__TYPE__": "FieldContent",
+				"value": "sm",
+				"type": "Select"
+			}
+		},
+		"items": []
+	}
+]

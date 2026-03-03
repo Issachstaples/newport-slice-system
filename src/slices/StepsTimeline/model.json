@@ -1,0 +1,224 @@
+{
+  "id": "steps_timeline",
+  "type": "SharedSlice",
+  "name": "StepsTimeline",
+  "description": "StepsTimeline",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "is_enabled": {
+          "type": "Boolean",
+          "config": {
+            "label": "Is Enabled",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": true
+          }
+        },
+        "visual_mode": {
+          "type": "Select",
+          "config": {
+            "label": "Visual Mode",
+            "placeholder": "none",
+            "options": [
+              "none",
+              "gradient_orb",
+              "3d_helix"
+            ],
+            "default_value": "none"
+          }
+        },
+        "section_padding": {
+          "type": "Select",
+          "config": {
+            "label": "Section Padding",
+            "placeholder": "none",
+            "options": [
+              "md",
+              "sm",
+              "lg",
+              "none"
+            ],
+            "default_value": "md"
+          }
+        },
+        "container_width": {
+          "type": "Select",
+          "config": {
+            "label": "Container Width",
+            "placeholder": "",
+            "options": [
+              "standard",
+              " wide",
+              "full"
+            ],
+            "default_value": "standard"
+          }
+        },
+        "align_mode": {
+          "type": "Select",
+          "config": {
+            "label": "Align Mode",
+            "placeholder": "none",
+            "options": [
+              "left",
+              "center"
+            ],
+            "default_value": "left"
+          }
+        },
+        "density_mode": {
+          "type": "Select",
+          "config": {
+            "label": "Density Mode",
+            "placeholder": "none",
+            "options": [
+              "relaxed",
+              "compact"
+            ],
+            "default_value": "relaxed"
+          }
+        },
+        "animation_mode": {
+          "type": "Select",
+          "config": {
+            "label": "Animation Mode",
+            "placeholder": "none",
+            "options": [
+              "none",
+              "fade_in",
+              "slide_up",
+              "stagger"
+            ],
+            "default_value": "none"
+          }
+        },
+        "layout_mode": {
+          "type": "Select",
+          "config": {
+            "label": "Layout Mode",
+            "placeholder": "none",
+            "options": [
+              "vertical",
+              "horizontal"
+            ],
+            "default_value": "vertical"
+          }
+        },
+        "connector_mode": {
+          "type": "Select",
+          "config": {
+            "label": "Connector Mode",
+            "placeholder": "none",
+            "options": [
+              "line",
+              "dots",
+              "none"
+            ],
+            "default_value": "line"
+          }
+        },
+        "number_style": {
+          "type": "Select",
+          "config": {
+            "label": "Number Style",
+            "placeholder": "none",
+            "options": [
+              "numeric",
+              "icon"
+            ],
+            "default_value": "numeric"
+          }
+        },
+        "eyebrow": {
+          "type": "Text",
+          "config": {
+            "label": "Eyebrow",
+            "placeholder": "none"
+          }
+        },
+        "headline": {
+          "type": "Text",
+          "config": {
+            "label": "Headline",
+            "placeholder": "Headline"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "none",
+            "allowTargetBlank": true,
+            "single": "paragraph,hyperlink,strong"
+          }
+        },
+        "steps": {
+          "type": "Group",
+          "config": {
+            "label": "Steps",
+            "repeat": true,
+            "fields": {
+              "step_title": {
+                "type": "Text",
+                "config": {
+                  "label": "Step Title",
+                  "placeholder": "none"
+                }
+              },
+              "step_body": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Step Body",
+                  "placeholder": "none",
+                  "allowTargetBlank": true,
+                  "single": "paragraph,strong,hyperlink"
+                }
+              },
+              "step_icon": {
+                "type": "Select",
+                "config": {
+                  "label": "Step Icon",
+                  "placeholder": "none",
+                  "options": [
+                    "check",
+                    " shield",
+                    "sparkles",
+                    "bolt",
+                    "star",
+                    "info",
+                    "warning"
+                  ],
+                  "default_value": "check"
+                }
+              },
+              "step_is_highlighted": {
+                "type": "Boolean",
+                "config": {
+                  "label": "Step Is Highlighted",
+                  "placeholder_false": "false",
+                  "placeholder_true": "true",
+                  "default_value": false
+                }
+              },
+              "step_badge": {
+                "type": "Text",
+                "config": {
+                  "label": "Step Badge",
+                  "placeholder": "none"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

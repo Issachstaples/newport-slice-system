@@ -1227,6 +1227,259 @@ export type SectionIntroSlice = prismic.SharedSlice<
   SectionIntroSliceVariation
 >;
 
+/**
+ * Item in *StepsTimeline → Default → Primary → Steps*
+ */
+export interface StepsTimelineSliceDefaultPrimaryStepsItem {
+  /**
+   * Step Title field in *StepsTimeline → Default → Primary → Steps*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: none
+   * - **API ID Path**: steps_timeline.default.primary.steps[].step_title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  step_title: prismic.KeyTextField;
+
+  /**
+   * Step Body field in *StepsTimeline → Default → Primary → Steps*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: none
+   * - **API ID Path**: steps_timeline.default.primary.steps[].step_body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  step_body: prismic.RichTextField;
+
+  /**
+   * Step Icon field in *StepsTimeline → Default → Primary → Steps*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: check
+   * - **API ID Path**: steps_timeline.default.primary.steps[].step_icon
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  step_icon: prismic.SelectField<
+    "check" | " shield" | "sparkles" | "bolt" | "star" | "info" | "warning",
+    "filled"
+  >;
+
+  /**
+   * Step Is Highlighted field in *StepsTimeline → Default → Primary → Steps*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: steps_timeline.default.primary.steps[].step_is_highlighted
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  step_is_highlighted: prismic.BooleanField;
+
+  /**
+   * Step Badge field in *StepsTimeline → Default → Primary → Steps*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: none
+   * - **API ID Path**: steps_timeline.default.primary.steps[].step_badge
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  step_badge: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *StepsTimeline → Default → Primary*
+ */
+export interface StepsTimelineSliceDefaultPrimary {
+  /**
+   * Is Enabled field in *StepsTimeline → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: steps_timeline.default.primary.is_enabled
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  is_enabled: prismic.BooleanField;
+
+  /**
+   * Visual Mode field in *StepsTimeline → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: none
+   * - **API ID Path**: steps_timeline.default.primary.visual_mode
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  visual_mode: prismic.SelectField<
+    "none" | "gradient_orb" | "3d_helix",
+    "filled"
+  >;
+
+  /**
+   * Section Padding field in *StepsTimeline → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: md
+   * - **API ID Path**: steps_timeline.default.primary.section_padding
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  section_padding: prismic.SelectField<"md" | "sm" | "lg" | "none", "filled">;
+
+  /**
+   * Container Width field in *StepsTimeline → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: standard
+   * - **API ID Path**: steps_timeline.default.primary.container_width
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  container_width: prismic.SelectField<"standard" | " wide" | "full", "filled">;
+
+  /**
+   * Align Mode field in *StepsTimeline → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: left
+   * - **API ID Path**: steps_timeline.default.primary.align_mode
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  align_mode: prismic.SelectField<"left" | "center", "filled">;
+
+  /**
+   * Density Mode field in *StepsTimeline → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: relaxed
+   * - **API ID Path**: steps_timeline.default.primary.density_mode
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  density_mode: prismic.SelectField<"relaxed" | "compact", "filled">;
+
+  /**
+   * Animation Mode field in *StepsTimeline → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: none
+   * - **API ID Path**: steps_timeline.default.primary.animation_mode
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  animation_mode: prismic.SelectField<
+    "none" | "fade_in" | "slide_up" | "stagger",
+    "filled"
+  >;
+
+  /**
+   * Layout Mode field in *StepsTimeline → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: vertical
+   * - **API ID Path**: steps_timeline.default.primary.layout_mode
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  layout_mode: prismic.SelectField<"vertical" | "horizontal", "filled">;
+
+  /**
+   * Connector Mode field in *StepsTimeline → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: line
+   * - **API ID Path**: steps_timeline.default.primary.connector_mode
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  connector_mode: prismic.SelectField<"line" | "dots" | "none", "filled">;
+
+  /**
+   * Number Style field in *StepsTimeline → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: numeric
+   * - **API ID Path**: steps_timeline.default.primary.number_style
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  number_style: prismic.SelectField<"numeric" | "icon", "filled">;
+
+  /**
+   * Eyebrow field in *StepsTimeline → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: none
+   * - **API ID Path**: steps_timeline.default.primary.eyebrow
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  eyebrow: prismic.KeyTextField;
+
+  /**
+   * Headline field in *StepsTimeline → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Headline
+   * - **API ID Path**: steps_timeline.default.primary.headline
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  headline: prismic.KeyTextField;
+
+  /**
+   * Body field in *StepsTimeline → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: none
+   * - **API ID Path**: steps_timeline.default.primary.body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Steps field in *StepsTimeline → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: steps_timeline.default.primary.steps[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  steps: prismic.GroupField<
+    Simplify<StepsTimelineSliceDefaultPrimaryStepsItem>
+  >;
+}
+
+/**
+ * Default variation for StepsTimeline Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type StepsTimelineSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<StepsTimelineSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *StepsTimeline*
+ */
+type StepsTimelineSliceVariation = StepsTimelineSliceDefault;
+
+/**
+ * StepsTimeline Shared Slice
+ *
+ * - **API ID**: `steps_timeline`
+ * - **Description**: StepsTimeline
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type StepsTimelineSlice = prismic.SharedSlice<
+  "steps_timeline",
+  StepsTimelineSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -1284,6 +1537,11 @@ declare module "@prismicio/client" {
       SectionIntroSliceDefaultPrimary,
       SectionIntroSliceVariation,
       SectionIntroSliceDefault,
+      StepsTimelineSlice,
+      StepsTimelineSliceDefaultPrimaryStepsItem,
+      StepsTimelineSliceDefaultPrimary,
+      StepsTimelineSliceVariation,
+      StepsTimelineSliceDefault,
     };
   }
 }
