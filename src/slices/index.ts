@@ -6,7 +6,7 @@ export const components = {
   bento_grid: dynamic(() => import("./BentoGrid")),
   cta_section: dynamic(() => import("./CtaSection")),
   eyebrow: dynamic(() => import("./FeatureGrid")),
-  feature_grid: dynamic(() => import("./FeatureGrid")),
   feature_grid_v2: dynamic(() => import("./FeatureGridV2")),
   hero_system: dynamic(() => import("./HeroSystem")),
+  section_intro: dynamic(() => import("./SectionIntro")),
 };

@@ -30,13 +30,10 @@ secondary_cta
 Purpose:
 High-conversion entry module.
 
-2. SectionIntro
+2. SectionIntro ✅
 
-Headline + subheadline + optional badge
+Headline + Rich Text section framing with universal layout controls.
 Used before major content blocks.
-
-Purpose:
-Clean section framing.
 
 3. CtaSection
 

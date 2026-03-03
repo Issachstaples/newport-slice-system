@@ -348,3 +348,9 @@ Never rediscover the same architecture lesson twice.
 This is no longer a website rebuild.
 
 This is the HelixFlow Operating System.
+
+---
+
+## Slice Library Updates
+
+- **SectionIntro** implemented (`src/slices/SectionIntro/index.tsx`) — replaces Slice Machine stub; full universal control block (`is_enabled`, `visual_mode`, `section_padding`, `container_width`, `align_mode`), `SafeRichText` + `normalizeRichText` for body, `asTextValue` for eyebrow/headline, lint verified (exit 0), two mocks added (gradient_orb/left and helix_3d/center), `slice_library_index.md` updated. *(2026-03-02)*

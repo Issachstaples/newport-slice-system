@@ -1,0 +1,102 @@
+{
+  "id": "section_intro",
+  "type": "SharedSlice",
+  "name": "SectionIntro",
+  "description": "SectionIntro",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "is_enabled": {
+          "type": "Boolean",
+          "config": {
+            "label": "Is Enabled",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": true
+          }
+        },
+        "visual_mode": {
+          "type": "Select",
+          "config": {
+            "label": "Visual Mode",
+            "placeholder": "none",
+            "options": [
+              "none",
+              "gradient_orb",
+              "helix_3d"
+            ],
+            "default_value": "none"
+          }
+        },
+        "section_padding": {
+          "type": "Select",
+          "config": {
+            "label": "Section Padding",
+            "placeholder": "none",
+            "options": [
+              "md",
+              "sm",
+              "none",
+              "lg"
+            ],
+            "default_value": "md"
+          }
+        },
+        "container_width": {
+          "type": "Select",
+          "config": {
+            "label": "Container Width",
+            "placeholder": "none",
+            "options": [
+              "standard",
+              "wide",
+              "full"
+            ],
+            "default_value": "standard"
+          }
+        },
+        "align_mode": {
+          "type": "Select",
+          "config": {
+            "label": "Align Mode",
+            "placeholder": "none",
+            "options": [
+              "left",
+              "center"
+            ]
+          }
+        },
+        "eyebrow": {
+          "type": "Text",
+          "config": {
+            "label": "Eyebrow",
+            "placeholder": "none"
+          }
+        },
+        "headline": {
+          "type": "Text",
+          "config": {
+            "label": "Headline",
+            "placeholder": "Headline"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "Body",
+            "allowTargetBlank": true,
+            "single": "paragraph,strong,hyperlink"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

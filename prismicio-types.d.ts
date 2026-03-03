@@ -906,6 +906,128 @@ export type HeroSystemSlice = prismic.SharedSlice<
   HeroSystemSliceVariation
 >;
 
+/**
+ * Primary content in *SectionIntro → Default → Primary*
+ */
+export interface SectionIntroSliceDefaultPrimary {
+  /**
+   * Is Enabled field in *SectionIntro → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: section_intro.default.primary.is_enabled
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  is_enabled: prismic.BooleanField;
+
+  /**
+   * Visual Mode field in *SectionIntro → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: none
+   * - **API ID Path**: section_intro.default.primary.visual_mode
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  visual_mode: prismic.SelectField<
+    "none" | "gradient_orb" | "helix_3d",
+    "filled"
+  >;
+
+  /**
+   * Section Padding field in *SectionIntro → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: md
+   * - **API ID Path**: section_intro.default.primary.section_padding
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  section_padding: prismic.SelectField<"md" | "sm" | "none" | "lg", "filled">;
+
+  /**
+   * Container Width field in *SectionIntro → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **Default Value**: standard
+   * - **API ID Path**: section_intro.default.primary.container_width
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  container_width: prismic.SelectField<"standard" | "wide" | "full", "filled">;
+
+  /**
+   * Align Mode field in *SectionIntro → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: none
+   * - **API ID Path**: section_intro.default.primary.align_mode
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  align_mode: prismic.SelectField<"left" | "center">;
+
+  /**
+   * Eyebrow field in *SectionIntro → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: none
+   * - **API ID Path**: section_intro.default.primary.eyebrow
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  eyebrow: prismic.KeyTextField;
+
+  /**
+   * Headline field in *SectionIntro → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Headline
+   * - **API ID Path**: section_intro.default.primary.headline
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  headline: prismic.KeyTextField;
+
+  /**
+   * Body field in *SectionIntro → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Body
+   * - **API ID Path**: section_intro.default.primary.body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  body: prismic.RichTextField;
+}
+
+/**
+ * Default variation for SectionIntro Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type SectionIntroSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<SectionIntroSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *SectionIntro*
+ */
+type SectionIntroSliceVariation = SectionIntroSliceDefault;
+
+/**
+ * SectionIntro Shared Slice
+ *
+ * - **API ID**: `section_intro`
+ * - **Description**: SectionIntro
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type SectionIntroSlice = prismic.SharedSlice<
+  "section_intro",
+  SectionIntroSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -954,6 +1076,10 @@ declare module "@prismicio/client" {
       HeroSystemSliceDefaultPrimary,
       HeroSystemSliceVariation,
       HeroSystemSliceDefault,
+      SectionIntroSlice,
+      SectionIntroSliceDefaultPrimary,
+      SectionIntroSliceVariation,
+      SectionIntroSliceDefault,
     };
   }
 }
