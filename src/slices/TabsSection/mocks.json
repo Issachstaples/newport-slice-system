@@ -9,12 +9,12 @@
 			},
 			"visual_mode": {
 				"__TYPE__": "FieldContent",
-				"value": "none",
+				"value": "gradient_orb",
 				"type": "Select"
 			},
 			"section_padding": {
 				"__TYPE__": "FieldContent",
-				"value": "lg",
+				"value": "md",
 				"type": "Select"
 			},
 			"container_width": {
@@ -34,12 +34,12 @@
 			},
 			"animation_mode": {
 				"__TYPE__": "FieldContent",
-				"value": "none",
+				"value": "fade_in",
 				"type": "Select"
 			},
 			"tabs_style": {
 				"__TYPE__": "FieldContent",
-				"value": "underline",
+				"value": "pills",
 				"type": "Select"
 			},
 			"content_style": {
@@ -49,12 +49,12 @@
 			},
 			"default_tab_index": {
 				"__TYPE__": "FieldContent",
-				"value": "44",
+				"value": "0",
 				"type": "Number"
 			},
 			"show_icons": {
 				"__TYPE__": "BooleanContent",
-				"value": false
+				"value": true
 			},
 			"allow_wrap": {
 				"__TYPE__": "BooleanContent",
@@ -62,12 +62,12 @@
 			},
 			"eyebrow": {
 				"__TYPE__": "FieldContent",
-				"value": "shoe",
+				"value": "Platform Overview",
 				"type": "Text"
 			},
 			"headline": {
 				"__TYPE__": "FieldContent",
-				"value": "lunch",
+				"value": "Everything your SaaS clients need in one system",
 				"type": "Text"
 			},
 			"body": {
@@ -76,7 +76,7 @@
 					{
 						"type": "paragraph",
 						"content": {
-							"text": "Anim excepteur consectetur nostrud incididunt culpa excepteur sit laborum. Officia minim fugiat ad sint mollit quis in."
+							"text": "HelixFlow is not a website builder. It is a modular operating system — assembled from slices, configured per tenant, deployed in minutes."
 						}
 					}
 				]
@@ -91,7 +91,268 @@
 								"tab_label",
 								{
 									"__TYPE__": "FieldContent",
-									"value": "average",
+									"value": "For Agencies",
+									"type": "Text"
+								}
+							],
+							[
+								"tab_icon",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "sparkles",
+									"type": "Select"
+								}
+							],
+							[
+								"tab_badge",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "",
+									"type": "Text"
+								}
+							],
+							[
+								"tab_body",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Newport gives agencies a reusable slice library that deploys a full client site in under a day. Every site shares the same proven architecture — only the content changes."
+											}
+										},
+										{
+											"type": "list-item",
+											"content": {
+												"text": "Slice library built once, reused across all client projects"
+											}
+										},
+										{
+											"type": "list-item",
+											"content": {
+												"text": "Prismic CMS gives clients editorial control without code access"
+											}
+										},
+										{
+											"type": "list-item",
+											"content": {
+												"text": "One deployment pipeline, no per-client infrastructure overhead"
+											}
+										}
+									]
+								}
+							]
+						]
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"tab_label",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "For SaaS Founders",
+									"type": "Text"
+								}
+							],
+							[
+								"tab_icon",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "bolt",
+									"type": "Select"
+								}
+							],
+							[
+								"tab_badge",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "Popular",
+									"type": "Text"
+								}
+							],
+							[
+								"tab_body",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Stop rebuilding your marketing site every funding round. HelixFlow gives you a **modular, component-driven front end** that evolves with your product — without a redesign agency."
+											}
+										},
+										{
+											"type": "list-item",
+											"content": {
+												"text": "Launch a full marketing site before your MVP ships"
+											}
+										},
+										{
+											"type": "list-item",
+											"content": {
+												"text": "Update any section from Prismic without touching code"
+											}
+										},
+										{
+											"type": "list-item",
+											"content": {
+												"text": "Add new slices as your feature set grows"
+											}
+										}
+									]
+								}
+							]
+						]
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"tab_label",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "For Operators",
+									"type": "Text"
+								}
+							],
+							[
+								"tab_icon",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "shield",
+									"type": "Select"
+								}
+							],
+							[
+								"tab_badge",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "",
+									"type": "Text"
+								}
+							],
+							[
+								"tab_body",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Multi-tenant architecture with Supabase Row Level Security means every client gets isolated data — with zero custom infrastructure per account."
+											}
+										},
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Deploy on Coolify or Vercel. Scale horizontally. The system is built for operators who need reliability, not complexity."
+											}
+										}
+									]
+								}
+							]
+						]
+					}
+				]
+			}
+		},
+		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"is_enabled": {
+				"__TYPE__": "BooleanContent",
+				"value": true
+			},
+			"visual_mode": {
+				"__TYPE__": "FieldContent",
+				"value": "helix_3d",
+				"type": "Select"
+			},
+			"section_padding": {
+				"__TYPE__": "FieldContent",
+				"value": "lg",
+				"type": "Select"
+			},
+			"container_width": {
+				"__TYPE__": "FieldContent",
+				"value": "wide",
+				"type": "Select"
+			},
+			"align_mode": {
+				"__TYPE__": "FieldContent",
+				"value": "center",
+				"type": "Select"
+			},
+			"density_mode": {
+				"__TYPE__": "FieldContent",
+				"value": "compact",
+				"type": "Select"
+			},
+			"animation_mode": {
+				"__TYPE__": "FieldContent",
+				"value": "stagger",
+				"type": "Select"
+			},
+			"tabs_style": {
+				"__TYPE__": "FieldContent",
+				"value": "underline",
+				"type": "Select"
+			},
+			"content_style": {
+				"__TYPE__": "FieldContent",
+				"value": "grid",
+				"type": "Select"
+			},
+			"default_tab_index": {
+				"__TYPE__": "FieldContent",
+				"value": "1",
+				"type": "Number"
+			},
+			"show_icons": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			},
+			"allow_wrap": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			},
+			"eyebrow": {
+				"__TYPE__": "FieldContent",
+				"value": "Use Cases",
+				"type": "Text"
+			},
+			"headline": {
+				"__TYPE__": "FieldContent",
+				"value": "One platform. Every vertical.",
+				"type": "Text"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "HelixFlow is configured per industry — not rebuilt per client. Select a vertical to see what ships out of the box."
+						}
+					}
+				]
+			},
+			"tabs": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"tab_label",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "Home Services",
 									"type": "Text"
 								}
 							],
@@ -107,7 +368,7 @@
 								"tab_badge",
 								{
 									"__TYPE__": "FieldContent",
-									"value": "greater",
+									"value": "",
 									"type": "Text"
 								}
 							],
@@ -119,7 +380,196 @@
 										{
 											"type": "paragraph",
 											"content": {
-												"text": "Id fugiat cupidatat eiusmod duis occaecat tempor non cillum pariatur labore veniam."
+												"text": "Booking & Scheduling. Let customers book jobs directly from your site — synced to your ops calendar in real time."
+											}
+										},
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Quote Builder. Generate itemised quotes online. Customers approve with one click — no phone tag required."
+											}
+										},
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Review Collection. Automated post-job review requests via SMS. Builds your local reputation on autopilot."
+											}
+										}
+									]
+								}
+							]
+						]
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"tab_label",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "Restaurants",
+									"type": "Text"
+								}
+							],
+							[
+								"tab_icon",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "check",
+									"type": "Select"
+								}
+							],
+							[
+								"tab_badge",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "Popular",
+									"type": "Text"
+								}
+							],
+							[
+								"tab_body",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Online Ordering. Commission-free ordering direct from your site. No third-party app taking 30% of every sale."
+											}
+										},
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Table Reservations. Configurable booking rules — party size, time slots, deposit requirements — all from Prismic."
+											}
+										},
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Loyalty Programme. Points-based rewards tied to order history. Configured per tenant, owned by you."
+											}
+										},
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Menu Management. Update items, prices, and availability from the CMS — no developer required."
+											}
+										}
+									]
+								}
+							]
+						]
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"tab_label",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "Fitness & Wellness",
+									"type": "Text"
+								}
+							],
+							[
+								"tab_icon",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "check",
+									"type": "Select"
+								}
+							],
+							[
+								"tab_badge",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "New",
+									"type": "Text"
+								}
+							],
+							[
+								"tab_body",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Class Scheduling. Members book and manage classes from any device. Capacity limits and waitlists handled automatically."
+											}
+										},
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Membership Tiers. Define access levels in Supabase. Gate content, classes, and features per plan — no custom code."
+											}
+										},
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Progress Tracking. Optional client-facing dashboard for workout logs, goals, and check-ins. White-labelled per gym."
+											}
+										}
+									]
+								}
+							]
+						]
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"tab_label",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "Professional Services",
+									"type": "Text"
+								}
+							],
+							[
+								"tab_icon",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "check",
+									"type": "Select"
+								}
+							],
+							[
+								"tab_badge",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "",
+									"type": "Text"
+								}
+							],
+							[
+								"tab_body",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Lead Capture Forms. Multi-step intake forms connected to your CRM. Qualify leads before the first call."
+											}
+										},
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Proposal Engine. Send branded proposals from a configurable template. Clients e-sign directly in the browser."
+											}
+										},
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Client Portal. Secure per-tenant document hub powered by Supabase RLS. No shared file drives."
+											}
+										},
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Invoicing & Payments. Stripe-connected invoices generated from proposal data. One click to collect."
 											}
 										}
 									]
