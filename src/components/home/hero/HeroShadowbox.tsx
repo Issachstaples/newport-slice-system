@@ -1,7 +1,6 @@
 import React from "react";
 import HeroBackground from "./HeroBackground";
 import HeroCarousel, { HeroCard } from "./HeroCarousel";
-import { TrendingUp, Briefcase, DollarSign } from "lucide-react";
 
 export interface HeroShadowboxProps {
     backgroundSrc: string;
@@ -32,103 +31,81 @@ export default function HeroShadowbox({
             {/* Layer 10: Optics placeholder (reserved for future laser/particle effects) */}
             <div className="absolute inset-0 z-10 pointer-events-none" aria-hidden="true" />
 
-            {/* Layer 20: UI content */}
-            <div className="relative z-20 container mx-auto px-6 py-16 lg:py-24 min-h-screen flex items-center">
-                {/* 2-column desktop layout, stacked mobile */}
-                <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            {/* Layer 20: UI content - Absolute positioned HUD cards */}
+            <div className="relative z-20 min-h-screen">
 
-                    {/* Left column: Headline, subheadline, CTAs */}
-                    <div className="lg:col-span-5 text-center lg:text-left">
-                        <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 text-metallic leading-tight">
-                            {headline}
-                        </h1>
-                        <p className="text-lg sm:text-xl lg:text-2xl text-[#cbd5e0] mb-8 max-w-2xl mx-auto lg:mx-0">
-                            {subheadline}
-                        </p>
+                {/* TOP-LEFT: Headline Card (no CTAs) */}
+                <div className="absolute left-6 lg:left-10 top-6 lg:top-10 w-full max-w-[calc(100%-3rem)] lg:max-w-[520px]">
+                    <div className="relative glass-panel-strong rounded-3xl p-6 lg:p-8 shadow-[var(--shadow-glass-lg)]">
+                        {/* Subtle top sheen overlay */}
+                        <div
+                            className="absolute inset-x-0 top-0 h-24 rounded-t-3xl pointer-events-none"
+                            style={{
+                                background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent)',
+                            }}
+                        />
 
-                        {/* CTAs */}
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                            {ctaText && ctaHref && (
-                                <a
-                                    href={ctaHref}
-                                    className="inline-block glass-panel-strong rounded-full px-8 py-4 text-lg font-semibold text-white hover:scale-105 transition-transform duration-300"
-                                >
-                                    {ctaText}
-                                </a>
-                            )}
-                            {secondaryCtaText && secondaryCtaHref && (
-                                <a
-                                    href={secondaryCtaHref}
-                                    className="inline-block glass-panel rounded-full px-8 py-4 text-lg font-semibold text-[#cbd5e0] hover:scale-105 transition-transform duration-300"
-                                >
-                                    {secondaryCtaText}
-                                </a>
-                            )}
+                        <div className="relative">
+                            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-metallic leading-tight">
+                                {headline}
+                            </h1>
+                            <p className="text-base sm:text-lg text-[#cbd5e0] leading-relaxed">
+                                {subheadline}
+                            </p>
                         </div>
                     </div>
+                </div>
 
-                    {/* Center/Left column: Carousel */}
-                    <div className="lg:col-span-4 flex justify-center lg:justify-start">
-                        <HeroCarousel cards={cards} />
+                {/* CENTER remains EMPTY by design */}
+
+                {/* Carousel with absolute-positioned alpha (left) and beta (right) slots */}
+                <HeroCarousel
+                    cards={cards}
+                    alphaClassName="absolute left-6 lg:left-10 top-[220px] sm:top-[240px] lg:top-[280px] z-20"
+                    betaClassName="absolute right-6 lg:right-10 top-[420px] sm:top-[340px] lg:top-[180px] z-10"
+                />
+            </div>
+
+            {/* Layer 30: BOTTOM-RIGHT CTA Card - Pinned, never moves */}
+            <div className="absolute bottom-6 lg:bottom-10 right-6 lg:right-10 z-30 w-[calc(100%-3rem)] lg:w-96">
+                <div className="relative glass-panel-strong rounded-2xl p-6 lg:p-8">
+                    {/* Decorative accent line (neutral, no metrics) */}
+                    <div className="absolute top-0 right-0 w-32 h-1 bg-gradient-to-l from-[#3B82F6]/30 to-transparent rounded-tr-2xl" />
+
+                    <h2 className="text-2xl font-bold text-white mb-3">
+                        Pay only for what you use.
+                    </h2>
+                    <p className="text-sm text-[#a8b2c1] mb-6 leading-relaxed">
+                        Modular pricing designed for scale. Toggle features on or off to match your workflow—no waste, just value.
+                    </p>
+
+                    {/* CTA Buttons */}
+                    <div className="flex flex-col sm:flex-row gap-3 mb-4">
+                        {ctaText && ctaHref && (
+                            <a
+                                href={ctaHref}
+                                className="inline-flex items-center justify-center rounded-full px-6 py-3 text-base font-semibold text-white bg-[#3B82F6] hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(59,130,246,0.5)]"
+                            >
+                                {ctaText}
+                            </a>
+                        )}
+                        {secondaryCtaText && secondaryCtaHref && (
+                            <a
+                                href={secondaryCtaHref}
+                                className="inline-flex items-center justify-center rounded-full px-6 py-3 text-base font-semibold text-[#cbd5e0] border border-[#cbd5e0]/30 hover:scale-105 hover:border-[#cbd5e0]/50 transition-all duration-300"
+                                style={{
+                                    background: 'rgba(255, 255, 255, 0.03)',
+                                }}
+                            >
+                                {secondaryCtaText}
+                            </a>
+                        )}
                     </div>
 
-                    {/* Right column: Pinned metrics/results card */}
-                    <div className="lg:col-span-3 hidden lg:block">
-                        <div className="glass-panel-strong rounded-2xl p-6 space-y-6">
-                            <h3 className="text-sm font-semibold text-[#a8b2c1] uppercase tracking-wide">
-                                Results That Matter
-                            </h3>
-
-                            {/* Metric 1: New Leads */}
-                            <div className="flex items-start gap-4">
-                                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center">
-                                    <TrendingUp className="w-5 h-5 text-emerald-400" />
-                                </div>
-                                <div>
-                                    <div className="text-2xl font-bold text-white mb-1">+247%</div>
-                                    <div className="text-sm text-[#a8b2c1]">New Leads</div>
-                                </div>
-                            </div>
-
-                            {/* Metric 2: Workflow Efficiency */}
-                            <div className="flex items-start gap-4">
-                                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-violet-500/20 flex items-center justify-center">
-                                    <Briefcase className="w-5 h-5 text-violet-400" />
-                                </div>
-                                <div>
-                                    <div className="text-2xl font-bold text-white mb-1">3.2x</div>
-                                    <div className="text-sm text-[#a8b2c1]">Workflow Efficiency</div>
-                                </div>
-                            </div>
-
-                            {/* Metric 3: Monthly Revenue with sparkline */}
-                            <div className="flex items-start gap-4">
-                                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                                    <DollarSign className="w-5 h-5 text-blue-400" />
-                                </div>
-                                <div className="flex-1">
-                                    <div className="text-2xl font-bold text-white mb-1">$127K</div>
-                                    <div className="text-sm text-[#a8b2c1] mb-2">Monthly Revenue</div>
-                                    {/* Tiny sparkline */}
-                                    <svg
-                                        viewBox="0 0 60 20"
-                                        className="w-full h-5 opacity-60"
-                                        preserveAspectRatio="none"
-                                    >
-                                        <polyline
-                                            points="0,15 10,12 20,14 30,10 40,8 50,5 60,3"
-                                            fill="none"
-                                            stroke="rgba(74, 144, 226, 0.8)"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                        <circle cx="60" cy="3" r="2" fill="#4a90e2" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {/* Microcopy */}
+                    <p className="text-xs text-[#a8b2c1]/70 leading-relaxed">
+                        Modular pricing. Scale up or down anytime.
+                    </p>
                 </div>
             </div>
         </section>

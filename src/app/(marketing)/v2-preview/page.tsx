@@ -38,10 +38,10 @@ export default function V2PreviewPage() {
                         "Full TypeScript support with canonical model templates and mock discipline.",
                 },
             ]}
-            ctaText="Explore Slices"
-            ctaHref="/slice-simulator"
-            secondaryCtaText="View Docs"
-            secondaryCtaHref="/docs"
+            ctaText="Book a Demo"
+            ctaHref="#demo"
+            secondaryCtaText="See Modules"
+            secondaryCtaHref="#modules"
         />
     );
 }
