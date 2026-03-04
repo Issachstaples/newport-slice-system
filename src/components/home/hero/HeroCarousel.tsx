@@ -40,7 +40,7 @@ export default function HeroCarousel({ cards, alphaClassName = "", betaClassName
 
     return (
         <>
-            {/* ALPHA CARD (Active - Left) */}
+            {/* ALPHA CARD (Active - Left) - Enhanced readability */}
             <div className={`transition-all duration-500 ease-out ${alphaClassName}`}>
                 <div
                     className="relative glass-panel-strong rounded-2xl p-6 w-full max-w-md"
@@ -64,16 +64,16 @@ export default function HeroCarousel({ cards, alphaClassName = "", betaClassName
                             <h3 className="text-xl font-semibold text-white mb-3">
                                 {alphaCard.title}
                             </h3>
-                            {/* Text with dark backplate for readability */}
+                            {/* Enhanced text backplate for improved readability */}
                             <div className="relative">
                                 <div
-                                    className="absolute inset-0 -m-2 rounded-lg"
+                                    className="absolute inset-0 -m-3 rounded-xl"
                                     style={{
-                                        background: 'linear-gradient(135deg, rgba(10, 13, 20, 0.4) 0%, rgba(10, 13, 20, 0.6) 100%)',
+                                        background: 'linear-gradient(135deg, rgba(10, 13, 20, 0.5) 0%, rgba(10, 13, 20, 0.7) 100%)',
                                         zIndex: -1,
                                     }}
                                 />
-                                <p className="text-sm leading-relaxed text-[#e0e7ef] relative z-10 p-2">
+                                <p className="text-sm leading-relaxed text-[#e0e7ef] relative z-10 p-3">
                                     {alphaCard.description}
                                 </p>
                             </div>
@@ -82,7 +82,7 @@ export default function HeroCarousel({ cards, alphaClassName = "", betaClassName
                 </div>
             </div>
 
-            {/* BETA CARD (On-Deck - Right) with Docking Frame */}
+            {/* BETA CARD (On-Deck - Right) - Improved readability */}
             <div
                 className={`transition-all duration-500 ease-out ${betaClassName}`}
                 style={{
@@ -121,14 +121,14 @@ export default function HeroCarousel({ cards, alphaClassName = "", betaClassName
                                 <BetaIcon className="w-6 h-6 text-[#3B82F6]/70" />
                             </div>
                             <div className="flex-1 min-w-0">
-                                {/* ON DECK label */}
+                                {/* ON DECK label - kept subtle */}
                                 <div className="text-[10px] font-semibold text-[#3B82F6]/50 uppercase tracking-wider mb-2">
                                     On Deck
                                 </div>
-                                <h3 className="text-lg font-semibold text-white/90 mb-3">
+                                <h3 className="text-lg font-semibold text-white mb-3">
                                     {betaCard.title}
                                 </h3>
-                                <p className="text-sm leading-relaxed text-[#a8b2c1]">
+                                <p className="text-sm leading-relaxed text-[#cbd5e0]">
                                     {betaCard.description}
                                 </p>
                             </div>
@@ -137,30 +137,31 @@ export default function HeroCarousel({ cards, alphaClassName = "", betaClassName
                 </div>
             </div>
 
-            {/* Next button - positioned by parent */}
-            <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-40">
+            {/* Controls cluster - repositioned near alpha card (left side) */}
+            <div className="fixed bottom-10 left-10 z-40 flex items-center gap-4">
+                {/* Next button */}
                 <button
                     onClick={handleNext}
-                    className="glass-panel-strong rounded-full p-4 hover:scale-110 transition-transform duration-300 group"
+                    className="glass-panel-strong rounded-full p-3 hover:scale-110 active:scale-95 transition-all duration-200 group"
                     aria-label="Next card"
                 >
-                    <ChevronRight className="w-6 h-6 text-[#3B82F6] group-hover:translate-x-1 transition-transform" />
+                    <ChevronRight className="w-5 h-5 text-[#3B82F6] group-hover:translate-x-0.5 transition-transform" />
                 </button>
-            </div>
 
-            {/* Dot indicators - positioned by parent */}
-            <div className="fixed bottom-24 left-1/2 -translate-x-1/2 z-40 flex gap-2">
-                {cards.map((_, idx) => (
-                    <button
-                        key={idx}
-                        onClick={() => setActiveIndex(idx)}
-                        className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === activeIndex
-                            ? "bg-[#3B82F6] w-8"
-                            : "bg-[#a8b2c1]/40 hover:bg-[#a8b2c1]/60"
-                            }`}
-                        aria-label={`Go to card ${idx + 1}`}
-                    />
-                ))}
+                {/* Dot indicators - smaller, hover to reveal */}
+                <div className="flex gap-1.5 opacity-40 hover:opacity-100 transition-opacity duration-300">
+                    {cards.map((_, idx) => (
+                        <button
+                            key={idx}
+                            onClick={() => setActiveIndex(idx)}
+                            className={`rounded-full transition-all duration-300 ${idx === activeIndex
+                                ? "bg-[#3B82F6] w-6 h-1.5"
+                                : "bg-[#a8b2c1]/50 hover:bg-[#a8b2c1]/70 w-1.5 h-1.5"
+                                }`}
+                            aria-label={`Go to card ${idx + 1}`}
+                        />
+                    ))}
+                </div>
             </div>
         </>
     );
