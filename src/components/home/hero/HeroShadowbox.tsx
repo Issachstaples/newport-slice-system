@@ -63,10 +63,19 @@ export default function HeroShadowbox({
 
                 {/* CENTER remains EMPTY by design */}
 
+                {/* Subtle horizontal divider between headline and alpha card */}
+                <div
+                    className="absolute left-6 lg:left-10 top-[280px] sm:top-[300px] lg:top-[360px] w-12 h-[1px]"
+                    style={{
+                        background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.15) 50%, transparent)',
+                        filter: 'blur(0.5px)',
+                    }}
+                />
+
                 {/* Carousel with absolute-positioned alpha (left) and beta (right) slots */}
                 <HeroCarousel
                     cards={cards}
-                    alphaClassName="absolute left-6 lg:left-10 top-[220px] sm:top-[240px] lg:top-[280px] z-20"
+                    alphaClassName="absolute left-6 lg:left-10 top-[300px] sm:top-[320px] lg:top-[380px] z-20"
                     betaClassName="absolute right-6 lg:right-10 top-[420px] sm:top-[340px] lg:top-[180px] z-10"
                 />
             </div>

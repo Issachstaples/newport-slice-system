@@ -373,3 +373,120 @@ The following slices were implemented, lint-verified (ESLint exit 0), and pushed
 - `docs/SLICE_FACTORY_WORKFLOW.md` — created; defines 10-step build process, QA checklist, JSON validation steps, commit message conventions
 - `docs/AI_rules.md` — updated with doc maintenance rule, cross-check rule, and no-nested-groups rule
 
+---
+
+# NewportEcom v2 Shadowbox Hero — HUD Layout Iteration (Day 1.x)
+
+**Date:** 2026-03-03  
+**Status:** HUD layout complete; laser/incineration deferred to Day 2  
+**Preview Route:** `/v2-preview`
+
+## A) Goals / Intent
+
+- Homepage hero is a static, no-scroll Shadowbox HUD.
+- Center must remain empty; composition is 3-lane HUD: Left (Alpha), Center (empty), Right (Beta).
+- Bottom-right CTA is the conversion module (no fake metrics).
+
+## B) What was built
+
+### Modular hero components created/refactored:
+
+- **`HeroBackground.tsx`** — image + vignette + spotlight + subtle grain overlay
+- **`HeroShadowbox.tsx`** — absolute-position HUD layout; strict z-index layers (z-0 background, z-10 optics placeholder, z-20 UI, z-30 CTA, z-40 controls)
+- **`HeroCarousel.tsx`** — two-card system: Alpha (active left) + Beta (on-deck right with docking bay frame)
+
+### Glass tokens/utilities (`globals.css`):
+
+- `.glass-panel` (base: 0.06 alpha, 24px blur)
+- `.glass-panel-strong` (active/CTA: 0.10 alpha, 32px blur, 0.18 border, inset glow)
+- `.glass-panel-soft` (beta/secondary: 0.04 alpha, 20px blur, 0.08 border)
+- `.text-metallic` (gradient text: #e0e7ef → #a8b2c1 → #cbd5e0)
+- Sheen overlays + edge accents added for premium "liquid glass" aesthetic
+
+### Two-card carousel rules:
+
+- Only Alpha and Beta are rendered in DOM; remaining cards are hidden until rotated in.
+- **Beta card "Docking Bay" aesthetic:**
+  - `translateY(22px)`, `scale(0.92)`, `opacity(0.72)`, `brightness(0.92)`, `saturate(0.95)`
+  - Docking frame + status dots
+  - "ON DECK" label
+- Controls repositioned to left cluster (`bottom-10 left-10`)
+- Hover-reveal dots (`opacity-40 → 100`), smaller button (`p-3`), horizontal pill active state (`w-6 h-1.5`)
+
+### CTA moved to bottom-right and made honest:
+
+- **Headline:** "Pay only for what you use."
+- **Subheadline:** Modular pricing message
+- **Buttons:** "Book a Demo" (primary cobalt glow) + "See Modules" (secondary border)
+- **Removed:** Fake/unsupported performance metrics (+247%, 3.2x, $127K sparkline) that implied real results
+
+## C) Layout "Strict Shadowbox Spec" (frozen decisions)
+
+- **Top-left:** Headline HUD card (no buttons; "SYSTEM" eyebrow label)
+- **Left:** Alpha card (active carousel card)
+- **Right:** Beta card (on-deck carousel card)
+- **Center:** Always empty (reserved for future laser/optics effects at z-10)
+- **Bottom-right:** CTA card pinned; never moves
+
+## D) Current positioning report (exact values)
+
+### Alpha card `alphaClassName` top values:
+
+- **Mobile:** `top-[300px]`
+- **sm:** `top-[320px]`
+- **lg:** `top-[380px]`
+
+### Divider line (subtle horizontal cobalt glow between headline and alpha):
+
+- **Position:** `top-[280px] sm:top-[300px] lg:top-[360px]`
+- **Width:** `w-12` (48px)
+- **Color:** `rgba(59, 130, 246, 0.15)` (15% opacity cobalt)
+- **Effect:** `blur(0.5px)` for soft glow
+- **Gradient:** `linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.15) 50%, transparent)`
+
+### Visual hierarchy polish (completed):
+
+- Reduced headline card dominance (glass-panel instead of glass-panel-strong, smaller text: `text-[2.75rem]`, max-w-[480px])
+- Enhanced alpha card readability (larger backplate coverage: `-m-3 p-3`, darker gradient: 0.5-0.7 opacity)
+- Improved beta card contrast (title: `text-white`, description: `text-[#cbd5e0]`)
+- Enhanced CTA card as "primary powered HUD module" (top sheen at 0.10 opacity, thin cobalt top edge gradient, enhanced button glow with `boxShadow: '0 0 24px rgba(59, 130, 246, 0.6), 0 0 12px rgba(59, 130, 246, 0.4)'`)
+
+## E) What is NOT done yet (explicit)
+
+- No laser/beam targeting, no incineration animation
+- No WebGL optics layer yet (reserved z-10 slot exists as empty `div`)
+- No Prismic integration yet for `hero_shadowbox` slice (still hardcoded preview route)
+
+## F) Where to preview
+
+- **Route:** `/v2-preview`
+- **Background asset path:** `/public/images/home/neon-eye-clean.png`
+
+## G) Files touched
+
+- `src/components/home/hero/HeroBackground.tsx`
+- `src/components/home/hero/HeroCarousel.tsx`
+- `src/components/home/hero/HeroShadowbox.tsx`
+- `src/slices/HeroShadowbox/index.tsx` (re-export for backward compatibility)
+- `src/app/(marketing)/v2-preview/page.tsx`
+- `src/app/globals.css`
+
+## H) Key decisions and rationale
+
+### Why remove fake metrics?
+
+The original design included a metrics card with "+247% conversion increase", "3.2x faster deployment", "$127K saved annually" with a sparkline chart. **These metrics are not backed by real customer data and could be misleading.** Replaced with honest value proposition: "Pay only for what you use" with modular pricing message.
+
+### Why strict Shadowbox spec with empty center?
+
+The empty center is intentional for future laser/targeting effects that will render at z-10 (optics layer). This creates visual breathing room and allows the HUD cards to feel like a command interface rather than a dense marketing page.
+
+### Why two-card carousel instead of stacked 5-card system?
+
+The original design stacked all 5 cards with offset/rotation. This created visual clutter and made the beta (on-deck) card feel like background noise. The two-card system with explicit Alpha/Beta roles creates clearer hierarchy and makes the docking bay aesthetic feel intentional.
+Update documentation with two quick additions:
+1) In context_anchor.md, add a single short paragraph under the Shadowbox Hero section titled "Frozen HUD Rules (1-paragraph)" that restates the strict 5 rules (empty center, alpha left, beta right docking bay, bottom-right CTA pinned, only alpha/beta rendered).
+2) In v2_hero_worklog.md and/or v2_hero_changes_log.md, update the "Next session bootstrap files" list to include globals.css (glass tokens/utilities are required to reproduce visuals).
+Do not modify any app code.
+---
+

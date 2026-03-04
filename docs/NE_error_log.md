@@ -430,3 +430,49 @@ You’re now protected against this entire class of failure going forward.
 ---
 
 End of NE_error_log.md
+
+---
+
+# 2026-03-03 — NewportEcom v2 Shadowbox Hero Implementation
+
+**Note:** This is NOT a bug/error entry, but a significant architectural change log for reference.
+
+## Summary
+
+Implemented modular Shadowbox Hero with strict HUD layout, two-card carousel, and honest CTA messaging.
+
+## Files Created/Modified
+
+- src/components/home/hero/HeroBackground.tsx (created)
+- src/components/home/hero/HeroCarousel.tsx (created)
+- src/components/home/hero/HeroShadowbox.tsx (created)
+- src/slices/HeroShadowbox/index.tsx (created)
+- src/app/(marketing)/v2-preview/page.tsx (created)
+- src/app/globals.css (updated with glass utilities)
+
+## Key Decisions
+
+1. **Removed fake performance metrics** (+247%, 3.2x, $127K sparkline) — Not backed by real data; replaced with honest "Pay only for what you use" CTA
+2. **Strict Shadowbox spec** — Center must remain empty; absolute-positioned HUD cards only
+3. **Two-card carousel** — Render only Alpha + Beta; hide remaining until rotated
+4. **Visual hierarchy polish** — Reduced headline dominance, enhanced readability, repositioned controls
+
+## Positioning Values (for future reference)
+
+- **Alpha card top:** top-[300px] sm:top-[320px] lg:top-[380px]
+- **Beta card top:** top-[420px] sm:top-[340px] lg:top-[180px]
+- **Divider line:** top-[280px] sm:top-[300px] lg:top-[360px], w-12, cobalt 15% opacity
+
+## What's NOT Done Yet
+
+- Laser/incineration effects (z-10 optics layer reserved but empty)
+- Prismic integration (currently hardcoded preview route)
+- Mobile responsive polish
+
+## Documentation
+
+See full details in:
+- public/docs/context_anchor.md — Shadowbox Hero section appended
+- docs/v2_hero_worklog.md — Day-by-day checkpoint log
+- docs/v2_hero_changes_log.md — Detailed decisions and rationale
+
