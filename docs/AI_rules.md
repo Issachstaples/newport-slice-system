@@ -1,319 +1,409 @@
 # AI_rules.md — Newport Slice System & HelixFlow
 
-Last Updated: 2026-02-28
-Applies to: Entire repository
-Authority Level: Non-negotiable
+Authority Level: Constitutional
+Applies To: Entire Repository
 
-If code conflicts with this document, **this document wins.**
+If any code, slice, or AI output conflicts with this document, **this document wins.**
 
 ---
 
-# 1. Core Philosophy
+# 1. System Philosophy
 
-This system is a:
+The Newport Slice System is a:
 
-* Config-driven SaaS architecture
-* Multi-tenant Next.js platform
-* Prismic slice factory
-* Defensive rendering environment
+• Config-driven SaaS architecture
+• Multi-tenant Next.js platform
+• Prismic slice factory
+• Defensive rendering environment
 
 Guiding principles:
 
 * Slices are layout-only
 * Data normalization is centralized
-* Never assume Prismic data shape
 * Defensive rendering is mandatory
 * Reuse > cleverness
 * Factory > playground
 * Minimal diffs > sweeping refactors
 
+Slices must **never crash the page.**
+
 ---
 
-# 2. Slice Architecture Rules (Hard Constraints)
+# 2. Universal Slice Control Schema
 
-## 2.1 Slices Must
+Every slice must begin its `primary` object with the required control block **in this exact order**.
+
+Required fields:
+
+1. `is_enabled` (Boolean)
+2. `visual_mode` (Select)
+3. `section_padding` (Select)
+4. `container_width` (Select)
+
+Enum values:
+
+### visual_mode
+
+```
+none | gradient_orb | helix_3d
+```
+
+### section_padding
+
+```
+none | sm | md | lg
+```
+
+### container_width
+
+```
+standard | wide | full
+```
+
+Optional standardized controls:
+
+```
+background_tone
+animation_mode
+density_mode
+align_mode
+```
+
+Enum-driven variability is mandatory.
+
+Free-text style controls are forbidden.
+
+---
+
+# 3. Slice Architecture Rules
+
+Slices must:
 
 * Accept `slice` only
 * Never fetch data
-* Never know about pages
 * Never access router
-* Never hardcode copy (except safe fallbacks)
+* Never manage global state
+* Never know about pages
+* Never hardcode copy
 
 Correct:
 
-```tsx
+```
 slice.primary.headline
 ```
 
 Forbidden:
 
-```tsx
+```
 "Build once. Operate everything."
 ```
 
 ---
 
-# 3. Rendering Rules by Field Type
+# 4. Rendering Rules by Field Type
 
-| Prismic Field | Required Rendering     |
-| ------------- | ---------------------- |
-| Rich Text     | `<SafeRichText />`     |
-| Key Text      | `asTextValue()`        |
-| Select / Enum | `asEnumValue()`        |
-| Boolean       | direct conditional     |
-| Number        | direct render          |
-| Image         | `<PrismicNextImage />` |
-| Link          | `<PrismicNextLink />`  |
+| Field     | Rendering                              |
+| --------- | -------------------------------------- |
+| Rich Text | normalizeRichText → `<SafeRichText />` |
+| Key Text  | `asTextValue()`                        |
+| Enum      | `asEnumValue()`                        |
+| Boolean   | conditional                            |
+| Number    | direct                                 |
+| Image     | `<PrismicNextImage />`                 |
+| Link      | `<PrismicNextLink />`                  |
 
-If unsure → assume Rich Text.
+Never render Rich Text directly.
 
----
+`PrismicRichText` must **never** be imported inside slices.
 
-# 4. Absolute Forbidden Patterns
-
-❌ Rendering Rich Text directly:
-
-```tsx
-<h2>{primary.headline}</h2>
-```
-
-❌ Importing `PrismicRichText` inside slices
-
-❌ Using `any` to silence shape uncertainty
-
-❌ Assuming mocks === API shape
-
-❌ Reading repeatables without guards
-
-❌ Inline normalization logic inside slice components
-
-❌ Moving files or refactoring architecture unless explicitly requested
+Headlines must always be **Key Text**.
 
 ---
 
-# 5. Required Helpers (Mandatory)
+# 5. Hard Prohibitions
 
-All slices MUST use:
+The following are forbidden:
 
-* `SafeRichText`
-* `asTextValue`
-* `asEnumValue`
+• Rendering Rich Text directly
+• Importing `PrismicRichText` inside slices
+• Using `any` to silence types
+• Assuming mocks match API shape
+• Nested Group fields
+• Inline normalization logic
+• Free-text styling fields
+• Hardcoded layout logic
 
-Helpers must live under:
-
-```
-src/lib/prismic/
-```
-
-Normalization must never be duplicated inline.
-
----
-
-# 6. Repeatable Fields Rule (Critical)
-
-Prismic repeatables may exist in two places:
-
-### A) Slice-level repeatables
-
-```ts
-slice.items
-```
-
-### B) Group field inside primary
-
-```ts
-slice.primary.cards
-```
-
-Never assume array shape.
-
-Always guard:
-
-```ts
-const cards = Array.isArray(slice.primary.cards)
-  ? slice.primary.cards
-  : [];
-```
-
-Factory standard:
-If `cards` exists in model, treat `slice.primary.cards` as canonical.
+Violation means the slice does not belong in the system.
 
 ---
 
-# 7. Slice Machine Wrapper Rule
+# 6. Defensive Rendering Requirements
 
-Slice Machine v2 may wrap fields as:
+Slices must never crash.
 
-```json
+Mandatory protections:
+
+### Kill Switch
+
+```
+const isEnabled = primary?.is_enabled !== false
+if (!isEnabled) return null
+```
+
+### Array Guards
+
+```
+const items = Array.isArray(primary?.items)
+  ? primary.items
+  : []
+```
+
+### Wrapper Awareness
+
+Slice Machine mocks may return:
+
+```
 { "__TYPE__": "...", "value": ... }
 ```
 
-All rendering must:
-
-* Detect wrapper objects
-* Extract `.value`
-* Support both mock + API shapes
+Helpers must unwrap `.value`.
 
 Never render wrapper objects directly.
 
 ---
 
-# 8. Text vs Rich Text Boundary Rule
+# 7. Repeatable Field Rule
 
-UI text and content text are different.
+Repeatables may appear as:
 
-## Key Text / UI Controls (Use `asTextValue`)
+```
+slice.items
+```
 
-* CTA labels
-* Badge text
-* Toggle labels
-* Visual mode
-* Enum values
+or
 
-## Rich Text (Use `SafeRichText`)
+```
+slice.primary.cards
+```
 
-* Body copy
-* Subheadline
-* Descriptive paragraphs
+Never assume array shape.
 
-🚫 Never use Rich Text for headlines in system slices.
+Always guard with `Array.isArray`.
 
 ---
 
-# 9. Naming & Structure Rules
+# 8. Implementation Standards
 
-Folder structure:
+All slices must follow these structural rules.
+
+### Folder Structure
 
 ```
 src/slices/
-  HeroSystem/
+  SliceName/
     index.tsx
     model.json
     mocks.json
     screenshot.png
 ```
 
-Naming conventions:
+Naming rules:
 
-| Item       | Rule           |
-| ---------- | -------------- |
-| Slice Name | PascalCase     |
-| Slice ID   | snake_case     |
-| Field IDs  | snake_case     |
-| Variants   | kebab or snake |
-
-Never break naming alignment.
+| Item       | Rule       |
+| ---------- | ---------- |
+| Slice Name | PascalCase |
+| Slice ID   | snake_case |
+| Field IDs  | snake_case |
 
 ---
 
-# 10. Control Field Requirements
-
-Every system slice must include:
-
-* At least 1 Boolean
-* At least 1 Select
-
-Example:
-
-```json
-badge_enabled
-visual_mode
-```
-
-These are design toggles, not content.
-
----
-
-# 11. Visual Mode Standard
-
-Allowed enum values:
-
-* none
-* gradient_orb
-* helix_3d
-
-Never invent new naming patterns casually.
-
-Rendering must branch cleanly:
-
-```ts
-if (visualMode === "gradient_orb") { ... }
-```
+# 9. Visual Mode Logic
 
 Visual logic must never pollute layout logic.
 
----
+Example:
 
-# 12. Styling Rules (Liquid Glass System)
+```
+if (visualMode === "gradient_orb") {
+  // apply orb layer
+}
+```
 
-Reusable glass utilities live in:
+Glass utilities must live in:
 
 ```
 globals.css
 ```
 
-Examples:
-
-* .glass-frost
-* .glass-rim
-* .pulse-dot
-
-🚫 Never inline complex glass CSS in components.
+Never inline complex CSS.
 
 ---
 
-# 13. Variants (Scaling Pattern)
+# 10. Variants Rule
 
 Do not duplicate slices for layout differences.
 
 Use variations:
 
-* default
-* centered
-* compact
+```
+default
+centered
+compact
+```
 
 Branch minimally:
 
-```ts
+```
 slice.variation === "centered"
 ```
 
 ---
 
-# 14. Mock Discipline Rule
+# 11. Slice Factory Workflow
 
-Immediately update `mocks.json`.
+All slices follow the manufacturing pipeline.
 
-Never design against lorem ipsum.
+### Step 1 — Define Purpose
 
-Mocks must include:
-
-* Real headline
-* Real body
-* Real CTAs
-* Correct visual_mode
-
-Mocks drive clarity.
+Confirm slice does not already exist.
 
 ---
 
-# 15. Debugging Protocol
+### Step 2 — Design Model
 
-If runtime error occurs:
+Create:
 
-1. Disable slices incrementally
-2. Identify crashing slice
-3. Audit for:
+```
+src/slices/[SliceName]/model.json
+```
 
-   * Direct JSX interpolation
-   * PrismicRichText usage
-   * Unguarded repeatables
-4. Replace with SafeRichText / guards
-5. Re-enable slices gradually
+Must include the control block first.
+
+No nested groups.
 
 ---
 
-# 16. AI Fix Protocol (Mandatory When Debugging)
+### Step 3 — Validate JSON
+
+```
+node -e "JSON.parse(require('fs').readFileSync('model.json','utf8'))"
+```
+
+---
+
+### Step 4 — Write Component
+
+Requirements:
+
+* `is_enabled` kill switch first
+* `SafeRichText` for Rich Text
+* `asTextValue` for Key Text
+* `asEnumValue` for enums
+* guarded arrays
+* no hardcoded copy
+
+---
+
+### Step 5 — Lint
+
+```
+npx eslint src/slices/** --max-warnings=0
+```
+
+Zero warnings.
+
+---
+
+### Step 6 — Write Mocks
+
+Requirements:
+
+* realistic content
+* `is_enabled: true`
+* valid enums
+* at least one list in Rich Text
+* at least one non-default visual mode
+
+---
+
+### Step 7 — Simulator QA
+
+Verify:
+
+• slice renders
+• mocks switch correctly
+• kill switch works
+• lists render properly
+• no console errors
+
+---
+
+### Step 8 — Update Documentation
+
+Update:
+
+```
+public/docs/slice_library_index.md
+public/docs/context_anchor.md
+```
+
+Documentation is mandatory.
+
+---
+
+### Step 9 — Verify No Regressions
+
+```
+npx eslint src/ --max-warnings=0
+```
+
+---
+
+### Step 10 — Commit
+
+Commit format:
+
+```
+feat: implement SliceName slice
+fix: correct SliceName bug
+chore: update SliceName mocks
+```
+
+One logical change per commit.
+
+---
+
+# 12. Multi-Tenant Rules (HelixFlow)
+
+Slices are future dashboard modules.
+
+Constraints:
+
+* tenant data filtered by `organization_id`
+* RLS enforced
+* feature toggles supported
+* config-driven modules
+
+Slices must remain reusable across tenants.
+
+---
+
+# 13. Documentation Protocol
+
+When a slice ships:
+
+Update:
+
+```
+slice_library_index.md
+context_anchor.md
+```
+
+Failure to update docs is a protocol violation.
+
+---
+
+# 14. AI Fix Protocol
 
 When asking AI to fix slice code, prepend:
 
@@ -321,148 +411,23 @@ When asking AI to fix slice code, prepend:
 Follow the Newport Slice System rules.
 
 Use:
-- SafeRichText for content
-- asTextValue for UI labels
-- asEnumValue for enums
+SafeRichText
+asTextValue
+asEnumValue
 
-Do NOT refactor beyond minimal fix.
-Do NOT introduce `any`.
-Do NOT change slice models.
-All imports must be at the top.
+Do not refactor architecture.
+Do not introduce `any`.
 Make the smallest possible change.
 ```
 
-AI must not:
-
-* Refactor architecture
-* Change slice model
-* Introduce abstractions
-* Touch unrelated code
-
 ---
 
-# 17. Multi-Tenant System Rules (HelixFlow Layer)
-
-Slices are not just marketing components.
-
-They are future dashboard modules.
-
-Constraints:
-
-* All tenant data filtered by `organization_id`
-* RLS enforced
-* UI modules conditionally rendered
-* Feature toggles via:
-
-  * `organization_modules`
-  * Prismic `Client_Configuration` slices
-
-Slices must remain config-driven and reusable across tenants.
-
----
-
-# 18. Factory Rule (The Payoff)
-
-If a slice:
-
-* Depends on copy hacks
-* Contains unclear field purpose
-* Hardcodes styling logic
-* Can crash the page
-
-It does not belong in the system.
-
-The slice library is a manufacturing line.
-
-Not a design sandbox.
-
----
-
-# 19. Final Rule (Most Important)
+# 15. Final Rule
 
 If a slice can crash the page,
+
 the slice is incorrect.
 
-There are no exceptions.
-### Rich Text Rule (Critical)
+There are **no exceptions**.
 
-If a field is modeled as Rich Text (lists, formatting, structure):
-- NEVER render with asTextValue
-- ALWAYS pass through normalizeRichText → SafeRichText
-- Local normalizers are forbidden; use shared helper only
-
-Violating this rule will cause mock/API divergence and silent rendering failures.
-
-20. Constitutional Awareness Rule (AI Prompt Requirement)
-
-When generating, modifying, or debugging any slice, model, or architectural file, AI must assume the following documents are authoritative:
-
-PROJECT_IDENTITY.md
-
-context_anchor.md
-
-UNIVERSAL_SLICE_CONTROL_SCHEMA.md
-
-SLICE_LIBRARY_INDEX.md
-
-NE_error_log.md
-
-AI must:
-
-Respect required slice controls.
-
-Preserve snake_case naming.
-
-Never introduce new enums without explicit approval.
-
-Never violate the multi-tenant architecture.
-
-Never bypass defensive rendering requirements.
-
-Never restructure architectural files unless explicitly instructed.
-
-Apply minimal-diff philosophy when editing existing files.
-
-If output conflicts with any governing document, the governing document wins.
-
-Failure to follow this rule invalidates the response.
-
----
-
-# 21. Documentation Maintenance Rule
-
-When a slice is implemented, the following documentation files must be updated in the same session:
-
-1. `public/docs/slice_library_index.md` — add/update the slice entry with ✅ status and one-line description.
-2. `public/docs/context_anchor.md` — append a bullet under the appropriate section noting the slice is implemented and lint-verified.
-
-Failure to update documentation when shipping a slice is a protocol violation. Documentation is part of the slice, not an afterthought.
-
----
-
-# 22. UNIVERSAL_SLICE_CONTROL_SCHEMA Cross-Check Rule
-
-Before generating, modifying, or reviewing any slice model or component, AI must cross-check `UNIVERSAL_SLICE_CONTROL_SCHEMA.md` to verify:
-
-- The required control block (`is_enabled`, `visual_mode`, `section_padding`, `container_width`) is present at the top of `primary`.
-- No enum values are introduced that are not defined in the schema.
-- Optional controls (`background_tone`, `animation_mode`, `density_mode`, `align_mode`) use only their defined enum values when included.
-
-If the proposed change conflicts with the schema, the schema wins. The change must not proceed without an explicit architectural decision.
-
----
-
-# 23. No Nested Groups Rule
-
-Slice Machine v2 does not support Group fields nested inside other Group fields.
-
-AI must never:
-- Generate a model with a Group field inside another Group field.
-- Suggest nested groups as a solution to grid-like content requirements.
-
-The canonical alternative for grid-like content within tabs or cards is Rich Text blocks rendered into a CSS grid using Tailwind's `[&>*]` selector utilities. This pattern is established in `TabsSection` and is the system-wide standard.
-
----
-
-End of AI_rules.md
 
