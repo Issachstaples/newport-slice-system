@@ -29,6 +29,24 @@
     -webkit-text-fill-color: transparent;
   }
 
+  .glass-panel-strong {
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(32px) saturate(160%);
+    -webkit-backdrop-filter: blur(32px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow:
+      var(--shadow-glass-lg),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  .glass-panel-soft {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  }
+
   .app-backdrop {
     background:
       radial-gradient(900px 520px at 20% 10%, rgba(56, 189, 248, 0.10), transparent 60%),

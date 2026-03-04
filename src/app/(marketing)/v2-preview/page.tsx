@@ -1,8 +1,9 @@
-import HeroShadowbox from "@/slices/HeroShadowbox";
+import HeroShadowbox from "@/components/home/hero/HeroShadowbox";
 
 export default function V2PreviewPage() {
     return (
         <HeroShadowbox
+            backgroundSrc="/images/home/neon-eye-clean.PNG"
             headline="Build faster with Newport"
             subheadline="Modern component system with Prismic CMS integration and Tailwind styling"
             cards={[
@@ -37,6 +38,10 @@ export default function V2PreviewPage() {
                         "Full TypeScript support with canonical model templates and mock discipline.",
                 },
             ]}
+            ctaText="Explore Slices"
+            ctaHref="/slice-simulator"
+            secondaryCtaText="View Docs"
+            secondaryCtaHref="/docs"
         />
     );
 }
