@@ -41,10 +41,11 @@ export default function HeroCarousel({ cards }: HeroCarouselProps) {
 
                     // Active card: full size, centered, strong glass
                     // Queued cards: scaled down, offset right, slight rotate, soft glass
-                    const scale = isActive ? 1 : 0.88;
-                    const translateX = isActive ? 0 : 48 + (position - 1) * 12;
-                    const rotate = isActive ? 0 : (position - 1) * 1.5;
-                    const opacity = isActive ? 1 : Math.max(0.35, 0.65 - (position - 1) * 0.15);
+                    const scale = isActive ? 1 : 0.86;
+                    const translateX = isActive ? 0 : 52 + (position - 1) * 14;
+                    const translateY = isActive ? 0 : (position - 1) * 2;
+                    const rotate = isActive ? 0 : (position - 1) * 2;
+                    const opacity = isActive ? 1 : Math.max(0.25, 0.55 - (position - 1) * 0.18);
                     const zIndex = isActive ? 20 : 20 - position;
 
                     return (
@@ -52,13 +53,31 @@ export default function HeroCarousel({ cards }: HeroCarouselProps) {
                             key={idx}
                             className="absolute inset-0 transition-all duration-500 ease-out"
                             style={{
-                                transform: `translateX(${translateX}px) scale(${scale}) rotate(${rotate}deg)`,
+                                transform: `translateX(${translateX}px) translateY(${translateY}px) scale(${scale}) rotate(${rotate}deg)`,
                                 opacity,
                                 zIndex,
                                 transformOrigin: 'left center',
+                                filter: isActive ? 'none' : 'brightness(0.85)',
                             }}
                         >
-                            <div className={`${isActive ? 'glass-panel-strong' : 'glass-panel-soft'} rounded-2xl p-6 h-full`}>
+                            <div
+                                className={`relative ${isActive ? 'glass-panel-strong' : 'glass-panel-soft'} rounded-2xl p-6 h-full`}
+                                style={{
+                                    boxShadow: isActive
+                                        ? '0 0 0 1px rgba(74, 144, 226, 0.3), 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(74, 144, 226, 0.2)'
+                                        : '0 8px 24px rgba(0, 0, 0, 0.4)',
+                                }}
+                            >
+                                {/* Pulsing target dot indicator for active card */}
+                                {isActive && (
+                                    <div className="absolute top-3 right-3">
+                                        <div className="relative w-2 h-2">
+                                            <div className="absolute inset-0 bg-[#4a90e2] rounded-full animate-ping opacity-75" />
+                                            <div className="relative bg-[#4a90e2] rounded-full w-2 h-2" />
+                                        </div>
+                                    </div>
+                                )}
+
                                 <div className="flex items-start gap-4">
                                     <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#4a90e2]/20 flex items-center justify-center">
                                         <Icon className="w-6 h-6 text-[#4a90e2]" />
@@ -67,9 +86,23 @@ export default function HeroCarousel({ cards }: HeroCarouselProps) {
                                         <h3 className="text-xl font-semibold text-white mb-3">
                                             {card.title}
                                         </h3>
-                                        <p className="text-sm text-[#cbd5e0] leading-relaxed">
-                                            {card.description}
-                                        </p>
+                                        {/* Text with dark backplate for readability on active card */}
+                                        <div
+                                            className={`${isActive ? 'relative' : ''}`}
+                                        >
+                                            {isActive && (
+                                                <div
+                                                    className="absolute inset-0 -m-2 rounded-lg"
+                                                    style={{
+                                                        background: 'linear-gradient(135deg, rgba(10, 13, 20, 0.4) 0%, rgba(10, 13, 20, 0.6) 100%)',
+                                                        zIndex: -1,
+                                                    }}
+                                                />
+                                            )}
+                                            <p className={`text-sm leading-relaxed ${isActive ? 'text-[#e0e7ef] relative z-10 p-2' : 'text-[#cbd5e0]'}`}>
+                                                {card.description}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import HeroBackground from "./HeroBackground";
 import HeroCarousel, { HeroCard } from "./HeroCarousel";
-import { TrendingUp, Users, Zap } from "lucide-react";
+import { TrendingUp, Briefcase, DollarSign } from "lucide-react";
 
 export interface HeroShadowboxProps {
     backgroundSrc: string;
@@ -76,39 +76,55 @@ export default function HeroShadowbox({
                     <div className="lg:col-span-3 hidden lg:block">
                         <div className="glass-panel-strong rounded-2xl p-6 space-y-6">
                             <h3 className="text-sm font-semibold text-[#a8b2c1] uppercase tracking-wide">
-                                System Metrics
+                                Results That Matter
                             </h3>
 
-                            {/* Metric 1 */}
+                            {/* Metric 1: New Leads */}
                             <div className="flex items-start gap-4">
                                 <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center">
                                     <TrendingUp className="w-5 h-5 text-emerald-400" />
                                 </div>
                                 <div>
-                                    <div className="text-2xl font-bold text-white mb-1">99.9%</div>
-                                    <div className="text-sm text-[#a8b2c1]">Uptime</div>
+                                    <div className="text-2xl font-bold text-white mb-1">+247%</div>
+                                    <div className="text-sm text-[#a8b2c1]">New Leads</div>
                                 </div>
                             </div>
 
-                            {/* Metric 2 */}
+                            {/* Metric 2: Workflow Efficiency */}
                             <div className="flex items-start gap-4">
                                 <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-violet-500/20 flex items-center justify-center">
-                                    <Users className="w-5 h-5 text-violet-400" />
+                                    <Briefcase className="w-5 h-5 text-violet-400" />
                                 </div>
                                 <div>
-                                    <div className="text-2xl font-bold text-white mb-1">10K+</div>
-                                    <div className="text-sm text-[#a8b2c1]">Active Users</div>
+                                    <div className="text-2xl font-bold text-white mb-1">3.2x</div>
+                                    <div className="text-sm text-[#a8b2c1]">Workflow Efficiency</div>
                                 </div>
                             </div>
 
-                            {/* Metric 3 */}
+                            {/* Metric 3: Monthly Revenue with sparkline */}
                             <div className="flex items-start gap-4">
                                 <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                                    <Zap className="w-5 h-5 text-blue-400" />
+                                    <DollarSign className="w-5 h-5 text-blue-400" />
                                 </div>
-                                <div>
-                                    <div className="text-2xl font-bold text-white mb-1">&lt;50ms</div>
-                                    <div className="text-sm text-[#a8b2c1]">Response Time</div>
+                                <div className="flex-1">
+                                    <div className="text-2xl font-bold text-white mb-1">$127K</div>
+                                    <div className="text-sm text-[#a8b2c1] mb-2">Monthly Revenue</div>
+                                    {/* Tiny sparkline */}
+                                    <svg
+                                        viewBox="0 0 60 20"
+                                        className="w-full h-5 opacity-60"
+                                        preserveAspectRatio="none"
+                                    >
+                                        <polyline
+                                            points="0,15 10,12 20,14 30,10 40,8 50,5 60,3"
+                                            fill="none"
+                                            stroke="rgba(74, 144, 226, 0.8)"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                        <circle cx="60" cy="3" r="2" fill="#4a90e2" />
+                                    </svg>
                                 </div>
                             </div>
                         </div>
