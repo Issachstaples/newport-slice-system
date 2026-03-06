@@ -157,3 +157,179 @@ If resuming in a new chat, provide these context files:
 5. `src/components/home/hero/HeroCarousel.tsx` — Alpha/Beta carousel logic
 
 This will allow instant bootstrap without rediscovering decisions.
+
+---
+
+## 2026-03-05 — Day 2: 3D Shadowbox Implementation
+
+### Summary
+
+Implemented React Three Fiber 3D shadowbox backdrop with four layered transparent PNG plates. Added independent per-mesh parallax, container-relative pointer tracking with clamping, explicit renderOrder for transparent sorting, global scaling system, cavity vignette, and responsive wrapper sizing. Composition tuned across multiple iterations for optimal depth and frame dominance.
+
+### Files Touched
+
+1. `src/components/home/hero/Shadowbox3D.tsx` — **Created**
+2. `src/components/home/hero/HeroShadowbox.tsx` — **Updated** (dynamic import, vignette, wrapper sizing)
+3. `package.json` — **Updated** (R3F dependencies)
+4. `public/images/hero/shadowbox_eye_back_2048.png` — **Added** (719KB)
+5. `public/images/hero/shadowbox_core_mid_2048.png` — **Added** (1.3MB)
+6. `public/images/hero/shadowbox_wrap_front_2048.png` — **Added** (1.4MB)
+
+### Key Decisions and Why
+
+#### 1. **React Three Fiber for 3D Shadowbox**
+
+**Decision:** Use @react-three/fiber Canvas with drei helpers instead of CSS transforms or video.
+
+**Why:**
+- True 3D depth with WebGL rendering
+- Independent parallax per mesh (not achievable with CSS parent transforms)
+- Emissive material pulsing for sci-fi aesthetic
+- Performant with dpr capping and framerate-independent smoothing
+- React component integration (no separate WebGL context management)
+
+#### 2. **Independent Per-Mesh Parallax**
+
+**Decision:** Share pointer state via Scene component, apply parallax at Plate level with individual moveFactorX/Y.
+
+**Why:**
+- Each plate can have different parallax sensitivity (eye subtle, wrap more pronounced)
+- Avoids parent group movement that moves entire stack together (breaks depth illusion)
+- Container-relative tracking via getBoundingClientRect() keeps parallax accurate within constrained wrapper
+- Clamp [-0.6, 0.6] prevents excessive drift on large screens
+
+#### 3. **Explicit RenderOrder for Transparent Layers**
+
+**Decision:** Set renderOrder: Eye=10, Core=20, AO=30, Wrap=40 on each Plate mesh.
+
+**Why:**
+- Three.js transparent sorting can fail with overlapping geometry
+- Explicit order prevents z-fighting and visual glitches
+- Ensures wrap always renders in front, eye always behind, regardless of camera angle
+
+#### 4. **Unit Plane + BaseScale System**
+
+**Decision:** Use constant 1×1 planeGeometry with per-plate baseScale prop instead of viewport-relative sizing.
+
+**Why:**
+- Viewport sizing caused shadowbox to scale unpredictably with window resize
+- BaseScale provides predictable, art-directable sizing
+- OffsetX/offsetY props allow independent positioning while maintaining parallax
+- Global scale multiplier (1.35) can uniformly scale entire cluster without refactoring individual values
+
+#### 5. **Global Scale System (GLOBAL_SCALE = 1.35)**
+
+**Decision:** Add single constant that multiplies all baseScale values uniformly.
+
+**Why:**
+- Shadowbox cluster was too small relative to ~1200px wrapper
+- Needed to fill ~80% of hero background area without changing relative proportions
+- Single constant easier to tune than adjusting 4 individual baseScale values
+- Maintains eye < core < wrap < AO hierarchy
+
+#### 6. **Core Visual Dominance Reduction**
+
+**Decision:** Reduce core opacity (0.95 → 0.88), alphaTest (0.02 → 0.01), emissive pulse amplitude.
+
+**Why:**
+- Core plate was reading as "rectangular sticker" with hard edges
+- Too visually dominant vs. wrap frame (felt like core was the hero, not the wrap)
+- Reduced opacity/alphaTest creates softer blend with vignette and AO shim
+- Subtler emissive pulse prevents attention-grabbing flash
+
+#### 7. **Cavity Vignette (Localized, Not Full-Screen)**
+
+**Decision:** Create centered box at z-5 with radial gradient, responsive sizing, positioned with transform.
+
+**Why:**
+- Full-screen vignette (inset-0) darkened entire viewport including HUD cards
+- Localized box targets only shadowbox area without muddying UI
+- Tighter falloff (50%/75% stops) concentrates shadow in cavity center
+- Neutral dark gradient (no blue tint) prevents color cast on wrap texture
+- Positioned with translate(-55%, -42%) to align with wrap/core and avoid CTA overlap
+
+#### 8. **Responsive Wrapper Sizing**
+
+**Decision:** Make Shadowbox3D wrapper responsive with breakpoint classes: 700px/900px/1200px.
+
+**Why:**
+- Larger fixed size (1200px) caused collision with HUD cards on mobile/tablet
+- Responsive sizing keeps shadowbox readable at all viewport sizes
+- Min() constraints prevent overflow on very small screens
+- Positioned with translate percentages maintains centering at all breakpoints
+
+#### 9. **Eye Plate Raised (offsetY 0.14 → 0.21)**
+
+**Decision:** Move eye upward in composition by +0.07.
+
+**Why:**
+- Eye was too close to core cavity, felt cramped
+- Raising it creates clear "watcher" positioning above the frame
+- Avoids collision with left headline card on smaller viewports
+- Makes three-layer hierarchy (eye / core / wrap) more visually distinct
+
+#### 10. **DEBUG Flag for Background Evaluation**
+
+**Decision:** Add DEBUG_SHADOWBOX_3D flag to disable legacy HeroBackground temporarily.
+
+**Why:**
+- Legacy background (vignette + spotlight + grain) interfered with shadowbox evaluation
+- Needed clean slate to tune cavity vignette and composition
+- Flag allows quick toggle for future re-enabling of background atmosphere blend
+- Prevents accidental deletion of legacy background code
+
+### Technical Notes
+
+#### Parallax Smoothing
+
+Used THREE.MathUtils.damp for framerate-independent parallax:
+```tsx
+meshRef.current.position.x = THREE.MathUtils.damp(
+    meshRef.current.position.x,
+    targetX,
+    4,  // damping factor
+    delta  // time since last frame
+);
+```
+
+This ensures 60fps and 120fps devices have identical movement feel.
+
+#### AO Shim Implementation
+
+AO shim is duplicate wrap texture with modified material:
+- `zDepth=-0.02` (behind wrap at 0.05)
+- `opacity=0.22` (subtle darkening)
+- `scale multiplier=1.02` (slightly larger than wrap)
+- `alphaTest=0.02` (trim fully transparent pixels)
+- `color="#000000"` (pure black for shadow)
+
+Creates subtle ambient occlusion effect without expensive lighting calculations.
+
+#### Emissive Pulse
+
+Eye and Core materials use sine wave pulse:
+```tsx
+const amplitude = isCore ? 0.08 : 0.15;
+const baseline = isCore ? 0.15 : 0.2;
+const pulse = Math.sin(state.clock.elapsedTime * 0.8) * amplitude + baseline;
+meshRef.current.material.emissiveIntensity = pulse;
+```
+
+Core has half the amplitude of Eye to prevent visual dominance.
+
+### Current Status
+
+- `/v2-preview` renders with no runtime errors
+- TypeScript + ESLint clean (--max-warnings=0)
+- Shadowbox fills ~80% of hero background area
+- All 4 plates render with correct depth separation and parallax
+- Cavity vignette provides depth cue without muddying UI
+- HUD cards (z-20) correctly float above shadowbox (z-10)
+
+### Next Steps
+
+- Optional: Re-enable legacy background atmosphere (blend with DEBUG flag)
+- Optional: Implement "heartbeat sparks" overlay (TODO in Shadowbox3D.tsx)
+- Future: Prismic slice integration (hero_shadowbox model)
+- Future: Mobile responsive polish (test stacked HUD layout)
+

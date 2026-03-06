@@ -476,3 +476,75 @@ See full details in:
 - docs/v2_hero_worklog.md — Day-by-day checkpoint log
 - docs/v2_hero_changes_log.md — Detailed decisions and rationale
 
+
+---
+
+## 2026-03-05 — 3D Shadowbox Implementation: No Runtime Errors ✅
+
+### Session Summary
+
+Implemented React Three Fiber 3D shadowbox backdrop with four layered PNG plates (Eye, Core, Wrap, AO shim). Session involved iterative composition tuning, client-side rendering fixes, and responsive wrapper adjustments.
+
+### Runtime Errors Encountered
+
+**None.** All TypeScript and ESLint checks passed clean (--max-warnings=0) throughout session.
+
+### Build/Compile Issues Fixed
+
+**1. Client-Side Rendering (R3F requires browser context)**
+
+- **Initial Issue:** drei's `useTexture` requires Suspense boundary; R3F Canvas needs client-side rendering
+- **Fix Applied:** 
+  - Wrapped Scene component in `<Suspense fallback={null}>` within Canvas
+  - Added `"use client"` directive to Shadowbox3D.tsx
+  - Used `dynamic(() => import("./Shadowbox3D"), { ssr: false })` in HeroShadowbox.tsx
+- **Outcome:** No SSR bailout warnings, clean client-side render
+
+**2. Hook Rules Violation (conditional useTexture)**
+
+- **Initial Attempt:** Wrapped `useTexture` in try-catch for defensive loading
+- **ESLint Error:** React Hook "useTexture" cannot be called inside a callback
+- **Fix Applied:** Removed try-catch, relied on Suspense for error boundary
+- **Outcome:** ESLint clean, Suspense handles loading states
+
+### Key Learnings
+
+1. **Three.js Transparent Sorting:** Overlapping transparent meshes require explicit `renderOrder` prop to prevent z-fighting. Cannot rely on automatic depth sorting.
+
+2. **Container-Relative Pointer Tracking:** When R3F Canvas is in constrained wrapper (not full-screen), must use `getBoundingClientRect()` on container instead of window coordinates. Otherwise parallax tracks wrong area.
+
+3. **Viewport Scaling Issues:** Using `useThree().viewport.width/height` for plane sizing causes unpredictable scaling on window resize. Use constant 1×1 planes with `baseScale` prop instead.
+
+4. **Global Scale Pattern:** When tuning multiple related values (4 plate scales), add single `GLOBAL_SCALE` constant that multiplies all values uniformly. Easier to tune than adjusting individual values.
+
+5. **Emissive Pulse Dominance:** Core plate with same emissive pulse amplitude as Eye drew too much attention. Reduced amplitude/baseline for Core created better visual hierarchy.
+
+6. **Localized Vignette > Full-Screen:** Full-screen vignettes (inset-0) darken entire viewport including UI. Localized centered box with responsive sizing targets only 3D area without muddying HUD cards.
+
+### Rules Extracted
+
+**RULE: R3F components must be client-only**
+- Always use `"use client"` directive
+- Always wrap in Suspense boundary
+- Always use `dynamic(() => import(), { ssr: false })` when importing into server components
+
+**RULE: Transparent meshes need explicit renderOrder**
+- Cannot rely on Three.js automatic depth sorting for overlapping transparent geometry
+- Assign explicit `renderOrder` prop to each mesh in back-to-front order
+
+**RULE: Container-relative pointer tracking for constrained Canvas**
+- When Canvas wrapper is not full-screen, use `getBoundingClientRect()` on container
+- Normalize pointer coordinates relative to container, not window
+
+**RULE: Avoid viewport-relative sizing in R3F**
+- Use constant geometry (e.g., 1×1 planes) with scale props
+- Do not use `useThree().viewport` for mesh sizing (causes resize issues)
+
+**RULE: Global scale constants for related values**
+- When multiple values need to scale together, use single multiplier constant
+- Apply at calculation level: `const finalScale = baseScale * GLOBAL_SCALE`
+
+**RULE: Localized effects over full-screen overlays**
+- Use responsive-sized containers with transform positioning for localized effects
+- Prevents unintended darkening/blurring of UI elements
+

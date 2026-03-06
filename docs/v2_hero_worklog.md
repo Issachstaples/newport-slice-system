@@ -145,3 +145,163 @@
 - [ ] Prismic slice integration (Day 3)
 - [ ] Optional: make eyebrow label ("SYSTEM") configurable via props
 - [ ] Optional: add dev toggle for laser effects (feature flag)
+
+---
+
+## Day 2 — 3D Shadowbox Implementation (2026-03-05)
+
+### Summary
+
+Implemented React Three Fiber 3D shadowbox backdrop with four layered transparent PNG plates (Eye, Core, Wrap, AO shim). Added independent per-mesh parallax, container-relative pointer tracking, and global scaling system. Integrated cavity vignette and made Shadowbox3D wrapper responsive. No runtime errors.
+
+### Checkpoints Completed ✅
+
+1. **R3F dependencies installed and Shadowbox3D component created**
+   - Added @react-three/fiber@9.5.0, @react-three/drei@10.7.7, three@0.183.2
+   - Created src/components/home/hero/Shadowbox3D.tsx with Canvas + Suspense
+   - Used drei useTexture for asset loading with defensive rendering
+
+2. **Client-side rendering fixes**
+   - Wrapped Scene in Suspense fallback
+   - Added dynamic import with `{ ssr: false }` in HeroShadowbox.tsx
+   - Added "use client" directive to Shadowbox3D.tsx
+   - Fixed hook rules violations (removed conditional useTexture calls)
+
+3. **Independent parallax per mesh implemented**
+   - Moved pointer state to Scene component (shared across all Plates)
+   - Each Plate receives pointerPos prop and applies own moveFactorX/Y
+   - Container-relative tracking via getBoundingClientRect()
+   - Pointer clamped to [-0.6, 0.6] range
+   - Framerate-independent smoothing with THREE.MathUtils.damp
+
+4. **Transparent layer sorting fixed**
+   - Added explicit renderOrder: Eye=10, Core=20, AO=30, Wrap=40
+   - Prevents z-fighting and transparent sorting glitches
+
+5. **AO shim improved**
+   - Duplicate wrap texture at zDepth=-0.02
+   - Opacity 0.22, scale multiplier 1.02, alphaTest 0.02
+   - Provides subtle ambient occlusion behind wrap frame
+
+6. **Camera and performance optimized**
+   - fov: 48, position: [0, 0, 1.15]
+   - dpr: [1, 1.5] for better iteration performance
+   - Lighting: ambient 0.45, directional 0.9, fill 0.25
+
+7. **Unit plane + baseScale system implemented**
+   - Removed viewport-relative scaling (caused sizing issues)
+   - Constant 1×1 planeGeometry with per-plate baseScale prop
+   - Added offsetX/offsetY props for independent positioning
+
+8. **Composition tuning (multiple iterations)**
+   - Eye: baseScale 0.62, offsetY 0.21, zDepth -0.30
+   - Core: baseScale 1.00, offsetY -0.10, zDepth -0.11, opacity 0.88, alphaTest 0.01
+   - Wrap: baseScale 1.34, offsetY -0.08, zDepth 0.05
+   - AO: baseScale 1.38, offsetY -0.08, zDepth -0.02
+   - Fixed group rotation: rotation-x=-0.03, rotation-y=0.02
+
+9. **Global scale system added**
+   - GLOBAL_SCALE = 1.35 constant multiplies all baseScale values
+   - Makes shadowbox cluster fill ~80% of hero background area
+   - Maintains relative proportions (eye < core < wrap < AO)
+
+10. **Cavity vignette added and refined**
+    - Localized box at z-5 (behind Shadowbox3D at z-10)
+    - Responsive sizing: 700px/900px/1200px at sm/md/lg breakpoints
+    - Radial gradient: circle at 50% 60%, tighter falloff at 50%/75%
+    - Positioned with translate(-55%, -42%)
+    - Neutral dark gradient (no blue tint), opacity 0.25
+
+11. **Shadowbox3D wrapper sizing and positioning**
+    - Made wrapper responsive with min() constraints
+    - Small: 700px×600px, Medium: 900px×700px, Large: 1200px×850px
+    - Adjusted transform to translate(-55%, -42%) to avoid CTA overlap
+    - Centers wrap frame between left and right HUD cards
+
+12. **Core visual dominance reduction**
+    - Reduced opacity: 0.95 → 0.88
+    - Lowered alphaTest: 0.02 → 0.01 (softer edges)
+    - Reduced emissive pulse amplitude: 0.15 → 0.08, baseline 0.2 → 0.15
+    - Prevents "rectangular sticker" appearance
+
+13. **Eye plate repositioned**
+    - Moved offsetY from 0.14 to 0.21 (raised upward)
+    - Reads clearly as back-layer "watcher" above cavity
+
+### Git Commits (Day 2)
+
+- `90824f4` — feat: implement 3D Shadowbox with React Three Fiber
+- `36b85b4` — refine: Shadowbox3D composition tuning and layout optimization
+
+### Files Modified (Day 2)
+
+- `src/components/home/hero/Shadowbox3D.tsx` (created)
+- `src/components/home/hero/HeroShadowbox.tsx` (updated: dynamic import, vignette, wrapper sizing)
+- `package.json` (added R3F dependencies)
+- `public/images/hero/shadowbox_eye_back_2048.png` (added, 719KB)
+- `public/images/hero/shadowbox_core_mid_2048.png` (added, 1.3MB)
+- `public/images/hero/shadowbox_wrap_front_2048.png` (added, 1.4MB)
+
+### Technical Notes
+
+#### Plate System Architecture
+
+Four plates rendered with independent parallax:
+- **Eye (back):** Smallest scale, farthest back, emissive pulse, "watcher" positioning
+- **Core (mid):** Base scale 1.00, reduced visual dominance (opacity/alphaTest), emissive pulse
+- **AO shim:** Ambient occlusion layer behind wrap, subtle opacity
+- **Wrap (front):** Largest scale, closest to camera, frames the composition
+
+Each plate has:
+- `zDepth`: Z-axis position (Eye -0.30, Core -0.11, AO -0.02, Wrap 0.05)
+- `baseScale`: Relative size (Eye 0.62, Core 1.00, Wrap 1.34, AO 1.38)
+- `offsetY`: Vertical positioning offset
+- `moveFactorX/Y`: Parallax sensitivity multipliers
+- `renderOrder`: Explicit sort order for transparent layers
+
+#### Global Scale System
+
+`GLOBAL_SCALE = 1.35` applied to all plates uniformly:
+```tsx
+const finalScale = (isAO ? baseScale * 1.02 : baseScale) * GLOBAL_SCALE;
+```
+
+Maintains relative proportions while making entire cluster fill ~80% of background.
+
+#### Pointer Tracking
+
+Container-relative via `getBoundingClientRect()`:
+```tsx
+const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+const clampedX = Math.max(-0.6, Math.min(0.6, x));
+```
+
+Prevents parallax from tracking full viewport when shadowbox is in constrained wrapper.
+
+#### Emissive Pulse Logic
+
+Eye and Core materials pulse with sine wave:
+```tsx
+const amplitude = isCore ? 0.08 : 0.15;
+const baseline = isCore ? 0.15 : 0.2;
+const pulse = Math.sin(state.clock.elapsedTime * 0.8) * amplitude + baseline;
+```
+
+Core has reduced amplitude to prevent visual dominance over wrap frame.
+
+### Current Status
+
+- `/v2-preview` renders with no runtime errors
+- TypeScript + ESLint clean (--max-warnings=0)
+- All assets loaded (719KB + 1.3MB + 1.4MB = ~3.4MB total)
+- Shadowbox fills ~80% of hero background area
+- HUD cards (z-20) render correctly above shadowbox (z-10)
+- Cavity vignette (z-5) provides depth cue behind stack
+
+### Remaining Work
+
+- Optional: Re-enable legacy background atmosphere blend (currently disabled via DEBUG flag)
+- Optional: Implement "heartbeat sparks" overlay (TODO comment exists in Shadowbox3D.tsx)
+- Future: Prismic integration (hero_shadowbox slice model)
+- Future: Mobile responsive polish (test stacked layout on sm breakpoint)
+

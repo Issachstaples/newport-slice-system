@@ -490,3 +490,77 @@ Update documentation with two quick additions:
 Do not modify any app code.
 ---
 
+
+
+## 3D Shadowbox Hero Implementation (2026-03-05)
+
+**Goal:** Implement 3D "shadowbox" hero backdrop using React Three Fiber with layered PNG plates and HUD UI floating above.
+
+### Assets
+
+Three prepared 2048×2048 transparent PNG plates stored at:
+- `/public/images/hero/shadowbox_eye_back_2048.png` (719KB)
+- `/public/images/hero/shadowbox_core_mid_2048.png` (1.3MB)
+- `/public/images/hero/shadowbox_wrap_front_2048.png` (1.4MB)
+
+### Implementation
+
+**Component:** `src/components/home/hero/Shadowbox3D.tsx`
+
+Uses @react-three/fiber Canvas + @react-three/drei useTexture with Suspense boundary. Four plates rendered (Eye, Core, AO shim, Wrap) with:
+
+- **Independent parallax per mesh** (no parent/camera parallax): pointer state shared via Scene component, each Plate applies its own moveFactorX/Y
+- **Container-relative pointer tracking:** via getBoundingClientRect() on wrapper div
+- **Pointer clamp:** [-0.6, 0.6] range prevents excessive drift
+- **Framerate-independent smoothing:** THREE.MathUtils.damp with delta
+- **RenderOrder:** Eye=10, Core=20, AO=30, Wrap=40 (prevents transparent sorting glitches)
+- **Emissive pulse:** Eye and Core materials pulse with reduced amplitude for Core (0.08 vs 0.15)
+- **AO shim:** Duplicate wrap texture at opacity 0.22, scale multiplier 1.02, alphaTest 0.02
+- **Unit planes + baseScale system:** Constant 1×1 planeGeometry with per-plate baseScale values
+- **Global scale (GLOBAL_SCALE = 1.35):** Uniformly scales all plates to fill ~80% of hero background
+- **Fixed group rotation:** rotation-x=-0.03, rotation-y=0.02 for physical tilt
+- **Camera:** fov=48, position=[0, 0, 1.15], dpr=[1, 1.5]
+
+**Plate Configuration:**
+- Eye: zDepth=-0.30, baseScale=0.62, offsetY=0.21, renderOrder=10
+- Core: zDepth=-0.11, baseScale=1.00, offsetY=-0.10, renderOrder=20, opacity=0.88, alphaTest=0.01
+- AO: zDepth=-0.02, baseScale=1.38, offsetY=-0.08, renderOrder=30
+- Wrap: zDepth=0.05, baseScale=1.34, offsetY=-0.08, renderOrder=40
+
+### Hero Layout Integration
+
+**Updated:** `src/components/home/hero/HeroShadowbox.tsx`
+
+- Mounts Shadowbox3D at z-10 optics layer behind HUD (z-20)
+- Added localized cavity vignette at z-5 (NOT full-screen): centered box with responsive sizing, radial gradient darkening center cavity, positioned with translate(-55%, -42%)
+- Shadowbox3D wrapper made responsive: 700px/900px/1200px at sm/md/lg breakpoints
+- DEBUG_SHADOWBOX_3D flag temporarily disables legacy background for accurate evaluation
+
+### Iteration Timeline
+
+1. Initial R3F implementation with 3 plates + AO shim
+2. Fixed client-side exceptions (Suspense, dynamic import, "use client")
+3. Fixed parallax moving whole stack → per-mesh independent parallax
+4. Added container-relative pointer tracking with [-0.6, 0.6] clamp
+5. Added renderOrder to prevent transparent layer glitches
+6. Improved AO shim (opacity 0.22, scale 1.02, alphaTest 0.02)
+7. Camera optimization (fov 48, position z 1.15, dpr [1, 1.5])
+8. Switched to unit plane + baseScale system (removed viewport scaling)
+9. Composition tuning (scales and offsets refined across multiple iterations)
+10. Added cavity vignette (localized, neutral dark gradient, tighter falloff)
+11. Z-depth separation increase (Eye -0.24→-0.30, Wrap 0.03→0.05)
+12. Frame dominance increase (Wrap 1.28→1.34, AO 1.32→1.38)
+13. Core visual dominance reduction (opacity 0.95→0.88, alphaTest 0.02→0.01, reduced emissive pulse)
+14. Fixed group rotation added (x: -0.03, y: 0.02)
+15. Global scale system (GLOBAL_SCALE = 1.35) for ~80% background fill
+16. Shadowbox3D wrapper sizing responsive + repositioning (translate -55%, -42%)
+17. Eye moved upward (offsetY 0.14→0.21) for "watcher" positioning
+
+**Note:** "Heartbeat sparks" overlay planned but not yet implemented (reference TODO comment in Shadowbox3D.tsx).
+
+### Current Status
+
+- `/v2-preview` renders correctly with no runtime errors
+- TypeScript and ESLint clean (--max-warnings=0)
+- Remaining: optional re-enable background atmosphere blend, future heartbeat sparks overlay
+
