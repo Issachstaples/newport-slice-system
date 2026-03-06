@@ -1,6 +1,15 @@
+"use client";
+
 import React from "react";
+import dynamic from "next/dynamic";
 import HeroBackground from "./HeroBackground";
 import HeroCarousel, { HeroCard } from "./HeroCarousel";
+
+// Dynamic import for client-only 3D component
+const Shadowbox3D = dynamic(() => import("./Shadowbox3D"), { ssr: false });
+
+// Debug flag: set to true to disable old background and only show Shadowbox3D
+const DEBUG_SHADOWBOX_3D = true;
 
 export interface HeroShadowboxProps {
     backgroundSrc: string;
@@ -26,10 +35,24 @@ export default function HeroShadowbox({
     return (
         <section className="relative min-h-screen overflow-hidden bg-[#0a0d14]">
             {/* Layer 0: Background with image + overlays */}
-            <HeroBackground src={backgroundSrc} alt="Hero background" />
+            {!DEBUG_SHADOWBOX_3D && (
+                <HeroBackground src={backgroundSrc} alt="Hero background" />
+            )}
 
-            {/* Layer 10: Optics placeholder (reserved for future laser/particle effects) */}
-            <div className="absolute inset-0 z-10 pointer-events-none" aria-hidden="true" />
+            {/* Layer 5: Subtle radial vignette behind shadowbox stack */}
+            <div
+                className="absolute inset-0 z-[5] pointer-events-none"
+                style={{
+                    background: 'radial-gradient(ellipse 50% 50% at 50% 45%, transparent 20%, rgba(10, 13, 20, 0.35) 70%)',
+                    opacity: 0.8,
+                }}
+                aria-hidden="true"
+            />
+
+            {/* Layer 10: 3D Shadowbox optics effect */}
+            <div className="absolute inset-0 z-10 pointer-events-none" aria-hidden="true">
+                <Shadowbox3D />
+            </div>
 
             {/* Layer 20: UI content - Absolute positioned HUD cards */}
             <div className="relative z-20 min-h-screen">
