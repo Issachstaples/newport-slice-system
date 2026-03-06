@@ -39,18 +39,32 @@ export default function HeroShadowbox({
                 <HeroBackground src={backgroundSrc} alt="Hero background" />
             )}
 
-            {/* Layer 5: Subtle radial vignette behind shadowbox stack */}
+            {/* Layer 5: Cavity vignette behind shadowbox stack */}
             <div
-                className="absolute inset-0 z-[5] pointer-events-none"
+                className="absolute z-[5] pointer-events-none"
                 style={{
-                    background: 'radial-gradient(ellipse 50% 50% at 50% 45%, transparent 20%, rgba(10, 13, 20, 0.35) 70%)',
-                    opacity: 0.8,
+                    left: '50%',
+                    top: '40%',
+                    transform: 'translate(-50%, -40%)',
+                    width: 'min(90vw, 1200px)',
+                    height: 'min(90vh, 900px)',
+                    background: 'radial-gradient(circle at 50% 60%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.65) 75%)',
+                    opacity: 0.25,
                 }}
                 aria-hidden="true"
             />
 
             {/* Layer 10: 3D Shadowbox optics effect */}
-            <div className="absolute inset-0 z-10 pointer-events-none" aria-hidden="true">
+            <div
+                className="absolute z-10 pointer-events-none left-1/2 top-1/2 
+                           w-[min(700px,85vw)] h-[min(600px,70vh)]
+                           md:w-[min(900px,88vw)] md:h-[min(700px,75vh)]
+                           lg:w-[min(1200px,92vw)] lg:h-[min(850px,78vh)]"
+                style={{
+                    transform: 'translate(-55%, -42%)',
+                }}
+                aria-hidden="true"
+            >
                 <Shadowbox3D />
             </div>
 

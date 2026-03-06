@@ -5,6 +5,9 @@ import { useTexture } from "@react-three/drei";
 import { useRef, useState, useEffect, Suspense } from "react";
 import * as THREE from "three";
 
+// Global scale multiplier for the entire shadowbox stack
+const GLOBAL_SCALE = 1.35;
+
 interface PlateProps {
     texturePath: string;
     zDepth: number;
@@ -12,6 +15,7 @@ interface PlateProps {
     moveFactorY: number;
     emissive?: boolean;
     isAO?: boolean;
+    isCore?: boolean;
     pointerPos: { x: number; y: number };
     renderOrder: number;
     baseScale: number;
@@ -19,7 +23,7 @@ interface PlateProps {
     offsetY?: number;
 }
 
-function Plate({ texturePath, zDepth, moveFactorX, moveFactorY, emissive = false, isAO = false, pointerPos, renderOrder, baseScale, offsetX = 0, offsetY = 0 }: PlateProps) {
+function Plate({ texturePath, zDepth, moveFactorX, moveFactorY, emissive = false, isAO = false, isCore = false, pointerPos, renderOrder, baseScale, offsetX = 0, offsetY = 0 }: PlateProps) {
     const meshRef = useRef<THREE.Mesh>(null);
 
     // Load texture (must be inside Suspense)
@@ -62,13 +66,16 @@ function Plate({ texturePath, zDepth, moveFactorX, moveFactorY, emissive = false
 
         // Emissive pulse on eye and core materials
         if (emissive && meshRef.current.material instanceof THREE.MeshStandardMaterial) {
-            const pulse = Math.sin(state.clock.elapsedTime * 0.8) * 0.15 + 0.2;
+            // Reduced pulse amplitude for core plate
+            const amplitude = isCore ? 0.08 : 0.15;
+            const baseline = isCore ? 0.15 : 0.2;
+            const pulse = Math.sin(state.clock.elapsedTime * 0.8) * amplitude + baseline;
             meshRef.current.material.emissiveIntensity = pulse;
         }
     });
 
-    // Calculate final scale (AO gets 1.02x multiplier on top of baseScale)
-    const finalScale = isAO ? baseScale * 1.02 : baseScale;
+    // Calculate final scale (AO gets 1.02x multiplier on top of baseScale, then apply GLOBAL_SCALE)
+    const finalScale = (isAO ? baseScale * 1.02 : baseScale) * GLOBAL_SCALE;
 
     return (
         <mesh ref={meshRef} position={[offsetX, offsetY, zDepth]} renderOrder={renderOrder} scale={[finalScale, finalScale, 1]}>
@@ -86,7 +93,8 @@ function Plate({ texturePath, zDepth, moveFactorX, moveFactorY, emissive = false
                 <meshStandardMaterial
                     map={texture}
                     transparent
-                    alphaTest={0.02}
+                    opacity={isCore ? 0.88 : 1.0}
+                    alphaTest={isCore ? 0.01 : 0.02}
                     depthWrite={false}
                     emissive={emissive ? "#3B82F6" : "#000000"}
                     emissiveIntensity={emissive ? 0.2 : 0}
@@ -126,56 +134,60 @@ function Scene({ containerRef }: { containerRef: React.RefObject<HTMLDivElement 
             <directionalLight position={[5, 5, 5]} intensity={0.9} />
             <directionalLight position={[-3, -2, -3]} intensity={0.25} />
 
-            {/* Back plate: Eye */}
-            <Plate
-                texturePath="/images/hero/shadowbox_eye_back_2048.png"
-                zDepth={-0.24}
-                moveFactorX={0.05}
-                moveFactorY={0.03}
-                emissive
-                pointerPos={pointerPos}
-                renderOrder={10}
-                baseScale={0.62}
-                offsetY={0.14}
-            />
+            {/* Plate stack with subtle fixed rotation */}
+            <group rotation-x={-0.03} rotation-y={0.02}>
+                {/* Back plate: Eye */}
+                <Plate
+                    texturePath="/images/hero/shadowbox_eye_back_2048.png"
+                    zDepth={-0.30}
+                    moveFactorX={0.05}
+                    moveFactorY={0.03}
+                    emissive
+                    pointerPos={pointerPos}
+                    renderOrder={10}
+                    baseScale={0.62}
+                    offsetY={0.21}
+                />
 
-            {/* Middle plate: Core */}
-            <Plate
-                texturePath="/images/hero/shadowbox_core_mid_2048.png"
-                zDepth={-0.12}
-                moveFactorX={0.09}
-                moveFactorY={0.06}
-                emissive
-                pointerPos={pointerPos}
-                renderOrder={20}
-                baseScale={1.00}
-                offsetY={-0.10}
-            />
+                {/* Middle plate: Core */}
+                <Plate
+                    texturePath="/images/hero/shadowbox_core_mid_2048.png"
+                    zDepth={-0.11}
+                    moveFactorX={0.09}
+                    moveFactorY={0.06}
+                    emissive
+                    isCore
+                    pointerPos={pointerPos}
+                    renderOrder={20}
+                    baseScale={1.00}
+                    offsetY={-0.10}
+                />
 
-            {/* AO shim behind wrap (optional depth cue) */}
-            <Plate
-                texturePath="/images/hero/shadowbox_wrap_front_2048.png"
-                zDepth={-0.025}
-                moveFactorX={0.12}
-                moveFactorY={0.08}
-                isAO
-                pointerPos={pointerPos}
-                renderOrder={30}
-                baseScale={1.32}
-                offsetY={-0.08}
-            />
+                {/* AO shim behind wrap (optional depth cue) */}
+                <Plate
+                    texturePath="/images/hero/shadowbox_wrap_front_2048.png"
+                    zDepth={-0.02}
+                    moveFactorX={0.12}
+                    moveFactorY={0.08}
+                    isAO
+                    pointerPos={pointerPos}
+                    renderOrder={30}
+                    baseScale={1.38}
+                    offsetY={-0.08}
+                />
 
-            {/* Front plate: Wrap */}
-            <Plate
-                texturePath="/images/hero/shadowbox_wrap_front_2048.png"
-                zDepth={0.03}
-                moveFactorX={0.12}
-                moveFactorY={0.08}
-                pointerPos={pointerPos}
-                renderOrder={40}
-                baseScale={1.28}
-                offsetY={-0.08}
-            />
+                {/* Front plate: Wrap */}
+                <Plate
+                    texturePath="/images/hero/shadowbox_wrap_front_2048.png"
+                    zDepth={0.05}
+                    moveFactorX={0.12}
+                    moveFactorY={0.08}
+                    pointerPos={pointerPos}
+                    renderOrder={40}
+                    baseScale={1.34}
+                    offsetY={-0.08}
+                />
+            </group>
 
             {/* TODO: canvas overlay sparks driven by normalized anchor points + heartbeat timer */}
         </>
