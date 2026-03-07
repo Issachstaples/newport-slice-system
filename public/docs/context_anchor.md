@@ -492,6 +492,29 @@ Do not modify any app code.
 
 
 
+---
+
+## HybridHero3D — R3F Eye Actor + HeroCarousel Interaction (2026-03-07)
+
+**Commits:** `47dbc16` (VFX), `e23bbd4` (lint clean + a11y fixes)  
+**Status:** `/v2-preview` working — eye tracks cursor correctly, alpha card selectable by click and controls, lint 0 problems.
+
+### What was built
+
+- **`HybridHero3D.tsx`** — React Three Fiber Canvas mounted inside `HeroShadowbox`; single `neon-eye-clean.png` backdrop; R3F eye actor (`EyeActor`) with gaze rotation driven by `state.pointer.x/y` projected relative to the eye's own NDC position, eliminating dead zones; pupil mesh translates in local eye space tracking the same dx/dy vector; iris emissive intensity is proximity-reactive (smoothstep 0→1 over NDC distance 0.60→0.08) with a slow breathing pulse on top; VFX layer includes `OrbitalSparks` (12 particles, orbit + proximity brightness), `RipplePulse` (2 expanding ring meshes, staggered 180°, proximity-driven speed/opacity), glint parallax (2 glint meshes slide counter to gaze), always-on aura mesh, and `DiodeEmitter` (halo + core at world position `[0.04, 0.02, -0.50]` — anchor for future laser/spark VFX).
+- **`HeroCarousel.tsx`** — Alpha and Beta cards promoted to `<button>` elements; single `activeIndex` useState is the sole source of truth; clicking Beta calls `setActiveIndex(betaIndex)`, clicking Alpha calls `setActiveIndex(alphaIndex)`; dot nav and Next button share the same state; `aria-pressed={true/false}` explicit on both; empty-cards guard (`if (!cards || cards.length === 0) return null`) placed after hooks.
+
+### Key decisions
+
+- **HybridHero3D route** (R3F inside existing HeroShadowbox, not a separate page): avoids re-architecting the HUD layout; Canvas lives at z-10 behind the HUD (z-20).
+- **eventSource on `<section ref={heroRef}>`**: Canvas has `style={{ pointerEvents: "none" }}` and `eventSource={eventSourceEl}` pointing to the hero section so R3F receives pointer events without the HUD overlay divs blocking them. `eventSourceEl` state is set in a `useEffect` after mount.
+- **dx/dy gaze**: pointer NDC minus eye's own projected NDC (not raw pointer); removes the offset dead zone when eye is not centered in viewport.
+- **Pitch direction**: `targetRotationX = dy * V_GAIN` (positive dy = cursor above eye = positive rotX = look up) — no sign flip needed.
+- **`SPARK_PHASES` at module scope**: `Math.random()` calls moved out of component render cycle to satisfy `react-hooks/purity` lint rule; values are identical, generated once at module load.
+- **Lens flare rejected**: too noisy at current eye scale; glint parallax provides the glass-surface read without it.
+
+---
+
 ## 3D Shadowbox Hero Implementation (2026-03-05)
 
 **Goal:** Implement 3D "shadowbox" hero backdrop using React Three Fiber with layered PNG plates and HUD UI floating above.

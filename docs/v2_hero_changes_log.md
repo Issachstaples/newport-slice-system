@@ -333,3 +333,70 @@ Core has half the amplitude of Eye to prevent visual dominance.
 - Future: Prismic slice integration (hero_shadowbox model)
 - Future: Mobile responsive polish (test stacked HUD layout)
 
+---
+
+## 2026-03-07 — HybridHero3D Interaction Polish + HeroCarousel Click-to-Select
+
+**Commits:** `47dbc16` · `e23bbd4`
+
+### Files Changed
+
+| File | Change |
+|---|---|
+| `src/components/home/hero/HybridHero3D.tsx` | Created: full R3F eye actor with gaze, pupil tracking, proximity iris, VFX layer (aura, orbital sparks, ripple pulse, glint parallax, diode emitter). Lint fixes: unused imports removed, `Math.random` lifted to module scope, `delta` dropped from `OrbitalSparks` useFrame, `RipplePulse` JSX ring map replaced with explicit refs. |
+| `src/components/home/hero/HeroShadowbox.tsx` | Added `heroRef` on `<section>`; wired as `eventSourceEl` prop to `HybridHero3D`; added `DEBUG_NO_OVERLAYS` flag gating vignette and exposure-lift divs. |
+| `src/components/home/hero/HeroCarousel.tsx` | Alpha and Beta cards promoted to `<button>`; `activeIndex` single source of truth; `alphaIndex` alias for symmetry with `betaIndex`; `aria-pressed={true/false}` explicit; empty-cards guard after hooks; dot nav `aria-pressed` added. |
+
+### Notable Technical Fixes
+
+#### R3F pointer event routing via section eventSource
+**Problem:** Canvas had `pointerEvents: "none"` (required so HUD cards remain clickable), but this meant `state.pointer` never updated — eye was stuck at 0,0.  
+**Fix:** Set `eventSource={eventSourceEl}` on Canvas pointing to the hero `<section>` element (passed as a prop from HeroShadowbox). The section sits under the HUD overlay divs in DOM order but above nothing, so it receives all pointer events. Canvas remains pointer-events-none; R3F reads events through the external eventSource.  
+**Rule:** When a Canvas must be pointer-events-none (so UI above it is clickable), always provide an `eventSource` that covers the same area and is not blocked by overlays.
+
+#### Vertical pitch direction
+**Problem:** Eye looked down when cursor was above it (inverted pitch).  
+**Fix:** `targetRotationX = dy * V_GAIN` — no sign constant needed. Positive `dy` (cursor above eye NDC) maps to positive `rotationX` (look up). The old `V_SIGN = -1` constant was incorrect.
+
+#### Gaze dx/dy relative to eye NDC position
+**Problem:** Gaze computed as raw `state.pointer.x/y`, creating a large dead zone because the eye is not at NDC 0,0.  
+**Fix:** Project eye group world position to NDC each frame (`eyeWorld.clone().project(camera)`), then `dx = clamp(px - eyeNdc.x)`. Dead zone collapses to ±0.03.
+
+#### Math.random in useRef initializer (lint: react-hooks/purity)
+**Problem:** Three `Math.random()` calls inside `useRef(Array.from(...))` inside `OrbitalSparks` were flagged as impure function calls during render.  
+**Fix:** Moved the entire phase-data array to a module-level `const SPARK_PHASES`. Values are identical; generated once at module load rather than per-render. `phases` ref now initialized as `useRef(SPARK_PHASES)`.
+
+#### Ref array in JSX (lint: react-hooks/refs)
+**Problem:** `[ring1Ref, ring2Ref].map((ref, i) => <mesh ref={ref}>...)` in `RipplePulse` return — lint flagged accessing ref objects during render.  
+**Fix:** Replaced with two explicit `<mesh ref={ring1Ref}>` / `<mesh ref={ring2Ref}>` elements. Identical geometry and behavior; no dynamic key needed.
+
+### VFX Inventory (all in HybridHero3D.tsx)
+
+| Component | Description | Key constants |
+|---|---|---|
+| `EyeActor` | Gaze rotation, pupil translation, iris proximity glow, glint parallax, always-on aura | `H_GAIN=0.18`, `V_GAIN=0.16`, `BASE_EMISSIVE=0.26`, `BOOST_EMISSIVE=0.50` |
+| `OrbitalSparks` | 12 particles orbit eye; proximity brightness | `SPARK_RADIUS=0.044`, `SPARK_SPEED=0.28` |
+| `RipplePulse` | 2 rings expand+fade from eye; proximity speed | `RIPPLE_MAX_SCALE=3.2`, `RIPPLE_DURATION=2.6` |
+| `DiodeEmitter` | Halo + core glow at backdrop diode position; anchor for future laser VFX | `EMIT_X=0.04`, `EMIT_Y=0.02`, `EMIT_Z=-0.50` |
+
+### Debug Flags (all `false` at ship)
+
+- `DEBUG_EYE_AXES` — AxesHelper on eye group
+- `DEBUG_GAZE_HUD` — HTML overlay + NDC dot marker
+- `DEBUG_EMITTER` — AxesHelper at diode emitter position
+- `DEBUG_NO_OVERLAYS` *(HeroShadowbox)* — suppresses vignette + exposure-lift divs
+
+### Lint Result
+
+```
+✓ 0 problems (0 errors, 0 warnings)
+```
+
+### What is NOT done yet
+
+- Laser beam + spark burst from DiodeEmitter (TODO comment in code; anchor is wired)
+- `DEBUG_NO_OVERLAYS` in HeroShadowbox should be set to `false` for production
+- Prismic integration for `hero_shadowbox` slice
+- Mobile responsive polish
+
+

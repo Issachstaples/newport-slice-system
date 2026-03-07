@@ -548,3 +548,86 @@ Implemented React Three Fiber 3D shadowbox backdrop with four layered PNG plates
 - Use responsive-sized containers with transform positioning for localized effects
 - Prevents unintended darkening/blurring of UI elements
 
+---
+
+# 2026-03-07 — HybridHero3D: Eye Pointer Stuck at (0, 0)
+
+## 1️⃣ R3F `state.pointer` Stuck at (0,0) Behind Pointer-Events-None Canvas
+
+### Error
+
+Eye actor did not move in response to cursor. `state.pointer.x/y` always read `0, 0` in `useFrame`. No runtime error — silent failure.
+
+### Root Cause
+
+`HybridHero3D` Canvas was rendered with `style={{ pointerEvents: "none" }}` (required so HUD cards layered above remain clickable). With `pointerEvents: "none"` and no `eventSource` prop, R3F never received pointer events and `state.pointer` was never updated.
+
+### Fix Applied
+
+Added `eventSource={eventSourceEl}` to the Canvas, where `eventSourceEl` is the hero `<section>` element passed as a prop from `HeroShadowbox`. The section is set via `useEffect` on a `ref` after mount:
+
+```tsx
+// HeroShadowbox.tsx
+const heroRef = useRef<HTMLElement>(null);
+const [eventSourceEl, setEventSourceEl] = useState<HTMLElement | null>(null);
+useEffect(() => { setEventSourceEl(heroRef.current); }, []);
+
+<section ref={heroRef}>
+  <HybridHero3D eventSourceEl={eventSourceEl} />
+</section>
+```
+
+```tsx
+// HybridHero3D.tsx
+<Canvas
+  eventSource={eventSourceEl}
+  eventPrefix="client"
+  style={{ pointerEvents: "none" }}
+>
+```
+
+The `<section>` sits behind the HUD overlay divs in the stacking context but is not blocked by them. R3F receives all pointer events through the section; `state.pointer` updates correctly on every frame.
+
+### Rule Extracted
+
+**RULE: R3F Canvas with `pointerEvents: none` MUST have an explicit `eventSource`**
+
+If a Canvas is `pointer-events: none` (so overlaid UI remains clickable), `state.pointer` will never update unless `eventSource` is provided pointing to a container element that can receive events.
+
+Pattern:
+1. Attach `ref` to the wrapper element that surrounds the Canvas
+2. Set `eventSourceEl` state in `useEffect` after mount (not directly from ref — SSR safety)
+3. Pass as `eventSource={eventSourceEl}` and `eventPrefix="client"` to Canvas
+4. Canvas itself stays `pointerEvents: "none"`
+
+Do NOT read pointer events from window or document — use the section/wrapper so coordinates are scoped correctly.
+
+---
+
+## 2️⃣ Inverted Vertical Gaze (Eye Looks Down When Cursor Is Above)
+
+### Error
+
+Eye pitched downward when cursor moved above it; upward when cursor moved below. Visually backwards.
+
+### Root Cause
+
+A constant `V_SIGN = -1` was applied: `targetRotationX = dy * V_GAIN * V_SIGN`. The sign was inverted relative to the actual coordinate convention. In R3F, positive `pointer.y` = cursor above screen center; positive `rotationX` on the eye group = pitched up (nose up). No sign flip is needed.
+
+### Fix Applied
+
+Removed `V_SIGN` constant entirely:
+
+```tsx
+const targetRotationX = dy * V_GAIN;  // no sign flip; dy > 0 = cursor above = look up ✓
+```
+
+### Rule Extracted
+
+**RULE: Verify gaze sign convention before adding a sign constant**
+
+R3F `state.pointer.y` is in NDC: +1 = top of container, -1 = bottom. Positive `rotation.x` on a forward-facing mesh = tilt upward. These conventions are consistent — adding a negation constant is almost always wrong.
+
+Test: move cursor above the eye; eye should rotate toward cursor (upward). If inverted, check whether `V_SIGN` or a sign literal was added incorrectly rather than debugging the data pipeline.
+
+
