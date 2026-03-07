@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import HeroBackground from "./HeroBackground";
 import HeroCarousel, { HeroCard } from "./HeroCarousel";
@@ -14,6 +14,9 @@ const DEBUG_SHADOWBOX_3D = true;
 
 // A/B testing flag: set to true to use HybridHero3D instead of Shadowbox3D
 const USE_HYBRID_HERO = true;
+
+// DEBUG: set to true to strip all gradient/haze overlays so the backdrop renders unobstructed
+const DEBUG_NO_OVERLAYS = true;
 
 export interface HeroShadowboxProps {
     backgroundSrc: string;
@@ -37,6 +40,8 @@ export default function HeroShadowbox({
     secondaryCtaHref,
 }: HeroShadowboxProps) {
     const heroRef = useRef<HTMLElement>(null);
+    const [eventSourceEl, setEventSourceEl] = useState<HTMLElement | null>(null);
+    useEffect(() => { setEventSourceEl(heroRef.current); }, []);
 
     return (
         <section ref={heroRef} className="relative min-h-screen overflow-hidden bg-[#0a0d14]">
@@ -46,36 +51,40 @@ export default function HeroShadowbox({
             )}
 
             {/* Layer 5: Localized cavity vignette behind HybridHero3D (centered on cradle opening) */}
-            <div
-                className="absolute z-[5] pointer-events-none"
-                style={{
-                    left: '50%',
-                    top: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    width: 'clamp(500px, 60vw, 800px)',
-                    height: 'clamp(400px, 50vh, 650px)',
-                    background: 'radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.25) 80%, rgba(0,0,0,0.4) 100%)',
-                    opacity: 0.08,
-                }}
-                aria-hidden="true"
-            />
+            {!DEBUG_NO_OVERLAYS && (
+                <div
+                    className="absolute z-[5] pointer-events-none"
+                    style={{
+                        left: '50%',
+                        top: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: 'clamp(500px, 60vw, 800px)',
+                        height: 'clamp(400px, 50vh, 650px)',
+                        background: 'radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 65%, rgba(0,0,0,0.18) 88%, rgba(0,0,0,0.28) 100%)',
+                        opacity: 0.06,
+                    }}
+                    aria-hidden="true"
+                />
+            )}
 
             {/* Layer 8: Exposure-lift — soft centre brightening, below HUD, above backdrop */}
-            <div
-                className="absolute inset-0 z-[8] pointer-events-none"
-                style={{
-                    background: 'radial-gradient(ellipse 75% 60% at 50% 48%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 100%)',
-                    opacity: 0.14,
-                }}
-                aria-hidden="true"
-            />
+            {!DEBUG_NO_OVERLAYS && (
+                <div
+                    className="absolute inset-0 z-[8] pointer-events-none"
+                    style={{
+                        background: 'radial-gradient(ellipse 75% 60% at 50% 48%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 100%)',
+                        opacity: 0.14,
+                    }}
+                    aria-hidden="true"
+                />
+            )}
 
             {/* Layer 10: 3D Shadowbox optics effect — full-bleed Canvas so cradle can extend to edges */}
             <div
                 className="absolute inset-0 z-10"
                 aria-hidden="true"
             >
-                {USE_HYBRID_HERO ? <HybridHero3D eventSourceEl={heroRef.current} /> : <Shadowbox3D />}
+                {USE_HYBRID_HERO ? <HybridHero3D eventSourceEl={eventSourceEl} /> : <Shadowbox3D />}
             </div>
 
             {/* Layer 20: UI content - Absolute positioned HUD cards */}
