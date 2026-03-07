@@ -1,8 +1,8 @@
 "use client";
 
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
-import { useRef, useState, useEffect, Suspense, useCallback } from "react";
+import { useRef, useState, Suspense, useCallback } from "react";
 import * as THREE from "three";
 
 interface PlaneProps {
@@ -423,22 +423,23 @@ const SPARK_CX = 0.03;
 const SPARK_CY = 0.52;
 const SPARK_CZ = -0.29;       // just in front of the eye group
 
+// Stable per-spark phase data generated once at module load (not during render)
+const SPARK_PHASES = Array.from({ length: SPARK_COUNT }, (_, i) => ({
+    phase: (i / SPARK_COUNT) * Math.PI * 2,
+    speedMult: 0.7 + Math.random() * 0.6,
+    yTilt: (Math.random() - 0.5) * 0.3, // slight vertical wobble amplitude
+    yPhase: Math.random() * Math.PI * 2,
+}));
+
 function OrbitalSparks({ renderOrder }: { renderOrder: number }) {
     const meshRefs = useRef<(THREE.Mesh | null)[]>(
         Array.from({ length: SPARK_COUNT }, () => null)
     );
 
     // Stable per-spark random phase offsets [0..2π] and speed multipliers [0.7..1.3]
-    const phases = useRef(
-        Array.from({ length: SPARK_COUNT }, (_, i) => ({
-            phase: (i / SPARK_COUNT) * Math.PI * 2,
-            speedMult: 0.7 + Math.random() * 0.6,
-            yTilt: (Math.random() - 0.5) * 0.3, // slight vertical wobble amplitude
-            yPhase: Math.random() * Math.PI * 2,
-        }))
-    );
+    const phases = useRef(SPARK_PHASES);
 
-    useFrame((state, delta) => {
+    useFrame((state) => {
         const t = state.clock.elapsedTime;
         const px = state.pointer.x;
         const py = state.pointer.y;
@@ -521,23 +522,34 @@ function RipplePulse() {
 
     return (
         <>
-            {[ring1Ref, ring2Ref].map((ref, i) => (
-                <mesh
-                    key={i}
-                    ref={ref}
-                    position={[SPARK_CX, SPARK_CY, SPARK_CZ + 0.01]}
-                    renderOrder={37}
-                >
-                    <ringGeometry args={[0.038, 0.048, 48]} />
-                    <meshBasicMaterial
-                        color="#88ccff"
-                        transparent
-                        opacity={0.09}
-                        depthWrite={false}
-                        side={THREE.DoubleSide}
-                    />
-                </mesh>
-            ))}
+            <mesh
+                ref={ring1Ref}
+                position={[SPARK_CX, SPARK_CY, SPARK_CZ + 0.01]}
+                renderOrder={37}
+            >
+                <ringGeometry args={[0.038, 0.048, 48]} />
+                <meshBasicMaterial
+                    color="#88ccff"
+                    transparent
+                    opacity={0.09}
+                    depthWrite={false}
+                    side={THREE.DoubleSide}
+                />
+            </mesh>
+            <mesh
+                ref={ring2Ref}
+                position={[SPARK_CX, SPARK_CY, SPARK_CZ + 0.01]}
+                renderOrder={37}
+            >
+                <ringGeometry args={[0.038, 0.048, 48]} />
+                <meshBasicMaterial
+                    color="#88ccff"
+                    transparent
+                    opacity={0.09}
+                    depthWrite={false}
+                    side={THREE.DoubleSide}
+                />
+            </mesh>
         </>
     );
 }
