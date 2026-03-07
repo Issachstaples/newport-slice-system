@@ -90,8 +90,8 @@ function EyeActor({ pointerPos, renderOrder }: EyeActorProps) {
     const pupilRef = useRef<THREE.Mesh>(null);
 
     // Base mount position — change these to reposition the eye
-    const BASE_X = 0;
-    const BASE_Y = 0.90;
+    const BASE_X = 0.03;
+    const BASE_Y = 0.52;
 
     useFrame((state, delta) => {
         if (!groupRef.current) return;
@@ -114,8 +114,8 @@ function EyeActor({ pointerPos, renderOrder }: EyeActorProps) {
         );
 
         // Eye rotation toward pointer (yaw/pitch for gaze tracking)
-        const targetRotationY = pointerPos.x * 0.2;  // Horizontal gaze
-        const targetRotationX = -pointerPos.y * 0.15; // Vertical gaze
+        const targetRotationY = pointerPos.x * 0.4;  // Horizontal gaze
+        const targetRotationX = -pointerPos.y * 0.3; // Vertical gaze
 
         groupRef.current.rotation.y = THREE.MathUtils.damp(
             groupRef.current.rotation.y,
@@ -157,7 +157,18 @@ function EyeActor({ pointerPos, renderOrder }: EyeActorProps) {
     });
 
     return (
-        <group ref={groupRef} position={[0, 0.90, -0.3]} scale={[0.115, 0.115, 1]}>
+        <group ref={groupRef} position={[0.03, 0.52, -0.3]} scale={[0.10, 0.10, 1]}>
+            {/* Glow halo: soft emissive disc behind the housing */}
+            <mesh position={[0, 0, -0.08]} renderOrder={renderOrder - 1}>
+                <circleGeometry args={[1.6, 48]} />
+                <meshBasicMaterial
+                    color="#1e3a6e"
+                    transparent
+                    opacity={0.18}
+                    depthWrite={false}
+                />
+            </mesh>
+
             {/* Outer housing bevel: slightly larger torus, darker, thicker tube */}
             <mesh position={[0, 0, -0.04]} renderOrder={renderOrder}>
                 <torusGeometry args={[0.90, 0.14, 20, 80]} />
@@ -286,7 +297,7 @@ function Scene({ containerRef }: { containerRef: React.RefObject<HTMLDivElement 
             {/* Backdrop: large plane behind everything (slight tilt back, no parallax — stable environment) */}
             <Plane
                 texturePath="/images/home/neon-eye-clean.png"
-                zDepth={-0.5}
+                zDepth={-0.53}
                 moveFactorX={0}
                 moveFactorY={0}
                 pointerPos={pointerPos}
@@ -300,7 +311,7 @@ function Scene({ containerRef }: { containerRef: React.RefObject<HTMLDivElement 
             />
 
             {/* Eye actor: simple emissive disc (TODO: replace with actual eye model/texture) */}
-            <EyeActor pointerPos={pointerPos} renderOrder={20} />
+            <EyeActor pointerPos={pointerPos} renderOrder={40} />
 
             {/* AO shim behind cradle (subtle occlusion cue) */}
             <Plane
