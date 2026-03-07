@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import dynamic from "next/dynamic";
 import HeroBackground from "./HeroBackground";
 import HeroCarousel, { HeroCard } from "./HeroCarousel";
@@ -36,8 +36,10 @@ export default function HeroShadowbox({
     secondaryCtaText,
     secondaryCtaHref,
 }: HeroShadowboxProps) {
+    const heroRef = useRef<HTMLElement>(null);
+
     return (
-        <section className="relative min-h-screen overflow-hidden bg-[#0a0d14]">
+        <section ref={heroRef} className="relative min-h-screen overflow-hidden bg-[#0a0d14]">
             {/* Layer 0: Background with image + overlays */}
             {!DEBUG_SHADOWBOX_3D && (
                 <HeroBackground src={backgroundSrc} alt="Hero background" />
@@ -70,10 +72,10 @@ export default function HeroShadowbox({
 
             {/* Layer 10: 3D Shadowbox optics effect — full-bleed Canvas so cradle can extend to edges */}
             <div
-                className="absolute inset-0 z-10 pointer-events-none"
+                className="absolute inset-0 z-10"
                 aria-hidden="true"
             >
-                {USE_HYBRID_HERO ? <HybridHero3D /> : <Shadowbox3D />}
+                {USE_HYBRID_HERO ? <HybridHero3D eventSourceEl={heroRef.current} /> : <Shadowbox3D />}
             </div>
 
             {/* Layer 20: UI content - Absolute positioned HUD cards */}
