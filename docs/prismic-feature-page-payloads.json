@@ -1,0 +1,1662 @@
+[
+    {
+        "_comment": "══════════════════════════════════════════════════════════════",
+        "_page": "1 of 5 — SEO Conversion",
+        "uid": "seo-conversion",
+        "title": "Rank higher. Convert more. Grow faster.",
+        "meta_title": "Rank higher. Convert more. Grow faster. | Newport",
+        "meta_description": "SEO-first websites engineered to rank fast and turn clicks into revenue.",
+        "body": [
+            {
+                "slice_type": "feature_hero",
+                "slice_label": null,
+                "primary": {
+                    "eyebrow": "Feature",
+                    "headline": "Rank higher. Convert more. Grow faster.",
+                    "subhead": [
+                        {
+                            "type": "paragraph",
+                            "text": "SEO-first websites engineered to rank fast and turn clicks into revenue.",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": []
+            },
+            {
+                "slice_type": "problem_solution",
+                "slice_label": null,
+                "primary": {
+                    "problem_title": "The Problem",
+                    "problem_body": [
+                        {
+                            "type": "paragraph",
+                            "text": "Most websites look fine—but they don't perform. They load slow, bury the offer, and give Google nothing to trust. The result: low rankings, low conversions, and wasted traffic.",
+                            "spans": []
+                        }
+                    ],
+                    "solution_title": "The Solution",
+                    "solution_body": [
+                        {
+                            "type": "paragraph",
+                            "text": "We build conversion-first sites on modern frameworks with a technical SEO foundation baked in—speed, structure, and intent-driven content blocks that search engines can index and customers can act on.",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": []
+            },
+            {
+                "slice_type": "qa_block",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "Common Questions"
+                },
+                "items": [
+                    {
+                        "question": "How do I rank on the first page of Google?",
+                        "answer_lead": "We build a crawlable, fast, and structured foundation that Google can trust.",
+                        "bullets": [
+                            {
+                                "type": "list-item",
+                                "text": "Performance-first architecture (Core Web Vitals, clean rendering)",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Proper headings, internal linking, and index-ready page structure",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Schema + metadata patterns that support visibility",
+                                "spans": []
+                            }
+                        ]
+                    },
+                    {
+                        "question": "How do I convert more traffic?",
+                        "answer_lead": "We design pages around decision-making—clear, guided, and frictionless.",
+                        "bullets": [
+                            {
+                                "type": "list-item",
+                                "text": "Strong above-the-fold message + \u201Cnext step\u201D CTA",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Trust signals (proof, reviews, process, guarantees)",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Conversion paths for every intent (call, form, book, buy)",
+                                "spans": []
+                            }
+                        ]
+                    },
+                    {
+                        "question": "How do I grow faster?",
+                        "answer_lead": "When ranking and conversion work together, every channel improves.",
+                        "bullets": [
+                            {
+                                "type": "list-item",
+                                "text": "Higher ROI from ads (better landing performance)",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "More qualified leads from organic search",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Cleaner funnel data for optimization",
+                                "spans": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slice_type": "process_flow",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "How We Get You There",
+                    "intro": [
+                        {
+                            "type": "paragraph",
+                            "text": "A five-phase approach from technical foundation to continuous growth.",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": [
+                    {
+                        "step_label": "Phase 1",
+                        "step_title": "Audit",
+                        "step_body": "Surface speed, structure, and indexability gaps."
+                    },
+                    {
+                        "step_label": "Phase 2",
+                        "step_title": "Architecture",
+                        "step_body": "Build crawlable, intent-mapped page structure."
+                    },
+                    {
+                        "step_label": "Phase 3",
+                        "step_title": "Content Blocks",
+                        "step_body": "Write and design conversion-first page sections."
+                    },
+                    {
+                        "step_label": "Phase 4",
+                        "step_title": "Launch",
+                        "step_body": "Deploy with performance and schema foundations live."
+                    },
+                    {
+                        "step_label": "Phase 5",
+                        "step_title": "Optimize",
+                        "step_body": "Track rankings, conversions, and iterate."
+                    }
+                ]
+            },
+            {
+                "slice_type": "before_after",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "Before Newport vs. After Newport",
+                    "before_title": "Before",
+                    "after_title": "After",
+                    "before_bullets": [
+                        {
+                            "type": "list-item",
+                            "text": "Slow pages and poor Core Web Vitals",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Weak page structure Google can't trust",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Buried CTAs and no clear next step",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Rankings plateau with no clear fix",
+                            "spans": []
+                        }
+                    ],
+                    "after_bullets": [
+                        {
+                            "type": "list-item",
+                            "text": "Fast, index-ready pages from day one",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Clear structure and intent-mapped content",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Strong CTAs backed by trust signals",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "More qualified organic traffic over time",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": []
+            },
+            {
+                "slice_type": "chart_panel",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "Speed Wins",
+                    "section_body": [
+                        {
+                            "type": "paragraph",
+                            "text": "Benchmarks show even small mobile speed improvements can lift conversion metrics.",
+                            "spans": []
+                        }
+                    ],
+                    "chart_type": "bar",
+                    "chart_data_json": "[{\"segment\":\"Retail\",\"lift_pct\":8.4},{\"segment\":\"Travel\",\"lift_pct\":10.1},{\"segment\":\"Lead Gen\",\"lift_pct\":21.6},{\"segment\":\"Luxury\",\"lift_pct\":40.1}]",
+                    "chart_config_json": "{\"lift_pct\":{\"label\":\"Conversion Lift (%)\"}}",
+                    "insight_caption": [
+                        {
+                            "type": "paragraph",
+                            "text": "Small speed gains can produce measurable lifts across the funnel. Benchmarks vary by industry, offer, and traffic quality—use this as directional evidence, not a guarantee.",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": [
+                    {
+                        "source_label": "web.dev — Milliseconds Make Millions",
+                        "source_href": {
+                            "link_type": "Web",
+                            "url": "https://web.dev/case-studies/milliseconds-make-millions",
+                            "target": "_blank"
+                        }
+                    }
+                ]
+            },
+            {
+                "slice_type": "bullets_section",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "What You Get",
+                    "bullets": [
+                        {
+                            "type": "list-item",
+                            "text": "SEO-ready templates and structure across key pages",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Conversion-optimized layouts and CTAs",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Speed + technical performance best practices",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Clear messaging hierarchy and trust placement",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": []
+            },
+            {
+                "slice_type": "proof_strip",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "Why It Works"
+                },
+                "items": [
+                    {
+                        "proof_point": [
+                            {
+                                "type": "paragraph",
+                                "text": "Built for speed and indexability from day one",
+                                "spans": []
+                            }
+                        ]
+                    },
+                    {
+                        "proof_point": [
+                            {
+                                "type": "paragraph",
+                                "text": "Designed around intent and action, not \u201Cpretty pages\u201D",
+                                "spans": []
+                            }
+                        ]
+                    },
+                    {
+                        "proof_point": [
+                            {
+                                "type": "paragraph",
+                                "text": "Structured content that scales across services and locations",
+                                "spans": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slice_type": "primary_cta",
+                "slice_label": null,
+                "primary": {
+                    "cta_title": "Want a site that ranks and sells?",
+                    "cta_body": [
+                        {
+                            "type": "paragraph",
+                            "text": "Get a quick audit and a build plan tailored to your offer.",
+                            "spans": []
+                        }
+                    ],
+                    "button_label": "Get a quick audit",
+                    "button_link": {
+                        "link_type": "Web",
+                        "url": "/contact"
+                    }
+                },
+                "items": []
+            }
+        ]
+    },
+    {
+        "_comment": "══════════════════════════════════════════════════════════════",
+        "_page": "2 of 5 — Pipeline",
+        "uid": "pipeline",
+        "title": "One System. Zero Learning Curve.",
+        "meta_title": "One System. Zero Learning Curve. | Newport",
+        "meta_description": "Capture every lead, track every touchpoint, and close faster than ever.",
+        "body": [
+            {
+                "slice_type": "feature_hero",
+                "slice_label": null,
+                "primary": {
+                    "eyebrow": "Feature",
+                    "headline": "One System. Zero Learning Curve.",
+                    "subhead": [
+                        {
+                            "type": "paragraph",
+                            "text": "Capture every lead, track every touchpoint, and close faster than ever.",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": []
+            },
+            {
+                "slice_type": "problem_solution",
+                "slice_label": null,
+                "primary": {
+                    "problem_title": "The Problem",
+                    "problem_body": [
+                        {
+                            "type": "paragraph",
+                            "text": "Leads come in from everywhere—forms, calls, DMs, email—then get scattered. Teams avoid CRMs because they're too complex, too slow, and too hard to adopt.",
+                            "spans": []
+                        }
+                    ],
+                    "solution_title": "The Solution",
+                    "solution_body": [
+                        {
+                            "type": "paragraph",
+                            "text": "We embed a simple pipeline that's easy on day one. Every lead enters one system, every touchpoint gets tracked, and every deal has a next step.",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": []
+            },
+            {
+                "slice_type": "qa_block",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "Common Questions"
+                },
+                "items": [
+                    {
+                        "question": "How do I stop losing leads across channels?",
+                        "answer_lead": "Everything routes into one place so you never \u201Chunt for the conversation.\u201D",
+                        "bullets": [
+                            {
+                                "type": "list-item",
+                                "text": "Unified lead capture (forms, calls, messages)",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Central record per lead/customer",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Consistent handoffs without chaos",
+                                "spans": []
+                            }
+                        ]
+                    },
+                    {
+                        "question": "How do I keep track of every interaction?",
+                        "answer_lead": "Touchpoints stay attached to the deal—automatically.",
+                        "bullets": [
+                            {
+                                "type": "list-item",
+                                "text": "Timeline-style activity logging",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Notes + tasks that don't get lost",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Clear ownership and status",
+                                "spans": []
+                            }
+                        ]
+                    },
+                    {
+                        "question": "How do I close faster?",
+                        "answer_lead": "When the pipeline is simple, people actually use it.",
+                        "bullets": [
+                            {
+                                "type": "list-item",
+                                "text": "Fewer missed steps and delays",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Faster follow-up and cleaner handoffs",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "More deals moving forward daily",
+                                "spans": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slice_type": "process_flow",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "How the Pipeline Works",
+                    "intro": [
+                        {
+                            "type": "paragraph",
+                            "text": "Five stages, one system—every lead has a place and a next step.",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": [
+                    {
+                        "step_label": "Stage 1",
+                        "step_title": "Capture",
+                        "step_body": "All leads enter one record, regardless of channel."
+                    },
+                    {
+                        "step_label": "Stage 2",
+                        "step_title": "Qualify",
+                        "step_body": "Assign intent, priority, and ownership immediately."
+                    },
+                    {
+                        "step_label": "Stage 3",
+                        "step_title": "Follow-up",
+                        "step_body": "Reminders and sequences keep momentum going."
+                    },
+                    {
+                        "step_label": "Stage 4",
+                        "step_title": "Quote",
+                        "step_body": "Estimates and proposals attached to the deal."
+                    },
+                    {
+                        "step_label": "Stage 5",
+                        "step_title": "Close",
+                        "step_body": "Outcome logged, handoff clean, review triggered."
+                    }
+                ]
+            },
+            {
+                "slice_type": "before_after",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "Before Newport vs. After Newport",
+                    "before_title": "Before",
+                    "after_title": "After",
+                    "before_bullets": [
+                        {
+                            "type": "list-item",
+                            "text": "Leads scattered across texts, email, and DMs",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "No defined stages or clear ownership",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Notes lost, context missing on every call",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Inconsistent follow-up kills warm leads",
+                            "spans": []
+                        }
+                    ],
+                    "after_bullets": [
+                        {
+                            "type": "list-item",
+                            "text": "One record with full lead history",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Clear stages, next steps, and ownership",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Simple tasks so nothing gets forgotten",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Faster, more consistent follow-up",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": []
+            },
+            {
+                "slice_type": "chart_panel",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "Speed-to-Lead Matters",
+                    "section_body": [
+                        {
+                            "type": "paragraph",
+                            "text": "Odds of qualifying a lead drop fast as response time increases.",
+                            "spans": []
+                        }
+                    ],
+                    "chart_type": "line",
+                    "chart_data_json": "[{\"minutes\":\"5 min\",\"relative_odds\":1.0},{\"minutes\":\"10 min\",\"relative_odds\":0.25},{\"minutes\":\"30 min\",\"relative_odds\":0.05}]",
+                    "chart_config_json": "{\"relative_odds\":{\"label\":\"Relative Qualification Odds\"}}",
+                    "insight_caption": [
+                        {
+                            "type": "paragraph",
+                            "text": "The longer your first response takes, the harder it becomes to qualify leads. Directional benchmark—not a guaranteed outcome.",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": [
+                    {
+                        "source_label": "MIT — Lead Response Management Study (via HubSpot PDF)",
+                        "source_href": {
+                            "link_type": "Web",
+                            "url": "https://cdn2.hubspot.net/hub/25649/file-13535879-pdf/docs/mit_study.pdf",
+                            "target": "_blank"
+                        }
+                    }
+                ]
+            },
+            {
+                "slice_type": "bullets_section",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "What You Get",
+                    "bullets": [
+                        {
+                            "type": "list-item",
+                            "text": "A pipeline anyone can understand",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Lead records with history + next steps",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "A simple workflow your team will actually adopt",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": []
+            },
+            {
+                "slice_type": "proof_strip",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "Why It Works"
+                },
+                "items": [
+                    {
+                        "proof_point": [
+                            {
+                                "type": "paragraph",
+                                "text": "Built for speed of adoption (not \u201CCRM training\u201D)",
+                                "spans": []
+                            }
+                        ]
+                    },
+                    {
+                        "proof_point": [
+                            {
+                                "type": "paragraph",
+                                "text": "Designed around real small-team operations",
+                                "spans": []
+                            }
+                        ]
+                    },
+                    {
+                        "proof_point": [
+                            {
+                                "type": "paragraph",
+                                "text": "Clear, repeatable process",
+                                "spans": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slice_type": "primary_cta",
+                "slice_label": null,
+                "primary": {
+                    "cta_title": "See the day-one pipeline",
+                    "cta_body": [
+                        {
+                            "type": "paragraph",
+                            "text": "We'll show you exactly how your lead flow maps into a simple system.",
+                            "spans": []
+                        }
+                    ],
+                    "button_label": "See pipeline demo",
+                    "button_link": {
+                        "link_type": "Web",
+                        "url": "/contact"
+                    }
+                },
+                "items": []
+            }
+        ]
+    },
+    {
+        "_comment": "══════════════════════════════════════════════════════════════",
+        "_page": "3 of 5 — Autopilot",
+        "uid": "autopilot",
+        "title": "From Lead to Close on Autopilot.",
+        "meta_title": "From Lead to Close on Autopilot. | Newport",
+        "meta_description": "Smart automations handle the busywork—so nothing slips through the cracks.",
+        "body": [
+            {
+                "slice_type": "feature_hero",
+                "slice_label": null,
+                "primary": {
+                    "eyebrow": "Feature",
+                    "headline": "From Lead to Close on Autopilot.",
+                    "subhead": [
+                        {
+                            "type": "paragraph",
+                            "text": "Smart automations handle the busywork—so nothing slips through the cracks.",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": []
+            },
+            {
+                "slice_type": "problem_solution",
+                "slice_label": null,
+                "primary": {
+                    "problem_title": "The Problem",
+                    "problem_body": [
+                        {
+                            "type": "paragraph",
+                            "text": "Most businesses don't have a lead problem—they have a follow-up problem. Missed replies, inconsistent handoffs, forgotten tasks, and slow response times quietly kill revenue.",
+                            "spans": []
+                        }
+                    ],
+                    "solution_title": "The Solution",
+                    "solution_body": [
+                        {
+                            "type": "paragraph",
+                            "text": "AI-powered workflows run your playbook. Leads get routed, follow-ups get triggered, reminders fire automatically, and deals keep moving.",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": []
+            },
+            {
+                "slice_type": "qa_block",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "Common Questions"
+                },
+                "items": [
+                    {
+                        "question": "How do I respond instantly without being online 24/7?",
+                        "answer_lead": "Automations acknowledge leads and trigger the next step immediately.",
+                        "bullets": [
+                            {
+                                "type": "list-item",
+                                "text": "Instant confirmation + next action",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Routing to the right person/team",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Timing-based nudges and reminders",
+                                "spans": []
+                            }
+                        ]
+                    },
+                    {
+                        "question": "How do I follow up consistently?",
+                        "answer_lead": "Your follow-up becomes a system, not a memory test.",
+                        "bullets": [
+                            {
+                                "type": "list-item",
+                                "text": "Workflow sequences by lead type/stage",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Task generation for calls, quotes, check-ins",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Escalations when leads go cold",
+                                "spans": []
+                            }
+                        ]
+                    },
+                    {
+                        "question": "How do I scale without breaking operations?",
+                        "answer_lead": "Automation keeps the process consistent as volume grows.",
+                        "bullets": [
+                            {
+                                "type": "list-item",
+                                "text": "Less manual work per lead",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Fewer dropped balls",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "More closed deals with the same team",
+                                "spans": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slice_type": "process_flow",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "How Autopilot Runs Your Playbook",
+                    "intro": [
+                        {
+                            "type": "paragraph",
+                            "text": "Every lead enters a workflow that handles the next step—automatically.",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": [
+                    {
+                        "step_label": "Step 1",
+                        "step_title": "Trigger",
+                        "step_body": "A new lead, form, or event starts the workflow."
+                    },
+                    {
+                        "step_label": "Step 2",
+                        "step_title": "Route",
+                        "step_body": "Lead assigned to the right person or queue."
+                    },
+                    {
+                        "step_label": "Step 3",
+                        "step_title": "Sequence",
+                        "step_body": "Timed follow-ups fire across the right channels."
+                    },
+                    {
+                        "step_label": "Step 4",
+                        "step_title": "Remind",
+                        "step_body": "Tasks and nudges keep your team on track."
+                    },
+                    {
+                        "step_label": "Step 5",
+                        "step_title": "Escalate",
+                        "step_body": "Deals at risk get flagged before they go cold."
+                    }
+                ]
+            },
+            {
+                "slice_type": "before_after",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "Before Newport vs. After Newport",
+                    "before_title": "Before",
+                    "after_title": "After",
+                    "before_bullets": [
+                        {
+                            "type": "list-item",
+                            "text": "Manual follow-ups and forgotten callbacks",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Slow response times lose warm leads",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Inconsistent handoffs between team members",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Deals stall with no automatic nudge",
+                            "spans": []
+                        }
+                    ],
+                    "after_bullets": [
+                        {
+                            "type": "list-item",
+                            "text": "Instant replies and smart routing on every lead",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Automated sequences run without your input",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Reminders fire so nothing falls through",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Escalations catch at-risk deals before they go cold",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": []
+            },
+            {
+                "slice_type": "chart_panel",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "Delay Creates Drop-Off",
+                    "section_body": [
+                        {
+                            "type": "paragraph",
+                            "text": "Follow-up consistency protects your qualification odds.",
+                            "spans": []
+                        }
+                    ],
+                    "chart_type": "bar",
+                    "chart_data_json": "[{\"response_time\":\"5 min\",\"odds_index\":100},{\"response_time\":\"10 min\",\"odds_index\":25},{\"response_time\":\"30 min\",\"odds_index\":5}]",
+                    "chart_config_json": "{\"odds_index\":{\"label\":\"Odds Index (normalized)\"}}",
+                    "insight_caption": [
+                        {
+                            "type": "paragraph",
+                            "text": "Automations protect speed-to-lead and consistency—two major drivers of follow-up success. Index values are normalized for readability, not a promise of outcomes.",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": [
+                    {
+                        "source_label": "MIT — Lead Response Management Study (via HubSpot PDF)",
+                        "source_href": {
+                            "link_type": "Web",
+                            "url": "https://cdn2.hubspot.net/hub/25649/file-13535879-pdf/docs/mit_study.pdf",
+                            "target": "_blank"
+                        }
+                    }
+                ]
+            },
+            {
+                "slice_type": "bullets_section",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "What You Get",
+                    "bullets": [
+                        {
+                            "type": "list-item",
+                            "text": "Workflow templates for lead handling + follow-up",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Automated reminders and next-step triggers",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "AI assist where it saves time (summary, drafting, triage)",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": []
+            },
+            {
+                "slice_type": "proof_strip",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "Why It Works"
+                },
+                "items": [
+                    {
+                        "proof_point": [
+                            {
+                                "type": "paragraph",
+                                "text": "Designed to eliminate \u201Cmissed follow-up\u201D failure modes",
+                                "spans": []
+                            }
+                        ]
+                    },
+                    {
+                        "proof_point": [
+                            {
+                                "type": "paragraph",
+                                "text": "Built around repeatable operating procedures",
+                                "spans": []
+                            }
+                        ]
+                    },
+                    {
+                        "proof_point": [
+                            {
+                                "type": "paragraph",
+                                "text": "Scales cleanly as lead volume increases",
+                                "spans": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slice_type": "primary_cta",
+                "slice_label": null,
+                "primary": {
+                    "cta_title": "Automate the next step",
+                    "cta_body": [
+                        {
+                            "type": "paragraph",
+                            "text": "Tell us your lead process and we'll show what to automate first.",
+                            "spans": []
+                        }
+                    ],
+                    "button_label": "Map my workflow",
+                    "button_link": {
+                        "link_type": "Web",
+                        "url": "/contact"
+                    }
+                },
+                "items": []
+            }
+        ]
+    },
+    {
+        "_comment": "══════════════════════════════════════════════════════════════",
+        "_page": "4 of 5 — Dashboard",
+        "uid": "dashboard",
+        "title": "Track Performance at a Glance.",
+        "meta_title": "Track Performance at a Glance. | Newport",
+        "meta_description": "One dashboard turns activity into insight—so you can act faster.",
+        "body": [
+            {
+                "slice_type": "feature_hero",
+                "slice_label": null,
+                "primary": {
+                    "eyebrow": "Feature",
+                    "headline": "Track Performance at a Glance.",
+                    "subhead": [
+                        {
+                            "type": "paragraph",
+                            "text": "One dashboard turns activity into insight—so you can act faster.",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": []
+            },
+            {
+                "slice_type": "problem_solution",
+                "slice_label": null,
+                "primary": {
+                    "problem_title": "The Problem",
+                    "problem_body": [
+                        {
+                            "type": "paragraph",
+                            "text": "If you can't see what's working, you can't improve it. Most teams bounce between analytics, inboxes, and spreadsheets with no single source of truth.",
+                            "spans": []
+                        }
+                    ],
+                    "solution_title": "The Solution",
+                    "solution_body": [
+                        {
+                            "type": "paragraph",
+                            "text": "We consolidate your pipeline and performance into one clean dashboard—so you can spot bottlenecks, measure ROI, and make decisions without guessing.",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": []
+            },
+            {
+                "slice_type": "qa_block",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "Common Questions"
+                },
+                "items": [
+                    {
+                        "question": "How do I know what marketing is working?",
+                        "answer_lead": "Track real outcomes, not vanity metrics.",
+                        "bullets": [
+                            {
+                                "type": "list-item",
+                                "text": "Leads by source/channel",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Conversion signals over time",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Revenue attribution where possible",
+                                "spans": []
+                            }
+                        ]
+                    },
+                    {
+                        "question": "How do I see where leads are getting stuck?",
+                        "answer_lead": "Pipeline visibility makes bottlenecks obvious.",
+                        "bullets": [
+                            {
+                                "type": "list-item",
+                                "text": "Stage-by-stage drop-off",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Aging deals / stalled follow-ups",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Team activity and response time",
+                                "spans": []
+                            }
+                        ]
+                    },
+                    {
+                        "question": "How do I act faster?",
+                        "answer_lead": "When insights are clear, decisions get easier.",
+                        "bullets": [
+                            {
+                                "type": "list-item",
+                                "text": "KPIs at a glance",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Alerts for issues and opportunities",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Simple reporting your team will use",
+                                "spans": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slice_type": "process_flow",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "From Raw Data to Clear Decisions",
+                    "intro": [
+                        {
+                            "type": "paragraph",
+                            "text": "Five steps from scattered tools to one dashboard that tells you what to do next.",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": [
+                    {
+                        "step_label": "Step 1",
+                        "step_title": "Collect",
+                        "step_body": "Pull data from your CRM, forms, and ad channels."
+                    },
+                    {
+                        "step_label": "Step 2",
+                        "step_title": "Normalize",
+                        "step_body": "Align metrics into consistent definitions."
+                    },
+                    {
+                        "step_label": "Step 3",
+                        "step_title": "Visualize",
+                        "step_body": "Build views your team actually checks."
+                    },
+                    {
+                        "step_label": "Step 4",
+                        "step_title": "Alert",
+                        "step_body": "Flag anomalies and opportunities automatically."
+                    },
+                    {
+                        "step_label": "Step 5",
+                        "step_title": "Improve",
+                        "step_body": "Use insights to iterate on what matters most."
+                    }
+                ]
+            },
+            {
+                "slice_type": "before_after",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "Before Newport vs. After Newport",
+                    "before_title": "Before",
+                    "after_title": "After",
+                    "before_bullets": [
+                        {
+                            "type": "list-item",
+                            "text": "Data spread across five tools with no summary",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Hard to spot where leads drop off",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Guessing which marketing channel is working",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Slow decisions from manual reporting",
+                            "spans": []
+                        }
+                    ],
+                    "after_bullets": [
+                        {
+                            "type": "list-item",
+                            "text": "One dashboard showing KPIs and pipeline health",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Bottlenecks visible at a glance",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Source tracking tied to real outcomes",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Faster weekly decisions with less manual work",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": []
+            },
+            {
+                "slice_type": "chart_panel",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "Data-Driven Teams Decide Better",
+                    "section_body": [
+                        {
+                            "type": "paragraph",
+                            "text": "Benchmarks show highly data-driven organizations report stronger decision-making outcomes.",
+                            "spans": []
+                        }
+                    ],
+                    "chart_type": "bar",
+                    "chart_data_json": "[{\"group\":\"Highly data-driven\",\"likelihood_multiple\":3.0},{\"group\":\"Less data-driven\",\"likelihood_multiple\":1.0}]",
+                    "chart_config_json": "{\"likelihood_multiple\":{\"label\":\"Decision Quality Multiple\"}}",
+                    "insight_caption": [
+                        {
+                            "type": "paragraph",
+                            "text": "Dashboards accelerate decisions by making performance obvious. Benchmark is about decision quality—not guaranteed revenue outcomes.",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": [
+                    {
+                        "source_label": "PwC — Data-driven decision-making benchmark",
+                        "source_href": {
+                            "link_type": "Web",
+                            "url": "https://www.pwc.ch/en/services/consulting/sap-enabled-transformation/leverage-data-to-drive-business.html",
+                            "target": "_blank"
+                        }
+                    }
+                ]
+            },
+            {
+                "slice_type": "bullets_section",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "What You Get",
+                    "bullets": [
+                        {
+                            "type": "list-item",
+                            "text": "Pipeline health + KPI snapshot",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Source/performance reporting",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Visual trends that reveal what to fix next",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": []
+            },
+            {
+                "slice_type": "proof_strip",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "Why It Works"
+                },
+                "items": [
+                    {
+                        "proof_point": [
+                            {
+                                "type": "paragraph",
+                                "text": "Built for clarity, not complexity",
+                                "spans": []
+                            }
+                        ]
+                    },
+                    {
+                        "proof_point": [
+                            {
+                                "type": "paragraph",
+                                "text": "Uses operational metrics teams understand",
+                                "spans": []
+                            }
+                        ]
+                    },
+                    {
+                        "proof_point": [
+                            {
+                                "type": "paragraph",
+                                "text": "Improves weekly decision-making speed",
+                                "spans": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slice_type": "primary_cta",
+                "slice_label": null,
+                "primary": {
+                    "cta_title": "Get clarity fast",
+                    "cta_body": [
+                        {
+                            "type": "paragraph",
+                            "text": "We'll set up dashboards that match how your business actually runs.",
+                            "spans": []
+                        }
+                    ],
+                    "button_label": "See dashboard example",
+                    "button_link": {
+                        "link_type": "Web",
+                        "url": "/contact"
+                    }
+                },
+                "items": []
+            }
+        ]
+    },
+    {
+        "_comment": "══════════════════════════════════════════════════════════════",
+        "_page": "5 of 5 — Fusebox",
+        "uid": "fusebox",
+        "title": "Only Pay for What You Use.",
+        "meta_title": "Only Pay for What You Use. | Newport",
+        "meta_description": "Fusebox turns features into toggles—add modules anytime as your business grows.",
+        "body": [
+            {
+                "slice_type": "feature_hero",
+                "slice_label": null,
+                "primary": {
+                    "eyebrow": "Feature",
+                    "headline": "Only Pay for What You Use.",
+                    "subhead": [
+                        {
+                            "type": "paragraph",
+                            "text": "Fusebox turns features into toggles—add modules anytime as your business grows.",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": []
+            },
+            {
+                "slice_type": "problem_solution",
+                "slice_label": null,
+                "primary": {
+                    "problem_title": "The Problem",
+                    "problem_body": [
+                        {
+                            "type": "paragraph",
+                            "text": "Most CRMs charge you for bundled features you don't use, force you into tiers, and increase costs as you scale—even when your needs haven't changed.",
+                            "spans": []
+                        }
+                    ],
+                    "solution_title": "The Solution",
+                    "solution_body": [
+                        {
+                            "type": "paragraph",
+                            "text": "Fusebox is the switchboard: activate modules when you need them, keep your stack lean, and scale capability-by-capability without replatforming.",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": []
+            },
+            {
+                "slice_type": "qa_block",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "Common Questions"
+                },
+                "items": [
+                    {
+                        "question": "How do I avoid feature bloat?",
+                        "answer_lead": "Start with what produces ROI—add the rest later.",
+                        "bullets": [
+                            {
+                                "type": "list-item",
+                                "text": "Turn modules on/off anytime",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Keep the system lean and focused",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Stop paying for unused features",
+                                "spans": []
+                            }
+                        ]
+                    },
+                    {
+                        "question": "How do I scale without migrating platforms?",
+                        "answer_lead": "Your system grows with you.",
+                        "bullets": [
+                            {
+                                "type": "list-item",
+                                "text": "Add capabilities without rebuilding",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Expand workflows and reporting as needed",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Keep the same core process",
+                                "spans": []
+                            }
+                        ]
+                    },
+                    {
+                        "question": "How do I keep costs aligned with growth?",
+                        "answer_lead": "Pay for outcomes, not \u201Csoftware clutter.\u201D",
+                        "bullets": [
+                            {
+                                "type": "list-item",
+                                "text": "Usage-aligned spend",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Modular expansion",
+                                "spans": []
+                            },
+                            {
+                                "type": "list-item",
+                                "text": "Predictable scaling path",
+                                "spans": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slice_type": "process_flow",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "How Fusebox Grows With You",
+                    "intro": [
+                        {
+                            "type": "paragraph",
+                            "text": "Start lean and add capability only when the ROI is clear.",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": [
+                    {
+                        "step_label": "Step 1",
+                        "step_title": "Start Lean",
+                        "step_body": "Activate only the modules that produce results now."
+                    },
+                    {
+                        "step_label": "Step 2",
+                        "step_title": "Toggle Modules",
+                        "step_body": "Turn features on or off based on your current needs."
+                    },
+                    {
+                        "step_label": "Step 3",
+                        "step_title": "Measure",
+                        "step_body": "Track which modules drive actual outcomes."
+                    },
+                    {
+                        "step_label": "Step 4",
+                        "step_title": "Expand",
+                        "step_body": "Add the next capability when ROI justifies it."
+                    },
+                    {
+                        "step_label": "Step 5",
+                        "step_title": "Scale",
+                        "step_body": "Grow the stack without platform churn."
+                    }
+                ]
+            },
+            {
+                "slice_type": "before_after",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "Before Newport vs. After Newport",
+                    "before_title": "Before",
+                    "after_title": "After",
+                    "before_bullets": [
+                        {
+                            "type": "list-item",
+                            "text": "Paying for bundled features you don\u2019t use",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Locked into tiers with bloat you can\u2019t remove",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Costs spike as you add one new thing",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Messy stack with overlapping tools",
+                            "spans": []
+                        }
+                    ],
+                    "after_bullets": [
+                        {
+                            "type": "list-item",
+                            "text": "Activate only what you need today",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Add modules as ROI proves them out",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "Predictable, usage-aligned scaling",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "One lean system that grows with you",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": []
+            },
+            {
+                "slice_type": "chart_panel",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "Tool Bloat Is Real",
+                    "section_body": [
+                        {
+                            "type": "paragraph",
+                            "text": "SaaS benchmarks often find a large share of licenses go unused or underused.",
+                            "spans": []
+                        }
+                    ],
+                    "chart_type": "donut",
+                    "chart_data_json": "[{\"name\":\"Unused / underused\",\"value\":53},{\"name\":\"Actively used\",\"value\":47}]",
+                    "chart_config_json": "{}",
+                    "insight_caption": [
+                        {
+                            "type": "paragraph",
+                            "text": "Modularity reduces bloat: activate what you use, expand when it\u2019s worth it. Benchmarks vary by org size and governance maturity.",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": [
+                    {
+                        "source_label": "Productiv \u2014 2023 State of SaaS",
+                        "source_href": {
+                            "link_type": "Web",
+                            "url": "https://productiv.com/blog/2023-state-of-saas-series-while-companies-make-progress-cutting-costs-previous-investments-and-growth-of-shadow-apps-like-chatgpt-challenge-efforts-to-manage-saas-spend/",
+                            "target": "_blank"
+                        }
+                    }
+                ]
+            },
+            {
+                "slice_type": "bullets_section",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "What You Get",
+                    "bullets": [
+                        {
+                            "type": "list-item",
+                            "text": "Modular feature architecture",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "A roadmap that scales by capability",
+                            "spans": []
+                        },
+                        {
+                            "type": "list-item",
+                            "text": "A system designed for growth stages",
+                            "spans": []
+                        }
+                    ]
+                },
+                "items": []
+            },
+            {
+                "slice_type": "proof_strip",
+                "slice_label": null,
+                "primary": {
+                    "section_title": "Why It Works"
+                },
+                "items": [
+                    {
+                        "proof_point": [
+                            {
+                                "type": "paragraph",
+                                "text": "Designed to stay lean at every stage",
+                                "spans": []
+                            }
+                        ]
+                    },
+                    {
+                        "proof_point": [
+                            {
+                                "type": "paragraph",
+                                "text": "Built for modular operations (not locked tiers)",
+                                "spans": []
+                            }
+                        ]
+                    },
+                    {
+                        "proof_point": [
+                            {
+                                "type": "paragraph",
+                                "text": "Scales without platform churn",
+                                "spans": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slice_type": "primary_cta",
+                "slice_label": null,
+                "primary": {
+                    "cta_title": "Build your stack",
+                    "cta_body": [
+                        {
+                            "type": "paragraph",
+                            "text": "Explore Fusebox modules and choose what you need now.",
+                            "spans": []
+                        }
+                    ],
+                    "button_label": "Explore modules",
+                    "button_link": {
+                        "link_type": "Web",
+                        "url": "/contact"
+                    }
+                },
+                "items": []
+            }
+        ]
+    }
+]
