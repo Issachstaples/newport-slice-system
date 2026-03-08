@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 import type { HeroCardData } from "@/lib/heroCards";
@@ -34,14 +35,15 @@ export default function HeroCarousel({ cards, alphaClassName = "", betaClassName
             <div className={`transition-all duration-500 ease-out ${alphaClassName}`}>
                 {/*
                   Alpha card navigates to its feature page on click.
-                  aria-label includes the destination for screen readers.
+                  Outer wrapper is a <div role="link"> to avoid nesting buttons.
                 */}
-                <button
-                    type="button"
+                <div
+                    role="link"
+                    tabIndex={0}
                     onClick={() => router.push(alphaCard.href)}
-                    aria-pressed={true}
+                    onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); router.push(alphaCard.href); } }}
                     aria-label={`Go to ${alphaCard.title}`}
-                    className="relative glass-panel-strong rounded-2xl p-6 w-full max-w-md text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]"
+                    className="relative glass-panel-strong rounded-2xl p-6 w-full max-w-md text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]"
                     style={{
                         boxShadow: "0 0 0 1px #3B82F6, 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(59, 130, 246, 0.2)",
                     }}
@@ -74,17 +76,17 @@ export default function HeroCarousel({ cards, alphaClassName = "", betaClassName
                             {alphaCard.body}
                         </p>
                         <div className="mt-4">
-                            <button
-                                type="button"
-                                onClick={(e) => { e.stopPropagation(); router.push(alphaCard.href); }}
+                            <Link
+                                href={alphaCard.href}
+                                onClick={(e) => e.stopPropagation()}
                                 aria-label={`Explore Feature: ${alphaCard.title}`}
                                 className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold text-white bg-[#3B82F6] hover:bg-blue-500 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]"
                             >
                                 Explore Feature
-                            </button>
+                            </Link>
                         </div>
                     </div>
-                </button>
+                </div>
             </div>
 
             {/* BETA CARD (On-Deck - Right) */}
@@ -117,10 +119,13 @@ export default function HeroCarousel({ cards, alphaClassName = "", betaClassName
 
                     {/*
                       Beta card advances the carousel when clicked — promotes this card to alpha.
+                      Outer wrapper is a <div role="button"> to avoid nesting buttons.
                     */}
-                    <button
-                        type="button"
+                    <div
+                        role="button"
+                        tabIndex={0}
                         onClick={() => setActiveIndex(betaIndex)}
+                        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActiveIndex(betaIndex); } }}
                         aria-pressed={false}
                         aria-label={`Select card: ${betaCard.title}`}
                         className="relative glass-panel-soft rounded-2xl p-6 w-full text-left cursor-pointer hover:brightness-110 transition-[filter] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]"
@@ -142,17 +147,17 @@ export default function HeroCarousel({ cards, alphaClassName = "", betaClassName
                                 {betaCard.body}
                             </p>
                             <div className="mt-4">
-                                <button
-                                    type="button"
-                                    onClick={(e) => { e.stopPropagation(); router.push(betaCard.href); }}
+                                <Link
+                                    href={betaCard.href}
+                                    onClick={(e) => e.stopPropagation()}
                                     aria-label={`Explore Feature: ${betaCard.title}`}
                                     className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold text-white/80 border border-[#3B82F6]/40 hover:bg-[#3B82F6]/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]"
                                 >
                                     Explore Feature
-                                </button>
+                                </Link>
                             </div>
                         </div>
-                    </button>
+                    </div>
                 </div>
             </div>
 
