@@ -2,10 +2,24 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-    title: "Contact Newport",
+    title: "Contact — Newport",
     description:
         "Tell us what you're building and we'll map the fastest path to results.",
 };
+
+const WHAT_TO_INCLUDE = [
+    "Your business type and main offer",
+    "Ideal timeline to launch or go live",
+    "Your current website (if you have one)",
+    "Primary goal: more leads, better close rate, automation, or all three",
+] as const;
+
+const WHAT_HAPPENS_NEXT = [
+    { step: "1", label: "Quick audit", desc: "We review what you've shared and your current online presence." },
+    { step: "2", label: "Roadmap", desc: "We map the site + system build that gets you to your goal fastest." },
+    { step: "3", label: "Build plan", desc: "You get a clear scope, timeline, and pricing before anything starts." },
+    { step: "4", label: "Kickoff", desc: "Assets in, work begins. Most sites launch within 2–3 weeks." },
+] as const;
 
 export default function ContactPage() {
     return (
@@ -41,51 +55,68 @@ export default function ContactPage() {
 
                 {/* Panels */}
                 <div className="space-y-5">
-                    {/* Panel 1 — Book a demo */}
+                    {/* Panel 1 — Book a Demo */}
                     <div
-                        className="glass-panel-strong rounded-2xl p-7 text-center"
+                        className="glass-panel-strong rounded-2xl p-8 text-center"
                         style={{
                             boxShadow:
                                 "0 0 0 1px #3B82F6, 0 24px 64px rgba(0,0,0,0.5), inset 0 1px 0 rgba(59,130,246,0.2)",
                         }}
                     >
-                        <h2 className="text-xl font-bold text-white mb-2">Book a Demo</h2>
-                        <p className="text-sm text-[#a8b2c1] mb-6 leading-relaxed">
-                            A 30-minute walkthrough of the full Newport system—no pitch, just the product.
+                        <h2 className="text-xl font-bold text-white mb-3">Book a Demo</h2>
+                        <p className="text-sm text-[#a8b2c1] mb-7 max-w-sm mx-auto leading-relaxed">
+                            A 30-minute walkthrough of the full Newport system. No pitch—just the product and a plan for your business.
                         </p>
-                        <Link
-                            href="#form"
-                            className="inline-block px-7 py-2.5 rounded-full bg-[#3B82F6] text-white text-sm font-semibold hover:bg-blue-500 transition-colors shadow-lg shadow-blue-500/20"
+                        <a
+                            href="mailto:hello@newportdigital.co?subject=Demo%20Request"
+                            className="inline-block px-8 py-3 rounded-full bg-[#3B82F6] text-white text-sm font-semibold hover:bg-blue-500 transition-colors shadow-lg shadow-blue-500/20"
                         >
-                            Schedule a call
-                        </Link>
+                            Email us to schedule
+                        </a>
+                        <p className="text-xs text-[#4a5568] mt-4">
+                            hello@newportdigital.co — response within 1 business day.
+                            <br />
+                            <span className="text-[#3B82F6]/50">Booking form coming soon.</span>
+                        </p>
                     </div>
 
-                    {/* Panel 2 — Email + response time */}
+                    {/* Panel 2 — What to include */}
                     <div className="glass-panel glass-rim rounded-2xl p-7">
-                        <h2 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#3B82F6]/70 mb-4">
-                            Email Us
+                        <h2 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#3B82F6]/70 mb-5">
+                            What to Include in Your Message
                         </h2>
-                        <p className="text-sm text-[#e0e7ef] mb-2 font-medium">
-                            hello@newportdigital.co
-                        </p>
-                        <p className="text-xs text-[#4a5568]">
-                            Response time: within 1 business day.
-                        </p>
+                        <ul className="space-y-3">
+                            {WHAT_TO_INCLUDE.map((item) => (
+                                <li key={item} className="flex items-start gap-3 text-sm text-[#cbd5e0]">
+                                    <span
+                                        className="mt-1 shrink-0 w-4 h-4 rounded-full bg-[#3B82F6]/15 border border-[#3B82F6]/30 flex items-center justify-center"
+                                        aria-hidden="true"
+                                    >
+                                        <svg viewBox="0 0 10 8" className="w-2.5 h-2 text-[#3B82F6] fill-none stroke-current stroke-[1.8]">
+                                            <polyline points="1,4 4,7 9,1" />
+                                        </svg>
+                                    </span>
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
                     </div>
 
                     {/* Panel 3 — What happens next */}
                     <div className="glass-panel-soft glass-rim rounded-2xl p-7">
-                        <h2 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#3B82F6]/70 mb-4">
+                        <h2 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#3B82F6]/70 mb-6">
                             What Happens Next
                         </h2>
-                        <ol className="space-y-2.5">
-                            {["Audit", "Plan", "Build", "Launch"].map((step, i) => (
-                                <li key={step} className="flex items-center gap-3 text-sm text-[#cbd5e0]">
-                                    <span className="shrink-0 w-5 h-5 rounded-full bg-[#3B82F6]/10 border border-[#3B82F6]/30 flex items-center justify-center text-[10px] font-bold text-[#3B82F6]">
-                                        {i + 1}
+                        <ol className="space-y-5">
+                            {WHAT_HAPPENS_NEXT.map(({ step, label, desc }) => (
+                                <li key={label} className="flex items-start gap-4">
+                                    <span className="shrink-0 w-7 h-7 rounded-full bg-[#3B82F6]/10 border border-[#3B82F6]/30 flex items-center justify-center text-[11px] font-bold text-[#3B82F6]">
+                                        {step}
                                     </span>
-                                    {step}
+                                    <div>
+                                        <p className="text-sm font-semibold text-white mb-0.5">{label}</p>
+                                        <p className="text-sm text-[#a8b2c1] leading-relaxed">{desc}</p>
+                                    </div>
                                 </li>
                             ))}
                         </ol>
