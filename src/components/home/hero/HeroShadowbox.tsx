@@ -3,7 +3,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import HeroBackground from "./HeroBackground";
-import HeroCarousel, { HeroCard } from "./HeroCarousel";
+import HeroCarousel, { HeroCardData } from "./HeroCarousel";
 
 // Dynamic imports for client-only 3D components
 const Shadowbox3D = dynamic(() => import("./Shadowbox3D"), { ssr: false });
@@ -22,7 +22,7 @@ export interface HeroShadowboxProps {
     backgroundSrc: string;
     headline: string;
     subheadline: string;
-    cards: HeroCard[];
+    cards: HeroCardData[];
     ctaText?: string;
     ctaHref?: string;
     secondaryCtaText?: string;

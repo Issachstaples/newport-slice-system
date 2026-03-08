@@ -1,24 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Sparkles, Zap, Shield, Star, Rocket, ChevronRight } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { ChevronRight } from "lucide-react";
+import type { HeroCardData } from "@/lib/heroCards";
 
-const iconMap = {
-    sparkles: Sparkles,
-    zap: Zap,
-    shield: Shield,
-    star: Star,
-    rocket: Rocket,
-};
-
-export interface HeroCard {
-    icon: keyof typeof iconMap;
-    title: string;
-    description: string;
-}
+export type { HeroCardData };
 
 export interface HeroCarouselProps {
-    cards: HeroCard[];
+    cards: HeroCardData[];
     alphaClassName?: string;
     betaClassName?: string;
 }
@@ -26,34 +16,31 @@ export interface HeroCarouselProps {
 export default function HeroCarousel({ cards, alphaClassName = "", betaClassName = "" }: HeroCarouselProps) {
     // Single source of truth — shared by card clicks, dot nav, and Next button
     const [activeIndex, setActiveIndex] = useState(0);
+    const router = useRouter();
 
     // Guard against empty or missing cards array (must come after hooks)
     if (!cards || cards.length === 0) return null;
 
     const handleNext = () => setActiveIndex((prev) => (prev + 1) % cards.length);
 
-    const alphaCard = cards[activeIndex];
     const alphaIndex = activeIndex; // explicit alias — used in onClick for symmetry with betaIndex
+    const alphaCard = cards[alphaIndex];
     const betaIndex = (activeIndex + 1) % cards.length;
     const betaCard = cards[betaIndex];
-
-    const AlphaIcon = iconMap[alphaCard.icon];
-    const BetaIcon = iconMap[betaCard.icon];
 
     return (
         <>
             {/* ALPHA CARD (Active - Left) */}
             <div className={`transition-all duration-500 ease-out ${alphaClassName}`}>
                 {/*
-                  Rendered as <button> so it is keyboard-focusable and screen-reader
-                  discoverable. Clicking the active card re-selects it explicitly
-                  via alphaIndex — symmetric with the beta card's betaIndex.
+                  Alpha card navigates to its feature page on click.
+                  aria-label includes the destination for screen readers.
                 */}
                 <button
                     type="button"
-                    onClick={() => setActiveIndex(alphaIndex)}
+                    onClick={() => router.push(alphaCard.href)}
                     aria-pressed={true}
-                    aria-label={`Active card: ${alphaCard.title}`}
+                    aria-label={`Go to ${alphaCard.title}`}
                     className="relative glass-panel-strong rounded-2xl p-6 w-full max-w-md text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]"
                     style={{
                         boxShadow: "0 0 0 1px #3B82F6, 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(59, 130, 246, 0.2)",
@@ -67,26 +54,21 @@ export default function HeroCarousel({ cards, alphaClassName = "", betaClassName
                         </div>
                     </div>
 
-                    <div className="flex items-start gap-4">
-                        <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#3B82F6]/20 flex items-center justify-center">
-                            <AlphaIcon className="w-6 h-6 text-[#3B82F6]" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                            <h3 className="text-xl font-semibold text-white mb-3">
-                                {alphaCard.title}
-                            </h3>
-                            <div className="relative">
-                                <div
-                                    className="absolute inset-0 -m-3 rounded-xl"
-                                    style={{
-                                        background: "linear-gradient(135deg, rgba(10, 13, 20, 0.5) 0%, rgba(10, 13, 20, 0.7) 100%)",
-                                        zIndex: -1,
-                                    }}
-                                />
-                                <p className="text-sm leading-relaxed text-[#e0e7ef] relative z-10 p-3">
-                                    {alphaCard.description}
-                                </p>
-                            </div>
+                    <div className="flex-1 min-w-0">
+                        <h2 className="text-xl font-semibold text-white mb-3">
+                            {alphaCard.title}
+                        </h2>
+                        <div className="relative">
+                            <div
+                                className="absolute inset-0 -m-3 rounded-xl"
+                                style={{
+                                    background: "linear-gradient(135deg, rgba(10, 13, 20, 0.5) 0%, rgba(10, 13, 20, 0.7) 100%)",
+                                    zIndex: -1,
+                                }}
+                            />
+                            <p className="text-sm leading-relaxed text-[#e0e7ef] relative z-10 p-3">
+                                {alphaCard.blurb}
+                            </p>
                         </div>
                     </div>
                 </button>
@@ -121,8 +103,7 @@ export default function HeroCarousel({ cards, alphaClassName = "", betaClassName
                     </div>
 
                     {/*
-                      Beta card is also a <button>: clicking it promotes this card
-                      to alpha by calling setActiveIndex(betaIndex).
+                      Beta card advances the carousel when clicked — promotes this card to alpha.
                     */}
                     <button
                         type="button"
@@ -134,21 +115,16 @@ export default function HeroCarousel({ cards, alphaClassName = "", betaClassName
                             boxShadow: "0 12px 32px rgba(0, 0, 0, 0.5)",
                         }}
                     >
-                        <div className="flex items-start gap-4">
-                            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#3B82F6]/15 flex items-center justify-center">
-                                <BetaIcon className="w-6 h-6 text-[#3B82F6]/70" />
+                        <div className="flex-1 min-w-0">
+                            <div className="text-[10px] font-semibold text-[#3B82F6]/50 uppercase tracking-wider mb-2">
+                                On Deck
                             </div>
-                            <div className="flex-1 min-w-0">
-                                <div className="text-[10px] font-semibold text-[#3B82F6]/50 uppercase tracking-wider mb-2">
-                                    On Deck
-                                </div>
-                                <h3 className="text-lg font-semibold text-white mb-3">
-                                    {betaCard.title}
-                                </h3>
-                                <p className="text-sm leading-relaxed text-[#cbd5e0]">
-                                    {betaCard.description}
-                                </p>
-                            </div>
+                            <h2 className="text-lg font-semibold text-white mb-3">
+                                {betaCard.title}
+                            </h2>
+                            <p className="text-sm leading-relaxed text-[#cbd5e0]">
+                                {betaCard.blurb}
+                            </p>
                         </div>
                     </button>
                 </div>
@@ -158,6 +134,7 @@ export default function HeroCarousel({ cards, alphaClassName = "", betaClassName
             <div className="fixed bottom-10 left-10 z-40 flex items-center gap-4">
                 {/* Next button */}
                 <button
+                    type="button"
                     onClick={handleNext}
                     className="glass-panel-strong rounded-full p-3 hover:scale-110 active:scale-95 transition-all duration-200 group"
                     aria-label="Next card"
@@ -167,11 +144,12 @@ export default function HeroCarousel({ cards, alphaClassName = "", betaClassName
 
                 {/* Dot indicators */}
                 <div className="flex gap-1.5 opacity-40 hover:opacity-100 transition-opacity duration-300">
-                    {cards.map((_, idx) => (
+                    {cards.map((card, idx) => (
                         <button
                             key={idx}
+                            type="button"
                             onClick={() => setActiveIndex(idx)}
-                            aria-label={`Go to card ${idx + 1}`}
+                            aria-label={`Go to card ${idx + 1}: ${card.title}`}
                             aria-pressed={idx === activeIndex}
                             className={`rounded-full transition-all duration-300 ${idx === activeIndex
                                 ? "bg-[#3B82F6] w-6 h-1.5"
