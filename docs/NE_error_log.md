@@ -631,3 +631,78 @@ R3F `state.pointer.y` is in NDC: +1 = top of container, -1 = bottom. Positive `r
 Test: move cursor above the eye; eye should rotate toward cursor (upward). If inverted, check whether `V_SIGN` or a sign literal was added incorrectly rather than debugging the data pipeline.
 
 
+
+---
+
+## 3️⃣ Nested `<button>` Inside `<button>` — HeroCarousel Hydration Error
+
+### Error
+
+React hydration warning in the browser console on `/v2-preview`:
+
+```
+In HTML, <button> cannot be a descendant of <button>.
+This will cause a hydration error.
+```
+
+Both Alpha and Beta card wrappers were `<button>` elements that contained an inner `<button>` ("Explore Feature" CTA).
+
+### Root Cause
+
+`HeroCarousel.tsx` rendered two levels of interactive elements:
+
+- Alpha wrapper: `<button type="button" onClick={() => router.push(alphaCard.href)}>` containing an inner `<button onClick={...}>Explore Feature</button>`
+- Beta wrapper: same pattern with `onClick={() => setActiveIndex(betaIndex)}`
+
+HTML spec §4.10.18.5 (Interactive content) forbids nesting interactive elements. React detects the mismatch at hydration and emits the warning. Some browsers silently restructure the DOM, causing click handler mismatches where inner/outer both fire or neither fires.
+
+### Fix Applied
+
+Converted both outer wrappers from `<button>` to `<div>` with explicit ARIA roles and keyboard handlers:
+
+```tsx
+// Alpha wrapper — navigates to feature page
+<div
+  role="link"
+  tabIndex={0}
+  onClick={() => router.push(alphaCard.href)}
+  onKeyDown={(e) => {
+    if (e.key === "Enter") { router.push(alphaCard.href); }
+    else if (e.key === " " || e.key === "Spacebar") {
+      e.preventDefault();
+      router.push(alphaCard.href);
+    }
+  }}
+  aria-label={`Open feature: ${alphaCard.title}`}
+>
+
+// Beta wrapper — advances carousel
+<div
+  role="button"
+  tabIndex={0}
+  onClick={() => setActiveIndex(betaIndex)}
+  onKeyDown={(e) => {
+    if (e.key === "Enter") { setActiveIndex(betaIndex); }
+    else if (e.key === " " || e.key === "Spacebar") {
+      e.preventDefault();
+      setActiveIndex(betaIndex);
+    }
+  }}
+  aria-label={`Next card preview: ${betaCard.title}`}
+  aria-describedby={`on-deck-${betaIndex}`}
+>
+```
+
+Inner "Explore Feature" CTA changed from `<button onClick={() => router.push(...)}>` to `<Link href={alphaCard.href} onClick={(e) => e.stopPropagation()}>`.
+
+### Rule Extracted
+
+**RULE: Never nest interactive elements — use `<div role="link/button">` for compound card patterns.**
+
+When a card is itself interactive (navigates or triggers state) AND contains a CTA button/link:
+
+1. The outer card wrapper must be `<div>` with `role="link"` (if it navigates) or `role="button"` (if it triggers state change)
+2. The inner CTA must be `<Link>` (not `<button>`) if it navigates, or a real `<button>` only if the outer wrapper is a non-interactive `<div>`
+3. Always add `e.stopPropagation()` on the inner element so the outer action does not also fire
+4. Always add `tabIndex={0}` + `onKeyDown` handler: `Enter` → fire action directly; `Space`/`Spacebar` → `e.preventDefault()` then fire action
+5. Never use `<button>` as a page-section card wrapper when it will contain any other interactive element

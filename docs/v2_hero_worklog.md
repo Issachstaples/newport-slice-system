@@ -305,3 +305,116 @@ Core has reduced amplitude to prevent visual dominance over wrap frame.
 - Future: Prismic integration (hero_shadowbox slice model)
 - Future: Mobile responsive polish (test stacked layout on sm breakpoint)
 
+
+---
+
+## Day 5 — Feature Pages, Floating Nav, Prismic Routing + a11y Polish (2026-03-07)
+
+### Summary
+
+Full-stack feature page system shipped: HERO_CARDS driving carousel, Prismic dynamic route with 9-slice map, FloatingGlassNav with active-route state, /pricing + stub pages (/about /contact /blog), and hydration + a11y bug fixes across HeroCarousel.
+
+### Checkpoints Completed ✅
+
+1. **HERO_CARDS data model + carousel upgrade**
+   - Added `body` field to `HeroCardData` in `heroCards.ts`
+   - 5 cards wired: seo-conversion, pipeline, autopilot, dashboard, fusebox
+   - Alpha/Beta cards now show title + blurb + body + "Explore Feature" CTA
+   - Alpha CTA navigates to `/features/{uid}`; Beta advances carousel
+
+2. **Nested button hydration fix**
+   - Root cause: alpha wrapper `<button>` contained inner CTA `<button>` — invalid HTML
+   - Fix: both wrappers converted to `<div role="link">` / `<div role="button">`
+   - Inner CTAs converted from `<button>` to `<Link href={href}>`
+   - `e.stopPropagation()` preserved on inner Link to prevent wrapper action firing
+
+3. **Keyboard + screen reader a11y hardening**
+   - `onKeyDown`: `Enter` fires action directly; `Space`/`Spacebar` calls `e.preventDefault()` first (blocks scroll) then fires
+   - `aria-label`: Alpha — `"Open feature: {title}"`; Beta — `"Next card preview: {title}"`
+   - Beta wrapper: `aria-describedby={on-deck-${betaIndex}}` pointing to visible "On Deck" label
+   - `id` keyed to `betaIndex` so it stays in sync across rotations
+
+4. **Beta hover/focus affordance**
+   - Added `transition-[opacity,box-shadow,background-color] duration-200`
+   - `hover:bg-white/[0.06]` + cobalt rim glow at 25% opacity
+   - `focus-visible` mirrors hover exactly (keyboard parity)
+   - Beta remains noticeably dimmer than Alpha (no `brightness-110` hack)
+
+5. **FloatingGlassNav built and positioned**
+   - Desktop: glass pill row with per-item active state; inactive items at `opacity-70`
+   - Mobile: Menu toggle + dropdown with matching active styles
+   - Active styles: `bg-white/[0.09]` + cobalt ring/glow `shadow-[0_0_0_1px_rgba(59,130,246,0.45)...]`
+   - `aria-current="page"` on active link; `usePathname` for route detection
+   - `isActive`: exact match for `/`; `startsWith` for all other routes
+   - Wrapper changed to `w-fit` in HeroShadowbox — was `w-[420px]` causing center bleed
+   - Mounted on `/v2-preview` via `navSlot` prop on HeroShadowbox
+
+6. **Prismic feature page system**
+   - 9 slice models defined in Slice Machine (FeatureHero, ProblemSolution, QaBlock, ProcessFlow, BeforeAfter, ChartPanel, BulletsSection, ProofStrip, PrimaryCta)
+   - `feature_page` custom type created (`customtypes/feature_page/index.json`)
+   - Dynamic route `app/features/[uid]/page.tsx` with `baseClient().getByUID("feature_page", uid)`
+   - SliceZone components map: all 9 slice IDs wired to their components
+   - `generateMetadata` safe — `try/catch` returns `{}` on miss
+   - Static `/features/{uid}` pages removed to avoid route precedence conflict
+
+7. **DraftFallback for unpublished docs**
+   - Prismic API confirmed: `feature_page` type not yet registered in repo + 0 published docs
+   - Known UIDs (`seo-conversion`, `pipeline`, `autopilot`, `dashboard`, `fusebox`) render a glass fallback with amber "Coming Soon" chip and 5-step publish instructions
+   - Unknown UIDs still call `notFound()` for hard 404
+   - `docs/prismic-feature-page-payloads.json` added: 5 complete document payloads (9 slices each) for fast Prismic entry
+
+8. **Content pages shipped**
+   - `/pricing` — 3-column plan grid (Starter/Growth/Scale), Fusebox Modules, AI Credit Packs, launch fees, FAQ, CTA
+   - `/about` — What We Build (5 bullets), How We Work (3-step), Book a Demo CTA
+   - `/contact` — Book a Demo (mailto), What to Include, What Happens Next (4-step)
+   - `/blog` — Latest Posts (3 placeholders + Coming Soon), Topics, Explore Features CTA
+   - All use fixed `app-grid` + cobalt radial bleed, `glass-chip` eyebrow, same footer nav
+
+### Git Commits (Day 5)
+
+- `977756d` — feat(hero-carousel): 5-card HERO_CARDS with title/blurb/href
+- `cc62773` — feat(hero-carousel): add body copy + Explore Feature CTA to Alpha/Beta cards
+- `fd567fb` — feat(nav): add FloatingGlassNav to v2-preview HUD, aligned to CTA column
+- `ebd5ea2` — feat: add stub pages for /about, /contact, /blog with liquid glass aesthetic
+- `c9c7221` — feat: add /pricing page with Business OS plans, Fusebox modules, credit packs, FAQ, and CTA
+- `9f9caf7` — feat: rewrite /about, /contact, /blog with spec copy, 3-panel structure, glass aesthetic
+- `7853006` — feat: add active state to FloatingGlassNav with usePathname + aria-current
+- `4579290` — feat: right-align floating nav — w-fit wrapper, no center bleed
+- `ffcbd6e` — fix: resolve nested button hydration error in HeroCarousel — div wrappers + Link CTAs
+- `15c5e08` — fix: tighten HeroCarousel a11y — aria-labels + split Enter/Space keydown handlers
+- `31dab58` — fix: add aria-describedby + stable id to Beta card On Deck label
+- `5471ccb` — feat: add hover/focus glow affordance to Beta card — subtle cobalt rim + bg lift
+- `8f7a82e` — feat(slices): 9 Slice Machine models + feature_page custom type
+- `7a1079f` — fix(slices): harden Slice Machine v2 schemas — canonical field names
+- `63f464c` — docs: add Prismic feature page document payloads (5 pages, 9 slices each)
+- `7f4159d` — feat(prismic): dynamic [uid] feature page route + 9 slice components
+- `300887a` — feat: remove static feature page routes (defer to [uid] dynamic route)
+- `a8f2598` — fix: draft fallback UI for unpublished feature_page docs
+
+### Files Modified (Day 5)
+
+- `src/lib/heroCards.ts` — added `body` field to `HeroCardData`, 5 feature cards
+- `src/components/home/hero/HeroCarousel.tsx` — nested button fix, a11y, hover/focus affordance
+- `src/components/home/hero/HeroShadowbox.tsx` — nav slot wrapper `w-fit`
+- `src/components/nav/FloatingGlassNav.tsx` — created; active route state, desktop + mobile
+- `src/app/(marketing)/v2-preview/page.tsx` — mounted FloatingGlassNav via navSlot
+- `src/app/features/page.tsx` — features hub with HERO_CARDS grid
+- `src/app/features/[uid]/page.tsx` — Prismic dynamic route + DraftFallback
+- `src/components/features/slices/index.ts` — 9-slice components map
+- `src/components/features/slices/*.tsx` — 9 slice components (created)
+- `src/app/pricing/page.tsx` — created
+- `src/app/about/page.tsx` — created/rewritten
+- `src/app/contact/page.tsx` — created/rewritten
+- `src/app/blog/page.tsx` — created/rewritten
+- `customtypes/feature_page/index.json` — created
+- `docs/prismic-feature-page-payloads.json` — created
+
+### Open Items / Next Session
+
+- [ ] Publish `feature_page` custom type in Prismic dashboard (Settings → Custom Types → Import)
+- [ ] Create + publish 5 feature_page docs using `prismic-feature-page-payloads.json`
+- [ ] Test `/features/seo-conversion` renders SliceZone after publish (DraftFallback should disappear)
+- [ ] Mount FloatingGlassNav globally across all pages (not just v2-preview)
+- [ ] Laser VFX: fire DiodeEmitter beam toward Alpha card on carousel advance
+- [ ] Mobile responsive audit: alpha/beta card overlap on narrow viewports
+- [ ] Set `DEBUG_NO_OVERLAYS = false` in HeroShadowbox before production

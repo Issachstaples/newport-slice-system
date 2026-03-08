@@ -400,3 +400,93 @@ Core has half the amplitude of Eye to prevent visual dominance.
 - Mobile responsive polish
 
 
+
+---
+
+## 2026-03-07 — Day 5: Feature Pages, Floating Nav, Prismic Routing + A11y
+
+### Summary
+
+Shipped the complete feature page system: Prismic dynamic route with 9-slice component map, a `/features` hub, and all 5 feature-page slice models. Built FloatingGlassNav with active-route state detection and mounted it on `/v2-preview`. Wrote and polished all content pages (`/pricing`, `/about`, `/contact`, `/blog`). Fixed a nested `<button>` hydration error in HeroCarousel and hardened its keyboard + screen reader a11y. Diagnosed Prismic as having zero published `feature_page` docs; added `DraftFallback` as a graceful interim UI while the CMS remains unpopulated.
+
+### Files Touched
+
+1. `src/lib/heroCards.ts` — **Updated** (`body` field added to `HeroCardData`, 5 feature cards)
+2. `src/components/home/hero/HeroCarousel.tsx` — **Updated** (div wrappers, Link CTAs, a11y attrs, Beta hover/focus glow)
+3. `src/components/home/hero/HeroShadowbox.tsx` — **Updated** (nav slot wrapper `w-fit` fix)
+4. `src/components/nav/FloatingGlassNav.tsx` — **Created** (desktop pill + mobile toggle, active state)
+5. `src/app/(marketing)/v2-preview/page.tsx` — **Updated** (navSlot prop wired)
+6. `src/app/features/page.tsx` — **Created** (hub page — HERO_CARDS grid + How It Works strip)
+7. `src/app/features/[uid]/page.tsx` — **Created** (Prismic `getByUID` + SliceZone + DraftFallback)
+8. `src/components/features/slices/index.ts` — **Created** (9-slice components map)
+9. `src/components/features/slices/FeatureHeroSlice.tsx` — **Created**
+10. `src/components/features/slices/ProblemSolutionSlice.tsx` — **Created**
+11. `src/components/features/slices/QaBlockSlice.tsx` — **Created** (multi-open accordion, first item open)
+12. `src/components/features/slices/ProcessFlowSlice.tsx` — **Created**
+13. `src/components/features/slices/BeforeAfterSlice.tsx` — **Created**
+14. `src/components/features/slices/ChartPanelSlice.tsx` — **Created**
+15. `src/components/features/slices/BulletsSectionSlice.tsx` — **Created**
+16. `src/components/features/slices/ProofStripSlice.tsx` — **Created**
+17. `src/components/features/slices/PrimaryCtaSlice.tsx` — **Created**
+18. `src/app/pricing/page.tsx` — **Created**
+19. `src/app/about/page.tsx` — **Created / Rewritten**
+20. `src/app/contact/page.tsx` — **Created / Rewritten**
+21. `src/app/blog/page.tsx` — **Created / Rewritten**
+22. `customtypes/feature_page/index.json` — **Created**
+23. `docs/prismic-feature-page-payloads.json` — **Created** (5 documents × 9 slices each)
+
+### Key Decisions and Why
+
+#### 1. **Delete Static Feature Page Routes**
+
+**Decision:** Remove 5 hard-coded `/features/{uid}` directories; use `/features/[uid]` dynamic route only.
+
+**Why:**
+- Next.js App Router static segments take precedence over dynamic segments — the `[uid]` route was silently shadowed
+- CMS-driven content should never live in JSX; single dynamic route handles any future UID
+- `generateStaticParams` left empty for now (full SSR until Prismic docs are published)
+
+#### 2. **DraftFallback for Known UIDs / Hard 404 for Unknown**
+
+**Decision:** 5 planned UIDs render a `DraftFallback` glass panel; all other UIDs call `notFound()`.
+
+**Why:**
+- Avoids confusing 404s for planned routes that haven't been published to Prismic yet
+- Inline publish instructions eliminate the need to open the docs folder during CMS setup
+- Hard 404 preserved for genuinely invalid UIDs — correct HTTP semantics maintained
+
+#### 3. **`<div role="link/button">` Instead of Nested `<button>`**
+
+**Decision:** Convert card wrappers from `<button>` to `<div>` with ARIA roles; CTA from `<button>` to `<Link>`.
+
+**Why:**
+- HTML spec §4.10.18.5 forbids interactive content inside interactive content; React surfaces this as a hydration warning
+- `role="link"` + `tabIndex` + `onKeyDown` is the correct ARIA pattern for a navigating `div`
+- `<Link>` preserves Next.js prefetch and correct anchor semantics
+
+#### 4. **Split Enter / Space `onKeyDown`**
+
+**Decision:** `Enter` → fire action immediately; `Space`/`Spacebar` → `e.preventDefault()` then fire.
+
+**Why:**
+- `Space` on a non-form element scrolls the page by default — `preventDefault()` must be called or both scroll and action fire simultaneously
+- `Enter` has no native default to suppress on a non-form element
+- Matches ARIA Authoring Practices Guide keyboard interaction pattern for `role="button"` / `role="link"`
+
+#### 5. **Beta Hover/Focus Affordance — Constrained Glow**
+
+**Decision:** Beta card gets `hover:bg-white/[0.06]` + cobalt rim at 25% opacity + ambient glow. No `brightness` boost.
+
+**Why:**
+- Beta is "On Deck" — interactive but not active; affordance must confirm clickability without implying it's the current focal element
+- Alpha rim is 100% cobalt opacity; Beta at 25% maintains the Alpha > Beta visual hierarchy
+- `focus-visible` mirrors hover exactly so keyboard users have identical affordance to pointer users
+
+#### 6. **FloatingGlassNav Wrapper `w-fit`**
+
+**Decision:** Nav slot wrapper in HeroShadowbox changed from `w-[420px] flex justify-end` to `w-fit`.
+
+**Why:**
+- `w-[420px]` extended the wrapper ~420px left from the right anchor point, bleeding into the center canvas
+- `w-fit` collapses to the pill's natural width; right-edge alignment handled by absolute positioning alone
+- No layout side effects elsewhere — `navSlot` is isolated in the top-right absolute zone
