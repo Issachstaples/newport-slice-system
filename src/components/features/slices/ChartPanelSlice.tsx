@@ -1,7 +1,7 @@
 import { PrismicRichText, PrismicLink } from "@prismicio/react";
 import type { SliceComponentProps } from "@prismicio/react";
 import { isFilled } from "@prismicio/client";
-import FeatureChartPanel from "@/components/features/FeatureChartPanel";
+import FeatureChartPanelBlock from "@/components/features/FeatureChartPanel";
 import type { FeatureChartPanel as ChartPanelData } from "@/components/features/FeaturePageTemplate";
 
 function safeParse<T>(json: string | null | undefined, fallback: T): T {
@@ -69,7 +69,7 @@ export default function ChartPanelSlice({ slice }: SliceComponentProps<any>) {
                     </div>
                 )}
 
-                {data.length > 0 && <FeatureChartPanel panel={panel} />}
+                {data.length > 0 && <FeatureChartPanelBlock panel={panel} />}
 
                 {sources.length > 0 && (
                     <p className="text-xs text-[#4a5568] text-center mt-4 space-x-2">
