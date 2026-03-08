@@ -71,6 +71,27 @@ const data: FeaturePageData = {
             "Escalations catch at-risk deals before they go cold",
         ],
     },
+    chartPanel: {
+        title: "Delay Creates Drop-Off",
+        description: "Follow-up consistency protects your qualification odds.",
+        chartType: "bar",
+        data: [
+            { response_time: "5 min", odds_index: 100 },
+            { response_time: "10 min", odds_index: 25 },
+            { response_time: "30 min", odds_index: 5 },
+        ],
+        config: {
+            odds_index: { label: "Odds Index (normalized)" },
+        },
+        insight:
+            "Automations protect speed-to-lead and consistency\u2014two major drivers of follow-up success. Index values are normalized for readability, not a promise of outcomes.",
+        sources: [
+            {
+                label: "MIT \u2014 Lead Response Management Study (via HubSpot PDF)",
+                href: "https://cdn2.hubspot.net/hub/25649/file-13535879-pdf/docs/mit_study.pdf",
+            },
+        ],
+    },
     whatYouGet: [
         "Workflow templates for lead handling + follow-up",
         "Automated reminders and next-step triggers",

@@ -71,6 +71,26 @@ const data: FeaturePageData = {
             "Faster weekly decisions with less manual work",
         ],
     },
+    chartPanel: {
+        title: "Data-Driven Teams Decide Better",
+        description: "Benchmarks show highly data-driven organizations report stronger decision-making outcomes.",
+        chartType: "bar",
+        data: [
+            { group: "Highly data-driven", likelihood_multiple: 3.0 },
+            { group: "Less data-driven", likelihood_multiple: 1.0 },
+        ],
+        config: {
+            likelihood_multiple: { label: "Decision Quality Multiple" },
+        },
+        insight:
+            "Dashboards accelerate decisions by making performance obvious. Benchmark is about decision quality\u2014not guaranteed revenue outcomes.",
+        sources: [
+            {
+                label: "PwC \u2014 Data-driven decision-making benchmark",
+                href: "https://www.pwc.ch/en/services/consulting/sap-enabled-transformation/leverage-data-to-drive-business.html",
+            },
+        ],
+    },
     whatYouGet: [
         "Pipeline health + KPI snapshot",
         "Source/performance reporting",

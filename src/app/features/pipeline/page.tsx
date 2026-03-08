@@ -71,6 +71,27 @@ const data: FeaturePageData = {
             "Faster, more consistent follow-up",
         ],
     },
+    chartPanel: {
+        title: "Speed-to-Lead Matters",
+        description: "Odds of qualifying a lead drop fast as response time increases.",
+        chartType: "line",
+        data: [
+            { minutes: "5 min", relative_odds: 1.0 },
+            { minutes: "10 min", relative_odds: 0.25 },
+            { minutes: "30 min", relative_odds: 0.05 },
+        ],
+        config: {
+            relative_odds: { label: "Relative Qualification Odds" },
+        },
+        insight:
+            "The longer your first response takes, the harder it becomes to qualify leads. Directional benchmark\u2014not a guaranteed outcome.",
+        sources: [
+            {
+                label: "MIT \u2014 Lead Response Management Study (via HubSpot PDF)",
+                href: "https://cdn2.hubspot.net/hub/25649/file-13535879-pdf/docs/mit_study.pdf",
+            },
+        ],
+    },
     whatYouGet: [
         "A pipeline anyone can understand",
         "Lead records with history + next steps",

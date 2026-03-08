@@ -71,6 +71,28 @@ const data: FeaturePageData = {
             "More qualified organic traffic over time",
         ],
     },
+    chartPanel: {
+        title: "Speed Wins",
+        description: "Benchmarks show even small mobile speed improvements can lift conversion metrics.",
+        chartType: "bar",
+        data: [
+            { segment: "Retail", lift_pct: 8.4 },
+            { segment: "Travel", lift_pct: 10.1 },
+            { segment: "Lead Gen", lift_pct: 21.6 },
+            { segment: "Luxury", lift_pct: 40.1 },
+        ],
+        config: {
+            lift_pct: { label: "Conversion Lift (%)" },
+        },
+        insight:
+            "Small speed gains can produce measurable lifts across the funnel. Benchmarks vary by industry, offer, and traffic quality\u2014use this as directional evidence, not a guarantee.",
+        sources: [
+            {
+                label: "web.dev \u2014 Milliseconds Make Millions",
+                href: "https://web.dev/case-studies/milliseconds-make-millions",
+            },
+        ],
+    },
     whatYouGet: [
         "SEO-ready templates and structure across key pages",
         "Conversion-optimized layouts and CTAs",

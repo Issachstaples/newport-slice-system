@@ -1,4 +1,5 @@
 import Link from "next/link";
+import FeatureChartPanelBlock from "@/components/features/FeatureChartPanel";
 
 export interface FeatureQA {
     question: string;
@@ -33,6 +34,23 @@ export interface FeatureBeforeAfter {
     afterBullets: string[];
 }
 
+export interface FeatureChartSource {
+    label: string;
+    href: string;
+}
+
+export interface FeatureChartPanel {
+    title: string;
+    description?: string;
+    chartType: "bar" | "line" | "area" | "radial" | "donut";
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    data: any[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    config?: Record<string, any>;
+    insight: string;
+    sources: FeatureChartSource[];
+}
+
 export interface FeaturePageData {
     title: string;
     subhead: string;
@@ -41,6 +59,7 @@ export interface FeaturePageData {
     qa: FeatureQA[];
     processFlow?: FeatureProcessFlow;
     beforeAfter?: FeatureBeforeAfter;
+    chartPanel?: FeatureChartPanel;
     whatYouGet: string[];
     proofPoints: string[];
     cta: FeatureCTA;
@@ -89,6 +108,7 @@ export default function FeaturePageTemplate({
     qa,
     processFlow,
     beforeAfter,
+    chartPanel,
     whatYouGet,
     proofPoints,
     cta,
@@ -317,6 +337,16 @@ export default function FeaturePageTemplate({
                 )}
 
                 <Divider />
+
+                {/* ── CHART PANEL ──────────────────────────────────────────────── */}
+                {chartPanel && (
+                    <>
+                        <Section className="mb-10">
+                            <FeatureChartPanelBlock panel={chartPanel} />
+                        </Section>
+                        <Divider />
+                    </>
+                )}
 
                 {/* ── WHAT YOU GET ─────────────────────────────────────────────── */}
                 <Section className="mb-10">

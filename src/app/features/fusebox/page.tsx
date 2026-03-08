@@ -71,6 +71,23 @@ const data: FeaturePageData = {
             "One lean system that grows with you",
         ],
     },
+    chartPanel: {
+        title: "Tool Bloat Is Real",
+        description: "SaaS benchmarks often find a large share of licenses go unused or underused.",
+        chartType: "donut",
+        data: [
+            { name: "Unused / underused", value: 53 },
+            { name: "Actively used", value: 47 },
+        ],
+        insight:
+            "Modularity reduces bloat: activate what you use, expand when it\u2019s worth it. Benchmarks vary by org size and governance maturity.",
+        sources: [
+            {
+                label: "Productiv \u2014 2023 State of SaaS",
+                href: "https://productiv.com/blog/2023-state-of-saas-series-while-companies-make-progress-cutting-costs-previous-investments-and-growth-of-shadow-apps-like-chatgpt-challenge-efforts-to-manage-saas-spend/",
+            },
+        ],
+    },
     whatYouGet: [
         "Modular feature architecture",
         "A roadmap that scales by capability",
