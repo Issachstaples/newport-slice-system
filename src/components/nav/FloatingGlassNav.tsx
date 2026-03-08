@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const NAV_ITEMS = [
     { label: "Home", href: "/" },
@@ -11,6 +12,12 @@ const NAV_ITEMS = [
     { label: "Blog", href: "/blog" },
 ] as const;
 
+/** Returns true when the nav item should be considered active for the given pathname. */
+function isActive(href: string, pathname: string): boolean {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+}
+
 export interface FloatingGlassNavProps {
     /** Extra classes applied to the outermost container (position, top, right, width, etc.) */
     className?: string;
@@ -18,6 +25,7 @@ export interface FloatingGlassNavProps {
 
 export default function FloatingGlassNav({ className = "" }: FloatingGlassNavProps) {
     const [mobileOpen, setMobileOpen] = useState(false);
+    const pathname = usePathname();
 
     return (
         <nav
@@ -32,15 +40,25 @@ export default function FloatingGlassNav({ className = "" }: FloatingGlassNavPro
                         "0 0 0 1px rgba(59,130,246,0.12), 0 8px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06)",
                 }}
             >
-                {NAV_ITEMS.map(({ label, href }) => (
-                    <Link
-                        key={href}
-                        href={href}
-                        className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#a8b2c1] transition-all duration-200 hover:text-white hover:bg-white/[0.07] hover:shadow-[0_0_12px_rgba(59,130,246,0.18)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]"
-                    >
-                        {label}
-                    </Link>
-                ))}
+                {NAV_ITEMS.map(({ label, href }) => {
+                    const active = isActive(href, pathname);
+                    return (
+                        <Link
+                            key={href}
+                            href={href}
+                            aria-current={active ? "page" : undefined}
+                            className={[
+                                "px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200",
+                                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]",
+                                active
+                                    ? "text-white bg-white/[0.09] shadow-[0_0_0_1px_rgba(59,130,246,0.45),0_0_14px_rgba(59,130,246,0.22)]"
+                                    : "text-[#a8b2c1] opacity-70 hover:opacity-100 hover:text-white hover:bg-white/[0.07] hover:shadow-[0_0_12px_rgba(59,130,246,0.18)] active:scale-95",
+                            ].join(" ")}
+                        >
+                            {label}
+                        </Link>
+                    );
+                })}
             </div>
 
             {/* ── MOBILE: single "Menu" toggle + dropdown ────────────────────── */}
@@ -85,16 +103,26 @@ export default function FloatingGlassNav({ className = "" }: FloatingGlassNavPro
                                 "0 0 0 1px rgba(59,130,246,0.12), 0 16px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05)",
                         }}
                     >
-                        {NAV_ITEMS.map(({ label, href }) => (
-                            <Link
-                                key={href}
-                                href={href}
-                                onClick={() => setMobileOpen(false)}
-                                className="block px-4 py-2 text-xs font-semibold text-[#a8b2c1] hover:text-white hover:bg-white/[0.06] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[#3B82F6]"
-                            >
-                                {label}
-                            </Link>
-                        ))}
+                        {NAV_ITEMS.map(({ label, href }) => {
+                            const active = isActive(href, pathname);
+                            return (
+                                <Link
+                                    key={href}
+                                    href={href}
+                                    aria-current={active ? "page" : undefined}
+                                    onClick={() => setMobileOpen(false)}
+                                    className={[
+                                        "block px-4 py-2 text-xs font-semibold transition-colors duration-150",
+                                        "focus-visible:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[#3B82F6]",
+                                        active
+                                            ? "text-white bg-[#3B82F6]/10 shadow-[inset_0_0_0_1px_rgba(59,130,246,0.3)]"
+                                            : "text-[#a8b2c1] opacity-70 hover:opacity-100 hover:text-white hover:bg-white/[0.06]",
+                                    ].join(" ")}
+                                >
+                                    {label}
+                                </Link>
+                            );
+                        })}
                     </div>
                 )}
             </div>
