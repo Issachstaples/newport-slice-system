@@ -43,6 +43,34 @@ const data: FeaturePageData = {
             ],
         },
     ],
+    processFlow: {
+        title: "How We Get You There",
+        intro: "A five-phase approach from technical foundation to continuous growth.",
+        steps: [
+            { label: "Phase 1", title: "Audit", body: "Surface speed, structure, and indexability gaps." },
+            { label: "Phase 2", title: "Architecture", body: "Build crawlable, intent-mapped page structure." },
+            { label: "Phase 3", title: "Content Blocks", body: "Write and design conversion-first page sections." },
+            { label: "Phase 4", title: "Launch", body: "Deploy with performance and schema foundations live." },
+            { label: "Phase 5", title: "Optimize", body: "Track rankings, conversions, and iterate." },
+        ],
+    },
+    beforeAfter: {
+        title: "Before Newport vs. After Newport",
+        beforeTitle: "Before",
+        afterTitle: "After",
+        beforeBullets: [
+            "Slow pages and poor Core Web Vitals",
+            "Weak page structure Google can't trust",
+            "Buried CTAs and no clear next step",
+            "Rankings plateau with no clear fix",
+        ],
+        afterBullets: [
+            "Fast, index-ready pages from day one",
+            "Clear structure and intent-mapped content",
+            "Strong CTAs backed by trust signals",
+            "More qualified organic traffic over time",
+        ],
+    },
     whatYouGet: [
         "SEO-ready templates and structure across key pages",
         "Conversion-optimized layouts and CTAs",

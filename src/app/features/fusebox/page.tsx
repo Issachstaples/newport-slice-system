@@ -43,6 +43,34 @@ const data: FeaturePageData = {
             ],
         },
     ],
+    processFlow: {
+        title: "How Fusebox Grows With You",
+        intro: "Start lean and add capability only when the ROI is clear.",
+        steps: [
+            { label: "Step 1", title: "Start Lean", body: "Activate only the modules that produce results now." },
+            { label: "Step 2", title: "Toggle Modules", body: "Turn features on or off based on your current needs." },
+            { label: "Step 3", title: "Measure", body: "Track which modules drive actual outcomes." },
+            { label: "Step 4", title: "Expand", body: "Add the next capability when ROI justifies it." },
+            { label: "Step 5", title: "Scale", body: "Grow the stack without platform churn." },
+        ],
+    },
+    beforeAfter: {
+        title: "Before Newport vs. After Newport",
+        beforeTitle: "Before",
+        afterTitle: "After",
+        beforeBullets: [
+            "Paying for bundled features you don\u2019t use",
+            "Locked into tiers with bloat you can\u2019t remove",
+            "Costs spike as you add one new thing",
+            "Messy stack with overlapping tools",
+        ],
+        afterBullets: [
+            "Activate only what you need today",
+            "Add modules as ROI proves them out",
+            "Predictable, usage-aligned scaling",
+            "One lean system that grows with you",
+        ],
+    },
     whatYouGet: [
         "Modular feature architecture",
         "A roadmap that scales by capability",

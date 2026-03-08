@@ -43,6 +43,34 @@ const data: FeaturePageData = {
             ],
         },
     ],
+    processFlow: {
+        title: "How the Pipeline Works",
+        intro: "Five stages, one system—every lead has a place and a next step.",
+        steps: [
+            { label: "Stage 1", title: "Capture", body: "All leads enter one record, regardless of channel." },
+            { label: "Stage 2", title: "Qualify", body: "Assign intent, priority, and ownership immediately." },
+            { label: "Stage 3", title: "Follow-up", body: "Reminders and sequences keep momentum going." },
+            { label: "Stage 4", title: "Quote", body: "Estimates and proposals attached to the deal." },
+            { label: "Stage 5", title: "Close", body: "Outcome logged, handoff clean, review triggered." },
+        ],
+    },
+    beforeAfter: {
+        title: "Before Newport vs. After Newport",
+        beforeTitle: "Before",
+        afterTitle: "After",
+        beforeBullets: [
+            "Leads scattered across texts, email, and DMs",
+            "No defined stages or clear ownership",
+            "Notes lost, context missing on every call",
+            "Inconsistent follow-up kills warm leads",
+        ],
+        afterBullets: [
+            "One record with full lead history",
+            "Clear stages, next steps, and ownership",
+            "Simple tasks so nothing gets forgotten",
+            "Faster, more consistent follow-up",
+        ],
+    },
     whatYouGet: [
         "A pipeline anyone can understand",
         "Lead records with history + next steps",

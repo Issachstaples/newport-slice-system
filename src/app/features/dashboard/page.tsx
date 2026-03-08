@@ -43,6 +43,34 @@ const data: FeaturePageData = {
             ],
         },
     ],
+    processFlow: {
+        title: "From Raw Data to Clear Decisions",
+        intro: "Five steps from scattered tools to one dashboard that tells you what to do next.",
+        steps: [
+            { label: "Step 1", title: "Collect", body: "Pull data from your CRM, forms, and ad channels." },
+            { label: "Step 2", title: "Normalize", body: "Align metrics into consistent definitions." },
+            { label: "Step 3", title: "Visualize", body: "Build views your team actually checks." },
+            { label: "Step 4", title: "Alert", body: "Flag anomalies and opportunities automatically." },
+            { label: "Step 5", title: "Improve", body: "Use insights to iterate on what matters most." },
+        ],
+    },
+    beforeAfter: {
+        title: "Before Newport vs. After Newport",
+        beforeTitle: "Before",
+        afterTitle: "After",
+        beforeBullets: [
+            "Data spread across five tools with no summary",
+            "Hard to spot where leads drop off",
+            "Guessing which marketing channel is working",
+            "Slow decisions from manual reporting",
+        ],
+        afterBullets: [
+            "One dashboard showing KPIs and pipeline health",
+            "Bottlenecks visible at a glance",
+            "Source tracking tied to real outcomes",
+            "Faster weekly decisions with less manual work",
+        ],
+    },
     whatYouGet: [
         "Pipeline health + KPI snapshot",
         "Source/performance reporting",

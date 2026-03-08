@@ -43,6 +43,34 @@ const data: FeaturePageData = {
             ],
         },
     ],
+    processFlow: {
+        title: "How Autopilot Runs Your Playbook",
+        intro: "Every lead enters a workflow that handles the next step—automatically.",
+        steps: [
+            { label: "Step 1", title: "Trigger", body: "A new lead, form, or event starts the workflow." },
+            { label: "Step 2", title: "Route", body: "Lead assigned to the right person or queue." },
+            { label: "Step 3", title: "Sequence", body: "Timed follow-ups fire across the right channels." },
+            { label: "Step 4", title: "Remind", body: "Tasks and nudges keep your team on track." },
+            { label: "Step 5", title: "Escalate", body: "Deals at risk get flagged before they go cold." },
+        ],
+    },
+    beforeAfter: {
+        title: "Before Newport vs. After Newport",
+        beforeTitle: "Before",
+        afterTitle: "After",
+        beforeBullets: [
+            "Manual follow-ups and forgotten callbacks",
+            "Slow response times lose warm leads",
+            "Inconsistent handoffs between team members",
+            "Deals stall with no automatic nudge",
+        ],
+        afterBullets: [
+            "Instant replies and smart routing on every lead",
+            "Automated sequences run without your input",
+            "Reminders fire so nothing falls through",
+            "Escalations catch at-risk deals before they go cold",
+        ],
+    },
     whatYouGet: [
         "Workflow templates for lead handling + follow-up",
         "Automated reminders and next-step triggers",
