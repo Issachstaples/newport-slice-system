@@ -41,8 +41,11 @@ export default function HeroCarousel({ cards, alphaClassName = "", betaClassName
                     role="link"
                     tabIndex={0}
                     onClick={() => router.push(alphaCard.href)}
-                    onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); router.push(alphaCard.href); } }}
-                    aria-label={`Go to ${alphaCard.title}`}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter") { router.push(alphaCard.href); }
+                        else if (e.key === " " || e.key === "Spacebar") { e.preventDefault(); router.push(alphaCard.href); }
+                    }}
+                    aria-label={`Open feature: ${alphaCard.title}`}
                     className="relative glass-panel-strong rounded-2xl p-6 w-full max-w-md text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]"
                     style={{
                         boxShadow: "0 0 0 1px #3B82F6, 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(59, 130, 246, 0.2)",
@@ -125,9 +128,12 @@ export default function HeroCarousel({ cards, alphaClassName = "", betaClassName
                         role="button"
                         tabIndex={0}
                         onClick={() => setActiveIndex(betaIndex)}
-                        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActiveIndex(betaIndex); } }}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter") { setActiveIndex(betaIndex); }
+                            else if (e.key === " " || e.key === "Spacebar") { e.preventDefault(); setActiveIndex(betaIndex); }
+                        }}
                         aria-pressed={false}
-                        aria-label={`Select card: ${betaCard.title}`}
+                        aria-label={`Next card preview: ${betaCard.title}`}
                         className="relative glass-panel-soft rounded-2xl p-6 w-full text-left cursor-pointer hover:brightness-110 transition-[filter] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]"
                         style={{
                             boxShadow: "0 12px 32px rgba(0, 0, 0, 0.5)",
