@@ -70,6 +70,19 @@ export default function HeroCarousel({ cards, alphaClassName = "", betaClassName
                                 {alphaCard.blurb}
                             </p>
                         </div>
+                        <p className="text-xs leading-relaxed text-[#a8b2c1] mt-3">
+                            {alphaCard.body}
+                        </p>
+                        <div className="mt-4">
+                            <button
+                                type="button"
+                                onClick={(e) => { e.stopPropagation(); router.push(alphaCard.href); }}
+                                aria-label={`Explore Feature: ${alphaCard.title}`}
+                                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold text-white bg-[#3B82F6] hover:bg-blue-500 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]"
+                            >
+                                Explore Feature
+                            </button>
+                        </div>
                     </div>
                 </button>
             </div>
@@ -125,6 +138,19 @@ export default function HeroCarousel({ cards, alphaClassName = "", betaClassName
                             <p className="text-sm leading-relaxed text-[#cbd5e0]">
                                 {betaCard.blurb}
                             </p>
+                            <p className="text-xs leading-relaxed text-[#a8b2c1] mt-3">
+                                {betaCard.body}
+                            </p>
+                            <div className="mt-4">
+                                <button
+                                    type="button"
+                                    onClick={(e) => { e.stopPropagation(); router.push(betaCard.href); }}
+                                    aria-label={`Explore Feature: ${betaCard.title}`}
+                                    className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold text-white/80 border border-[#3B82F6]/40 hover:bg-[#3B82F6]/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]"
+                                >
+                                    Explore Feature
+                                </button>
+                            </div>
                         </div>
                     </button>
                 </div>
