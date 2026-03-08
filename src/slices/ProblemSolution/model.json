@@ -1,0 +1,51 @@
+{
+    "id": "problem_solution",
+    "type": "SharedSlice",
+    "name": "ProblemSolution",
+    "description": "Two-panel section: a problem statement and a solution statement.",
+    "variations": [
+        {
+            "id": "default",
+            "name": "Default",
+            "docURL": "...",
+            "version": "initial",
+            "description": "Default",
+            "imageUrl": "",
+            "primary": {
+                "problem_title": {
+                    "type": "Text",
+                    "config": {
+                        "label": "Problem Title",
+                        "placeholder": "The Problem"
+                    }
+                },
+                "problem_body": {
+                    "type": "StructuredText",
+                    "config": {
+                        "label": "Problem Body",
+                        "placeholder": "Describe the pain the reader is experiencing.",
+                        "allowTargetBlank": false,
+                        "single": "paragraph,strong,em,hyperlink"
+                    }
+                },
+                "solution_title": {
+                    "type": "Text",
+                    "config": {
+                        "label": "Solution Title",
+                        "placeholder": "The Solution"
+                    }
+                },
+                "solution_body": {
+                    "type": "StructuredText",
+                    "config": {
+                        "label": "Solution Body",
+                        "placeholder": "Describe how Newport solves the problem.",
+                        "allowTargetBlank": false,
+                        "single": "paragraph,strong,em,hyperlink"
+                    }
+                }
+            },
+            "items": {}
+        }
+    ]
+}

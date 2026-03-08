@@ -1,0 +1,92 @@
+{
+    "id": "chart_panel",
+    "type": "SharedSlice",
+    "name": "ChartPanel",
+    "description": "Benchmark chart panel with insight caption, disclaimer, and source citations.",
+    "variations": [
+        {
+            "id": "default",
+            "name": "Default",
+            "docURL": "...",
+            "version": "initial",
+            "description": "Default",
+            "imageUrl": "",
+            "primary": {
+                "title": {
+                    "type": "Text",
+                    "config": {
+                        "label": "Title",
+                        "placeholder": "Speed Wins"
+                    }
+                },
+                "description": {
+                    "type": "StructuredText",
+                    "config": {
+                        "label": "Description",
+                        "placeholder": "1–2 sentences contextualising the benchmark data.",
+                        "allowTargetBlank": false,
+                        "single": "paragraph,strong,em"
+                    }
+                },
+                "chart_type": {
+                    "type": "Select",
+                    "config": {
+                        "label": "Chart Type",
+                        "placeholder": "bar",
+                        "options": [
+                            "bar",
+                            "line",
+                            "area",
+                            "radial",
+                            "donut"
+                        ],
+                        "default_value": "bar"
+                    }
+                },
+                "chart_data_json": {
+                    "type": "Text",
+                    "config": {
+                        "label": "Chart Data JSON",
+                        "placeholder": "[{\"segment\":\"Retail\",\"lift_pct\":8.4}]"
+                    }
+                },
+                "chart_config_json": {
+                    "type": "Text",
+                    "config": {
+                        "label": "Chart Config JSON",
+                        "placeholder": "{\"lift_pct\":{\"label\":\"Conversion Lift (%)\"}}"
+                    }
+                },
+                "insight_caption": {
+                    "type": "StructuredText",
+                    "config": {
+                        "label": "Insight Caption",
+                        "placeholder": "One sentence takeaway. Benchmarks vary by industry and offer; results aren't guaranteed.",
+                        "allowTargetBlank": false,
+                        "single": "paragraph,strong,em"
+                    }
+                }
+            },
+            "items": {
+                "source_label": {
+                    "type": "Text",
+                    "config": {
+                        "label": "Source Label",
+                        "placeholder": "web.dev — Milliseconds Make Millions"
+                    }
+                },
+                "source_href": {
+                    "type": "Link",
+                    "config": {
+                        "label": "Source Link",
+                        "placeholder": "",
+                        "select": null,
+                        "allowTargetBlank": true,
+                        "allowText": false,
+                        "repeat": false
+                    }
+                }
+            }
+        }
+    ]
+}

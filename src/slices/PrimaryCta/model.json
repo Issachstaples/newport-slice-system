@@ -1,0 +1,53 @@
+{
+    "id": "primary_cta",
+    "type": "SharedSlice",
+    "name": "PrimaryCta",
+    "description": "Full-width CTA panel with heading, body copy, and a single primary button.",
+    "variations": [
+        {
+            "id": "default",
+            "name": "Default",
+            "docURL": "...",
+            "version": "initial",
+            "description": "Default",
+            "imageUrl": "",
+            "primary": {
+                "cta_title": {
+                    "type": "Text",
+                    "config": {
+                        "label": "CTA Title",
+                        "placeholder": "Want a site that ranks and sells?"
+                    }
+                },
+                "cta_body": {
+                    "type": "StructuredText",
+                    "config": {
+                        "label": "CTA Body",
+                        "placeholder": "One or two sentences with a clear next step.",
+                        "allowTargetBlank": false,
+                        "single": "paragraph,strong,em,hyperlink"
+                    }
+                },
+                "button_label": {
+                    "type": "Text",
+                    "config": {
+                        "label": "Button Label",
+                        "placeholder": "Get a quick audit"
+                    }
+                },
+                "button_link": {
+                    "type": "Link",
+                    "config": {
+                        "label": "Button Link",
+                        "placeholder": "",
+                        "select": null,
+                        "allowTargetBlank": false,
+                        "allowText": false,
+                        "repeat": false
+                    }
+                }
+            },
+            "items": {}
+        }
+    ]
+}

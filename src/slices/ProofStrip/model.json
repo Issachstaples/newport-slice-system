@@ -1,0 +1,36 @@
+{
+    "id": "proof_strip",
+    "type": "SharedSlice",
+    "name": "ProofStrip",
+    "description": "Repeatable proof-point strip — used for 'Why It Works' and similar sections.",
+    "variations": [
+        {
+            "id": "default",
+            "name": "Default",
+            "docURL": "...",
+            "version": "initial",
+            "description": "Default",
+            "imageUrl": "",
+            "primary": {
+                "section_title": {
+                    "type": "Text",
+                    "config": {
+                        "label": "Section Title",
+                        "placeholder": "Why It Works"
+                    }
+                }
+            },
+            "items": {
+                "proof_point": {
+                    "type": "StructuredText",
+                    "config": {
+                        "label": "Proof Point",
+                        "placeholder": "One concise proof-point sentence.",
+                        "allowTargetBlank": false,
+                        "single": "paragraph,strong,em,hyperlink"
+                    }
+                }
+            }
+        }
+    ]
+}

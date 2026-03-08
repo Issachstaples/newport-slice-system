@@ -1,0 +1,42 @@
+{
+    "id": "feature_hero",
+    "type": "SharedSlice",
+    "name": "FeatureHero",
+    "description": "Hero section for a feature page: title, subhead, optional eyebrow chip.",
+    "variations": [
+        {
+            "id": "default",
+            "name": "Default",
+            "docURL": "...",
+            "version": "initial",
+            "description": "Default",
+            "imageUrl": "",
+            "primary": {
+                "eyebrow": {
+                    "type": "Text",
+                    "config": {
+                        "label": "Eyebrow",
+                        "placeholder": "Feature"
+                    }
+                },
+                "title": {
+                    "type": "Text",
+                    "config": {
+                        "label": "Title",
+                        "placeholder": "Rank higher. Convert more. Grow faster."
+                    }
+                },
+                "subhead": {
+                    "type": "StructuredText",
+                    "config": {
+                        "label": "Subhead",
+                        "placeholder": "One sentence describing the outcome.",
+                        "allowTargetBlank": false,
+                        "single": "paragraph,strong,em,hyperlink"
+                    }
+                }
+            },
+            "items": {}
+        }
+    ]
+}

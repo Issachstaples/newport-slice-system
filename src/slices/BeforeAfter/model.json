@@ -1,0 +1,58 @@
+{
+    "id": "before_after",
+    "type": "SharedSlice",
+    "name": "BeforeAfter",
+    "description": "Two-column before/after comparison panel.",
+    "variations": [
+        {
+            "id": "default",
+            "name": "Default",
+            "docURL": "...",
+            "version": "initial",
+            "description": "Default",
+            "imageUrl": "",
+            "primary": {
+                "section_title": {
+                    "type": "Text",
+                    "config": {
+                        "label": "Section Title",
+                        "placeholder": "Before Newport vs. After Newport"
+                    }
+                },
+                "before_title": {
+                    "type": "Text",
+                    "config": {
+                        "label": "Before Column Title",
+                        "placeholder": "Before"
+                    }
+                },
+                "after_title": {
+                    "type": "Text",
+                    "config": {
+                        "label": "After Column Title",
+                        "placeholder": "After"
+                    }
+                },
+                "before_bullets": {
+                    "type": "StructuredText",
+                    "config": {
+                        "label": "Before Bullets",
+                        "placeholder": "Pain-state bullets.",
+                        "allowTargetBlank": false,
+                        "multi": "list-item,o-list-item,paragraph,strong,em"
+                    }
+                },
+                "after_bullets": {
+                    "type": "StructuredText",
+                    "config": {
+                        "label": "After Bullets",
+                        "placeholder": "Outcome-state bullets.",
+                        "allowTargetBlank": false,
+                        "multi": "list-item,o-list-item,paragraph,strong,em"
+                    }
+                }
+            },
+            "items": {}
+        }
+    ]
+}

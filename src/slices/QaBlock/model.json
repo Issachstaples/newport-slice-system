@@ -1,0 +1,50 @@
+{
+    "id": "qa_block",
+    "type": "SharedSlice",
+    "name": "QaBlock",
+    "description": "Accordion-style Q&A section with repeatable question/answer items.",
+    "variations": [
+        {
+            "id": "default",
+            "name": "Default",
+            "docURL": "...",
+            "version": "initial",
+            "description": "Default",
+            "imageUrl": "",
+            "primary": {
+                "section_title": {
+                    "type": "Text",
+                    "config": {
+                        "label": "Section Title",
+                        "placeholder": "Common Questions"
+                    }
+                }
+            },
+            "items": {
+                "question": {
+                    "type": "Text",
+                    "config": {
+                        "label": "Question",
+                        "placeholder": "How do I rank on the first page of Google?"
+                    }
+                },
+                "answer_lead": {
+                    "type": "Text",
+                    "config": {
+                        "label": "Answer Lead",
+                        "placeholder": "One sentence intro to the answer."
+                    }
+                },
+                "bullets": {
+                    "type": "StructuredText",
+                    "config": {
+                        "label": "Bullets",
+                        "placeholder": "Supporting bullet points.",
+                        "allowTargetBlank": false,
+                        "multi": "list-item,o-list-item,paragraph,strong,em"
+                    }
+                }
+            }
+        }
+    ]
+}

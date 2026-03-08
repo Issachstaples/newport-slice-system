@@ -1,0 +1,35 @@
+{
+    "id": "bullets_section",
+    "type": "SharedSlice",
+    "name": "BulletsSection",
+    "description": "Checklist-style section — used for 'What You Get' and similar lists.",
+    "variations": [
+        {
+            "id": "default",
+            "name": "Default",
+            "docURL": "...",
+            "version": "initial",
+            "description": "Default",
+            "imageUrl": "",
+            "primary": {
+                "section_title": {
+                    "type": "Text",
+                    "config": {
+                        "label": "Section Title",
+                        "placeholder": "What You Get"
+                    }
+                },
+                "bullets": {
+                    "type": "StructuredText",
+                    "config": {
+                        "label": "Bullets",
+                        "placeholder": "Each list item becomes a cobalt-check bullet.",
+                        "allowTargetBlank": false,
+                        "multi": "list-item,o-list-item,paragraph,strong,em"
+                    }
+                }
+            },
+            "items": {}
+        }
+    ]
+}

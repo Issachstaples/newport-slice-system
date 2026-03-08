@@ -1,0 +1,57 @@
+{
+    "id": "process_flow",
+    "type": "SharedSlice",
+    "name": "ProcessFlow",
+    "description": "Horizontal step-flow infographic with 4–6 numbered steps.",
+    "variations": [
+        {
+            "id": "default",
+            "name": "Default",
+            "docURL": "...",
+            "version": "initial",
+            "description": "Default",
+            "imageUrl": "",
+            "primary": {
+                "section_title": {
+                    "type": "Text",
+                    "config": {
+                        "label": "Section Title",
+                        "placeholder": "How We Get You There"
+                    }
+                },
+                "intro": {
+                    "type": "StructuredText",
+                    "config": {
+                        "label": "Intro",
+                        "placeholder": "Optional sentence introducing the flow.",
+                        "allowTargetBlank": false,
+                        "single": "paragraph,strong,em"
+                    }
+                }
+            },
+            "items": {
+                "step_label": {
+                    "type": "Text",
+                    "config": {
+                        "label": "Step Label",
+                        "placeholder": "Phase 1"
+                    }
+                },
+                "step_title": {
+                    "type": "Text",
+                    "config": {
+                        "label": "Step Title",
+                        "placeholder": "Audit"
+                    }
+                },
+                "step_body": {
+                    "type": "Text",
+                    "config": {
+                        "label": "Step Body",
+                        "placeholder": "Short description of this step."
+                    }
+                }
+            }
+        }
+    ]
+}
