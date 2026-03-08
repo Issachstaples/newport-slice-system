@@ -1,4 +1,5 @@
 import HeroShadowbox from "@/components/home/hero/HeroShadowbox";
+import FloatingGlassNav from "@/components/nav/FloatingGlassNav";
 import { HERO_CARDS } from "@/lib/heroCards";
 
 export default function V2PreviewPage() {
@@ -12,6 +13,7 @@ export default function V2PreviewPage() {
             ctaHref="#demo"
             secondaryCtaText="See Modules"
             secondaryCtaHref="#modules"
+            navSlot={<FloatingGlassNav />}
         />
     );
 }

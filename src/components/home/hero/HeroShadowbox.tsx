@@ -27,6 +27,8 @@ export interface HeroShadowboxProps {
     ctaHref?: string;
     secondaryCtaText?: string;
     secondaryCtaHref?: string;
+    /** Optional slot rendered in the top-right HUD column, above the beta card */
+    navSlot?: React.ReactNode;
 }
 
 export default function HeroShadowbox({
@@ -38,6 +40,7 @@ export default function HeroShadowbox({
     ctaHref,
     secondaryCtaText,
     secondaryCtaHref,
+    navSlot,
 }: HeroShadowboxProps) {
     const heroRef = useRef<HTMLElement>(null);
     const [eventSourceEl, setEventSourceEl] = useState<HTMLElement | null>(null);
@@ -118,6 +121,13 @@ export default function HeroShadowbox({
                 </div>
 
                 {/* CENTER remains EMPTY by design */}
+
+                {/* TOP-RIGHT: Optional nav slot — aligned to CTA column */}
+                {navSlot && (
+                    <div className="absolute top-6 lg:top-10 right-6 lg:right-10 z-30 w-[calc(100%-3rem)] lg:w-[420px] flex justify-end relative">
+                        {navSlot}
+                    </div>
+                )}
 
                 {/* Subtle horizontal divider between headline and alpha card */}
                 <div
