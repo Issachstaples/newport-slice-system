@@ -135,7 +135,7 @@ export default function HeroCarousel({ cards, alphaClassName = "", betaClassName
                         aria-pressed={false}
                         aria-label={`Next card preview: ${betaCard.title}`}
                         aria-describedby={`on-deck-${betaIndex}`}
-                        className="relative glass-panel-soft rounded-2xl p-6 w-full text-left cursor-pointer hover:brightness-110 transition-[filter] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]"
+                        className="relative glass-panel-soft rounded-2xl p-6 w-full text-left cursor-pointer transition-[opacity,box-shadow,background-color] duration-200 hover:bg-white/[0.06] hover:shadow-[0_0_0_1px_rgba(59,130,246,0.25),0_0_10px_rgba(59,130,246,0.12),0_12px_32px_rgba(0,0,0,0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14] focus-visible:bg-white/[0.06] focus-visible:shadow-[0_0_0_1px_rgba(59,130,246,0.25),0_0_10px_rgba(59,130,246,0.12),0_12px_32px_rgba(0,0,0,0.5)]"
                         style={{
                             boxShadow: "0 12px 32px rgba(0, 0, 0, 0.5)",
                         }}
