@@ -122,9 +122,9 @@ export default function HeroShadowbox({
 
                 {/* CENTER remains EMPTY by design */}
 
-                {/* TOP-RIGHT: Optional nav slot — aligned to CTA column */}
+                {/* TOP-RIGHT: Optional nav slot — right-aligned, width hugs content only */}
                 {navSlot && (
-                    <div className="absolute top-6 lg:top-10 right-6 lg:right-10 z-30 w-[calc(100%-3rem)] lg:w-[420px] flex justify-end relative">
+                    <div className="absolute top-6 lg:top-10 right-6 lg:right-10 z-30 w-fit">
                         {navSlot}
                     </div>
                 )}
